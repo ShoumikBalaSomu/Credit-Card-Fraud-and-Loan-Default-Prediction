@@ -1,0 +1,13 @@
+models_to_run:
+  - logistic_regression
+  - random_forest
+  - xgboost
+  - lightgbm
+  - catboost
+
+cost_strategies:
+  - baseline_unweighted
+  - class_weighted
+  - threshold_optimized
+  - smote_resampled
+  - focal_sample_weighted

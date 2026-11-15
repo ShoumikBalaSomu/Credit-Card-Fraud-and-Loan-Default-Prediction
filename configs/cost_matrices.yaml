@@ -1,0 +1,13 @@
+fraud:
+  cost_fn: 500.0   # Avg unrecovered loss for missed fraudulent transaction
+  cost_fp: 10.0    # Friction, card block, SMS notification, review overhead
+  cost_tp: 0.0     # Fraud prevented
+  cost_tn: 0.0     # Normal legitimate operation
+  ratio_description: '50:1 FN to FP penalty reflecting catastrophic fraud loss vs operational friction'
+
+loan:
+  cost_fn: 5000.0  # Default write-off loss on defaulted loan principal
+  cost_fp: 500.0   # Missed interest spread and customer lifetime value on rejected creditworthy applicant
+  cost_tp: 0.0     # Default properly averted
+  cost_tn: 0.0     # Performing loan interest realized
+  ratio_description: '10:1 FN to FP penalty reflecting principal loss vs interest margin'

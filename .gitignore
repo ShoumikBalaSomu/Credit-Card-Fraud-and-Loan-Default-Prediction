@@ -1,0 +1,48 @@
+# Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Data and Cache (Raw, Processed, Large artifacts)
+data/raw/
+data/processed/
+*.parquet
+*.feather
+*.h5
+*.csv
+!tests/fixtures/*.csv
+!reports/tables/*.csv
+!data/README.md
+
+# Large Model Weights and Serialized Objects (>5MB)
+models_cache/
+*.pt
+*.bin
+*.onnx
+
+# Allow lightweight committed models and results under 5MB
+!reports/results/*.json
+!reports/results/*.joblib
+
+# Credentials and Local Config
+.env
+.env.local
+.kaggle/
+kaggle.json
+
+# Caches and Runtime Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+catboost_info/
+wandb/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+.DS_Store

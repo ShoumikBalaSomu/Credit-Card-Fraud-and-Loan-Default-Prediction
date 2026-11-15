@@ -1,0 +1,39 @@
+{
+  "fraud_detection_dataset": {
+    "source": "kaggle:kartik2112/fraud-detection",
+    "license": "CC0: Public Domain (Simulated credit card transaction data via Sparkov)",
+    "train_file": {
+      "name": "fraudTrain.csv",
+      "size_bytes": 351238196,
+      "sha256": "fd7139200dbfcbed0b6742bbe05a4f1abce532c4fef20918228a651647a3e75d",
+      "rows": 1296675,
+      "fraud_count": 7506,
+      "fraud_rate": 0.005788651743883394
+    },
+    "test_file": {
+      "name": "fraudTest.csv",
+      "size_bytes": 150354339,
+      "sha256": "12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0",
+      "rows": 555719,
+      "fraud_count": 2145,
+      "fraud_rate": 0.0038598644278853163
+    },
+    "total_rows": 1852394,
+    "imbalance_ratio": "1 : 172.5 (0.579% positive)",
+    "split_mechanism": "Strict Chronological Partition (Train: Jan 2019 - Dec 2019, Test: Jan 2020 - Dec 2020)"
+  },
+  "loan_prediction_dataset": {
+    "source": "kaggle:subhamjain/loan-prediction-based-on-customer-behavior",
+    "license": "CC0: Public Domain",
+    "file": {
+      "name": "Training Data.csv",
+      "size_bytes": 20119553,
+      "sha256": "8d44998e60cc8f37248dc259fb3f54555a0cb1cf57487fb4ac12a45d93f30ef7",
+      "rows": 252000,
+      "default_count": 30996,
+      "default_rate": 0.123
+    },
+    "imbalance_ratio": "1 : 7.13 (12.30% positive)",
+    "split_mechanism": "Stratified Shuffle Split (80% Train, 20% Holdout Test with seed 42)"
+  }
+}

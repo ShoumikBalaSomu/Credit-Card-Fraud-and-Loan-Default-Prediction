@@ -1,0 +1,18 @@
+fraud:
+  dataset_name: 'kartik2112/fraud-detection'
+  train_file: 'fraudTrain.csv'
+  test_file: 'fraudTest.csv'
+  target_column: 'is_fraud'
+  time_column: 'trans_date_trans_time'
+  sample_size_train: 100000
+  sample_size_test: 40000
+  split_strategy: 'chronological'
+
+loan:
+  dataset_name: 'subhamjain/loan-prediction-based-on-customer-behavior'
+  raw_file: 'Training Data.csv'
+  target_column: 'Risk_Flag'
+  id_column: 'Id'
+  test_size: 0.20
+  sample_size: 60000
+  split_strategy: 'stratified'
