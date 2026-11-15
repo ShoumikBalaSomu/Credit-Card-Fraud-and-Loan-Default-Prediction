@@ -27,6 +27,7 @@ from src.explain.shap_global import run_tree_shap_global
 from src.features.engineering import build_fraud_feature_pipeline, build_loan_feature_pipeline
 from src.models.baselines import get_logistic_regression, get_random_forest
 from src.models.cost_sensitive import CostMatrix, ThresholdOptimizer
+from src.models.ensemble import ProbabilityVotingClassifier
 from src.models.gradient_boosting import get_catboost, get_lightgbm, get_xgboost
 from src.utils.artifacts import save_artifact
 from src.utils.io import load_yaml, save_json
@@ -107,6 +108,20 @@ def train_and_evaluate_task(task: str = "fraud", random_seed: int = 42) -> Dict[
         "XGBoost": get_xgboost(random_state=random_seed),
         "LightGBM": get_lightgbm(random_state=random_seed),
         "CatBoost": get_catboost(random_state=random_seed),
+        "Ensemble Blend": ProbabilityVotingClassifier(
+            estimators=[
+                (
+                    "primary",
+                    (
+                        get_catboost(random_state=random_seed)
+                        if task == "fraud"
+                        else get_random_forest(random_state=random_seed)
+                    ),
+                ),
+                ("secondary", get_lightgbm(random_state=random_seed)),
+            ],
+            weights=[0.65, 0.35],
+        ),
     }
 
     model_eval_results = {}
@@ -165,6 +180,12 @@ def train_and_evaluate_task(task: str = "fraud", random_seed: int = 42) -> Dict[
         m_cw = get_catboost(scale_pos_weight=scale_pos_weight, random_state=random_seed)
     elif best_model_name == "Random Forest":
         m_cw = get_random_forest(class_weight="balanced", random_state=random_seed)
+    elif best_model_name == "Ensemble Blend":
+        m_cw = (
+            get_catboost(scale_pos_weight=scale_pos_weight, random_state=random_seed)
+            if task == "fraud"
+            else get_random_forest(class_weight="balanced", random_state=random_seed)
+        )
     else:
         m_cw = get_logistic_regression(class_weight="balanced", random_state=random_seed)
     m_cw.fit(X_train_proc, y_train)
@@ -194,6 +215,12 @@ def train_and_evaluate_task(task: str = "fraud", random_seed: int = 42) -> Dict[
         m_sm = get_catboost(random_state=random_seed)
     elif best_model_name == "Random Forest":
         m_sm = get_random_forest(random_state=random_seed)
+    elif best_model_name == "Ensemble Blend":
+        m_sm = (
+            get_catboost(random_state=random_seed)
+            if task == "fraud"
+            else get_random_forest(random_state=random_seed)
+        )
     else:
         m_sm = get_logistic_regression(random_state=random_seed)
     m_sm.fit(X_train_sm, y_train_sm)

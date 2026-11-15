@@ -1,7 +1,7 @@
-# Model Card: Random Forest for LOAN Risk Prediction
+# Model Card: Ensemble Blend for LOAN Risk Prediction
 
 ## 1. Model Overview
-- **Model Architecture:** Random Forest
+- **Model Architecture:** Ensemble Blend
 - **Task:** Binary Financial Risk Classification (loan)
 - **Framework:** Python, scikit-learn, Gradient Boosting
 - **Decision Strategy:** Cost-Sensitive Optimal Thresholding (Expected Loss Minimization)
@@ -17,14 +17,14 @@
 - **Preprocessing:** Standard scaling and one-hot encoding strictly fit inside Pipeline folds.
 
 ## 4. Performance Summary
-- **PR-AUC (Average Precision - Headline):** 0.6088
-- **ROC-AUC:** 0.9139
-- **Optimal Decision Threshold (p*):** 0.14
-- **Recall at Optimal Threshold:** 0.8539
-- **Precision at Optimal Threshold:** 0.4661
-- **Total Expected Financial Cost:** $1,886,500.00
-- **Cost Reduction vs Default (0.50) Threshold:** 73.41%
-- **Brier Score:** 0.0855
+- **PR-AUC (Average Precision - Headline):** 0.6259
+- **ROC-AUC:** 0.9135
+- **Optimal Decision Threshold (p*):** 0.13
+- **Recall at Optimal Threshold:** 0.8688
+- **Precision at Optimal Threshold:** 0.4212
+- **Total Expected Financial Cost:** $1,938,500.00
+- **Cost Reduction vs Default (0.50) Threshold:** 72.83%
+- **Brier Score:** 0.0852
 
 ## 5. Cost Matrix & Trade-offs
 - **Cost Formulation:** 10:1 FN to FP penalty reflecting principal loss vs interest margin

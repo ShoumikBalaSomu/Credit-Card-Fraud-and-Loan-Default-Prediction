@@ -12,6 +12,8 @@ def run_tree_shap_global(
     model, X_sample: np.ndarray, feature_names: list, save_path: str | Path, max_display: int = 15
 ) -> dict:
     Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+    if hasattr(model, "fitted_estimators_"):
+        model = model.fitted_estimators_[0][1]
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X_sample)
 

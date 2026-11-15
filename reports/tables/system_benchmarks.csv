@@ -1,3 +1,3 @@
 Task,Model File Size (MB),Latency per sample (ms),Throughput (samples/sec)
-FRAUD,0.05,0.0018,553243
-LOAN,2.45,0.0305,32756
+FRAUD,0.22,0.0149,67044
+LOAN,2.63,0.0403,24821

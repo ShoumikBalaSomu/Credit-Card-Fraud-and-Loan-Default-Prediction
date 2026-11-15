@@ -1,7 +1,7 @@
-# Model Card: CatBoost for FRAUD Risk Prediction
+# Model Card: Ensemble Blend for FRAUD Risk Prediction
 
 ## 1. Model Overview
-- **Model Architecture:** CatBoost
+- **Model Architecture:** Ensemble Blend
 - **Task:** Binary Financial Risk Classification (fraud)
 - **Framework:** Python, scikit-learn, Gradient Boosting
 - **Decision Strategy:** Cost-Sensitive Optimal Thresholding (Expected Loss Minimization)
@@ -17,14 +17,14 @@
 - **Preprocessing:** Standard scaling and one-hot encoding strictly fit inside Pipeline folds.
 
 ## 4. Performance Summary
-- **PR-AUC (Average Precision - Headline):** 0.8364
-- **ROC-AUC:** 0.9942
-- **Optimal Decision Threshold (p*):** 0.02
-- **Recall at Optimal Threshold:** 0.9167
-- **Precision at Optimal Threshold:** 0.2299
-- **Total Expected Financial Cost:** $12,160.00
-- **Cost Reduction vs Default (0.50) Threshold:** 44.01%
-- **Brier Score:** 0.0014
+- **PR-AUC (Average Precision - Headline):** 0.8398
+- **ROC-AUC:** 0.9944
+- **Optimal Decision Threshold (p*):** 0.12
+- **Recall at Optimal Threshold:** 0.8333
+- **Precision at Optimal Threshold:** 0.5882
+- **Total Expected Financial Cost:** $14,980.00
+- **Cost Reduction vs Default (0.50) Threshold:** 36.74%
+- **Brier Score:** 0.0013
 
 ## 5. Cost Matrix & Trade-offs
 - **Cost Formulation:** 50:1 FN to FP penalty reflecting catastrophic fraud loss vs operational friction

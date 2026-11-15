@@ -12,6 +12,8 @@ def explain_instance_waterfall(
     model, instance: np.ndarray, feature_names: list, save_path: str | Path
 ) -> None:
     Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+    if hasattr(model, "fitted_estimators_"):
+        model = model.fitted_estimators_[0][1]
     explainer = shap.TreeExplainer(model)
     explanation = explainer(instance.reshape(1, -1))
 
