@@ -2,7 +2,7 @@
 
 **Course:** CSE431 - Machine Learning  
 **Project Title:** Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction  
-**Team:** Group 08 (Shoumik Bala, Md Israfil Hossen, Ariyan Islam Hridoy)  
+**Team:** Group 08 (Shoumik Bala Somu, Md Israfil Hossen, Ariyan Islam Hridoy)  
 **Duration:** 15 Minutes Presentation + 5 Minutes Q&A  
 
 ---
@@ -12,7 +12,7 @@
 - **Subtitle:** Dual-Domain Evaluation: Credit Card Fraud Detection & Loan Default Prediction
 - **Course:** CSE431 Machine Learning
 - **Presenters (Group 08):**
-  - Shoumik Bala (`shoumik.bala@gmail.com`)
+  - Shoumik Bala Somu (`shoumik.bala@gmail.com`)
   - Md Israfil Hossen
   - Ariyan Islam Hridoy
 - **Visual:** Project logo / architecture diagram thumbnail.

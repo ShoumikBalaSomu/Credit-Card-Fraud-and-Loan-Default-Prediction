@@ -8,7 +8,7 @@
 
 ## Team Members
 
-- **Shoumik Bala** (`shoumik.bala@gmail.com`)
+- **Shoumik Bala Somu** (`shoumik.bala@gmail.com`)
 - **Md Israfil Hossen**
 - **Ariyan Islam Hridoy**
 

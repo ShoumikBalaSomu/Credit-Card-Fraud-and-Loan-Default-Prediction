@@ -15,7 +15,7 @@
 
 ## 👥 Team Information (Group 08)
 
-- **Shoumik Bala** (`shoumik.bala@gmail.com`)
+- **Shoumik Bala Somu** (`shoumik.bala@gmail.com`)
 - **Md Israfil Hossen**
 - **Ariyan Islam Hridoy**
 
@@ -234,9 +234,9 @@ Both models include automated adverse action explainability pipelines compliant 
 If you reference this work or codebase in academic or industrial research, please cite:
 
 ```text
-@misc{bala2026costsensitive,
+@misc{somu2026costsensitive,
   title = {Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction},
-  author = {Bala, Shoumik and Hossen, Md Israfil and Hridoy, Ariyan Islam},
+  author = {Shoumik Bala Somu and Md Israfil Hossen and Ariyan Islam Hridoy},
   year = {2026},
   howpublished = {https://github.com/ShoumikBalaSomu/ML-Project-Group-08},
   note = {CSE431 Machine Learning Course Project, Group 08}

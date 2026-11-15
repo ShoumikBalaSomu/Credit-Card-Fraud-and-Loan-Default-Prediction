@@ -7,7 +7,7 @@ name = "cse431-financial-risk"
 version = "0.1.0"
 description = "Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction"
 authors = [
-    {name = "Shoumik Bala", email = "shoumik.bala@gmail.com"},
+    {name = "Shoumik Bala Somu", email = "shoumik.bala@gmail.com"},
     {name = "Md Israfil Hossen"},
     {name = "Ariyan Islam Hridoy"}
 ]

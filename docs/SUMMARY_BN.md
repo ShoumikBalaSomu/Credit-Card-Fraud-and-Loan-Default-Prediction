@@ -4,7 +4,7 @@
 **কোর্স:** CSE431 - Machine Learning  
 **দল:** Group 08  
 **দলের সদস্যবৃন্দ (Group 08):**
-1. **সৌমিক বালা (Shoumik Bala)**
+1. **সৌমিক বালা সোমু (Shoumik Bala Somu)**
 2. **মো. ইসরাফিল হোসেন (Md Israfil Hossen)**
 3. **আরিয়ান ইসলাম হৃদয় (Ariyan Islam Hridoy)**
 

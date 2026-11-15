@@ -78,7 +78,7 @@ st.sidebar.title("💳 Financial Risk ML")
 st.sidebar.markdown("**Course:** CSE431 - Machine Learning  \n**Group:** Group 08")
 st.sidebar.markdown("""
     **Members:**
-    - Shoumik Bala
+    - Shoumik Bala Somu
     - Md Israfil Hossen
     - Ariyan Islam Hridoy
     """)
