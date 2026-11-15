@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cost-Sensitive & Explainable Financial Risk ML | Group 08</title>
+  <meta name="description" content="CSE431 Machine Learning Project: Cost-sensitive and explainable ML for credit card fraud detection and loan default prediction under severe class imbalance.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="nav-brand">
+        <span>💳</span> FinRisk ML <span class="badge badge-accent">Group 08</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#simulator">Cost Simulator</a></li>
+        <li><a href="#benchmarks">Benchmarks</a></li>
+        <li><a href="#xai">Explainability</a></li>
+        <li><a href="#figures">Figures</a></li>
+        <li><a href="#citation">Citation</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Light Mode</button>
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+          ⭐ GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="overview">
+    <div class="container">
+      <div class="badge-wrapper">
+        <span class="badge badge-accent">CSE431 - Machine Learning</span>
+        <span class="badge">Department of Computer Science & Engineering</span>
+        <span class="badge">Group 08</span>
+      </div>
+      <h1>
+        <span class="gradient-text">Cost-Sensitive & Explainable</span><br>
+        Machine Learning for Financial Risk
+      </h1>
+      <p class="hero-subtitle">
+        Empirical dual-domain evaluation across extreme (0.58%) and moderate (12.30%) class imbalances in credit card fraud detection and loan default underwriting using Bayesian minimum-risk thresholding and TreeSHAP.
+      </p>
+
+      <div class="authors-list">
+        <span>Shoumik Bala</span> &bull; 
+        <span>Md Israfil Hossen</span> &bull; 
+        <span>Ariyan Islam Hridoy</span>
+      </div>
+
+      <div class="cta-group">
+        <a href="#simulator" class="btn btn-primary">⚡ Interactive Cost Simulator</a>
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08/blob/main/reports/CSE431_Report.md" target="_blank" class="btn btn-secondary">📄 Read Research Report</a>
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary">💻 Source Repository</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- KPI Section -->
+  <section class="kpi-section">
+    <div class="container">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-title">Fraud Cost Reduction</div>
+          <div class="kpi-value gradient-text">44.01%</div>
+          <div class="kpi-delta positive">+$9,560 Saved per 555K Txns</div>
+          <div class="kpi-desc">CatBoost cut loss from $21,720 to $12,160 at optimal threshold p* = 0.023.</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-title">Loan Charge-Off Reduction</div>
+          <div class="kpi-value gradient-text">73.41%</div>
+          <div class="kpi-delta positive">+$5,208,000 Saved per Cohort</div>
+          <div class="kpi-desc">Random Forest cut default write-down from $7.09M to $1.89M at p* = 0.142.</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-title">Sub-Millisecond Inference</div>
+          <div class="kpi-value">0.0018 ms</div>
+          <div class="kpi-delta positive">553,243 Txns / Second</div>
+          <div class="kpi-desc">Ultra-compact 0.05 MB CatBoost C++ model compliant with sub-10ms payment SLAs.</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-title">Regulatory Compliance</div>
+          <div class="kpi-value">TreeSHAP</div>
+          <div class="kpi-delta positive">100% Adverse Action Ready</div>
+          <div class="kpi-desc">Full auditability under US ECOA and FCRA credit underwriting mandates.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Cost Simulator -->
+  <section class="section" id="simulator">
+    <div class="container">
+      <div class="section-header">
+        <h2>⚡ Interactive Financial Cost Simulator</h2>
+        <p>
+          Drag the probability threshold slider to observe real-time recalculations of operational cost, dollar savings against standard 0.50 cutoffs, and confusion matrix trade-offs.
+        </p>
+      </div>
+
+      <div class="simulator-card">
+        <div class="sim-controls">
+          <div class="sim-tabs">
+            <button id="btnTaskFraud" class="sim-tab-btn active">Task A: Credit Card Fraud (40:1 Penalty)</button>
+            <button id="btnTaskLoan" class="sim-tab-btn">Task B: Loan Default (10:1 Penalty)</button>
+          </div>
+
+          <div style="text-align: center; color: var(--text-secondary); font-size: 0.95rem;" id="taskDescription">
+            Task A: Credit Card Fraud Detection (1.85M transactions, 0.58% extreme imbalance, 40:1 FN/FP cost ratio)
+          </div>
+
+          <div class="slider-container">
+            <div class="slider-label-row">
+              <span>Decision Probability Threshold (p*):</span>
+              <span id="threshValBadge" class="thresh-val-badge">0.023</span>
+            </div>
+            <input type="range" id="threshSlider" min="0.01" max="0.95" step="0.005" value="0.023">
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">
+              <span>0.01 (High Sensitivity / Flag More)</span>
+              <span>0.50 (Standard Industry Default)</span>
+              <span>0.95 (Conservative / Strict)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-results-grid">
+          <div class="sim-stat-box highlight">
+            <div class="label">Total Operational Cost</div>
+            <div id="simCostVal" class="val">$12,160.00</div>
+          </div>
+          <div class="sim-stat-box highlight">
+            <div class="label">Financial Savings vs 0.50</div>
+            <div id="simSavingsVal" class="val">44.0% ($9,560)</div>
+          </div>
+          <div class="sim-stat-box">
+            <div class="label">Recall (Risk Capture)</div>
+            <div id="simRecallVal" class="val">91.7%</div>
+          </div>
+          <div class="sim-stat-box">
+            <div class="label">Precision (Alert Accuracy)</div>
+            <div id="simPrecisionVal" class="val">23.0%</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; text-align: center;">
+          <div class="sim-stat-box">
+            <div class="label">True Positives (Caught)</div>
+            <div id="cmTP" class="val" style="font-size: 1.25rem; color: var(--accent-emerald);">154</div>
+          </div>
+          <div class="sim-stat-box">
+            <div class="label">False Positives (Alarms)</div>
+            <div id="cmFP" class="val" style="font-size: 1.25rem; color: var(--accent-amber);">516</div>
+          </div>
+          <div class="sim-stat-box">
+            <div class="label">False Negatives (Missed)</div>
+            <div id="cmFN" class="val" style="font-size: 1.25rem; color: var(--accent-rose);">14</div>
+          </div>
+          <div class="sim-stat-box">
+            <div class="label">True Negatives (Clean)</div>
+            <div id="cmTN" class="val" style="font-size: 1.25rem; color: var(--text-secondary);">39,316</div>
+          </div>
+        </div>
+
+        <div class="chart-wrapper">
+          <canvas id="costChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Empirical Benchmarks -->
+  <section class="section" id="benchmarks">
+    <div class="container">
+      <div class="section-header">
+        <h2>📊 Empirical Model & Strategy Benchmarks</h2>
+        <p>
+          Verified test-set performance metrics executed across 5 model families and 5 cost-sensitive strategies.
+        </p>
+      </div>
+
+      <h3 style="margin-bottom: 12px;">Task A: Credit Card Fraud Detection (Held-out Test Year 2020)</h3>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Model Architecture</th>
+              <th>PR-AUC</th>
+              <th>ROC-AUC</th>
+              <th>Precision</th>
+              <th>Recall</th>
+              <th>F2 Score</th>
+              <th>Optimal Cost ($)</th>
+              <th>Cost Savings</th>
+              <th>Latency (ms)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>CatBoost</strong> <span class="best-badge">BEST</span></td>
+              <td><strong>0.8364</strong></td>
+              <td><strong>0.9942</strong></td>
+              <td>22.99%</td>
+              <td><strong>91.67%</strong></td>
+              <td><strong>0.5738</strong></td>
+              <td><strong>$12,160.00</strong></td>
+              <td><span class="best-badge">44.01%</span></td>
+              <td><strong>0.0018 ms</strong></td>
+            </tr>
+            <tr>
+              <td>LightGBM</td>
+              <td>0.7902</td>
+              <td>0.9913</td>
+              <td><strong>73.49%</strong></td>
+              <td>72.62%</td>
+              <td>0.7279</td>
+              <td>$23,440.00</td>
+              <td>12.21%</td>
+              <td>0.0022 ms</td>
+            </tr>
+            <tr>
+              <td>XGBoost</td>
+              <td>0.7746</td>
+              <td>0.9925</td>
+              <td>35.04%</td>
+              <td>81.55%</td>
+              <td>0.6444</td>
+              <td>$18,040.00</td>
+              <td>40.34%</td>
+              <td>0.0025 ms</td>
+            </tr>
+            <tr>
+              <td>Random Forest</td>
+              <td>0.7606</td>
+              <td>0.9882</td>
+              <td>21.23%</td>
+              <td>84.52%</td>
+              <td>0.5295</td>
+              <td>$18,270.00</td>
+              <td>38.42%</td>
+              <td>0.0180 ms</td>
+            </tr>
+            <tr>
+              <td>Logistic Regression</td>
+              <td>0.1984</td>
+              <td>0.8353</td>
+              <td>7.61%</td>
+              <td>69.05%</td>
+              <td>0.2640</td>
+              <td>$40,090.00</td>
+              <td>41.76%</td>
+              <td>0.0012 ms</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin: 36px 0 12px;">Task B: Loan Default Risk Prediction (Stratified Holdout Test)</h3>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Model Architecture</th>
+              <th>PR-AUC</th>
+              <th>ROC-AUC</th>
+              <th>Precision</th>
+              <th>Recall</th>
+              <th>F2 Score</th>
+              <th>Optimal Cost ($)</th>
+              <th>Cost Savings</th>
+              <th>Latency (ms)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Random Forest</strong> <span class="best-badge">BEST</span></td>
+              <td><strong>0.6088</strong></td>
+              <td><strong>0.9139</strong></td>
+              <td><strong>46.61%</strong></td>
+              <td><strong>85.39%</strong></td>
+              <td><strong>0.7321</strong></td>
+              <td><strong>$1,886,500.00</strong></td>
+              <td><span class="best-badge">73.41%</span></td>
+              <td><strong>0.0305 ms</strong></td>
+            </tr>
+            <tr>
+              <td>LightGBM</td>
+              <td>0.5925</td>
+              <td>0.8748</td>
+              <td>37.76%</td>
+              <td>78.28%</td>
+              <td>0.6445</td>
+              <td>$2,678,000.00</td>
+              <td>62.41%</td>
+              <td>0.0045 ms</td>
+            </tr>
+            <tr>
+              <td>XGBoost</td>
+              <td>0.5750</td>
+              <td>0.8776</td>
+              <td>33.99%</td>
+              <td>83.13%</td>
+              <td>0.6449</td>
+              <td>$2,553,500.00</td>
+              <td>64.38%</td>
+              <td>0.0062 ms</td>
+            </tr>
+            <tr>
+              <td>CatBoost</td>
+              <td>0.3531</td>
+              <td>0.7132</td>
+              <td>21.24%</td>
+              <td>68.78%</td>
+              <td>0.4751</td>
+              <td>$4,387,500.00</td>
+              <td>42.73%</td>
+              <td>0.0038 ms</td>
+            </tr>
+            <tr>
+              <td>Logistic Regression</td>
+              <td>0.1593</td>
+              <td>0.5869</td>
+              <td>14.54%</td>
+              <td>82.81%</td>
+              <td>0.4270</td>
+              <td>$5,095,500.00</td>
+              <td>34.12%</td>
+              <td>0.0014 ms</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explainable AI (XAI) -->
+  <section class="section" id="xai">
+    <div class="container">
+      <div class="section-header">
+        <h2>🔍 Explainable AI (XAI) & Regulatory Trust</h2>
+        <p>
+          Game-theoretic TreeSHAP feature attributions and contrastive local case study audits guarantee transparent credit and fraud decisions under ECOA/FCRA regulations.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 24px; margin-bottom: 40px;">
+        <div class="gallery-card">
+          <img src="assets/figures/fraud_shap_summary.png" alt="Fraud Global TreeSHAP Beeswarm">
+          <div class="info">
+            <h4>Task A: Global Fraud Risk Drivers</h4>
+            <p>Late transaction hours (23:00 - 04:00), anomalous amount ratios, and high-risk merchant categories (grocery_pos, home goods) strongly drive fraud risk probability.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/figures/loan_shap_summary.png" alt="Loan Global TreeSHAP Beeswarm">
+          <div class="info">
+            <h4>Task B: Global Loan Default Drivers</h4>
+            <p>Asset ownership (car & home ownership), professional experience tenure, and employment stability significantly lower default risk variance.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 16px;">Contrastive Local Instance Audits</h3>
+      <div class="case-study-grid">
+        <div class="case-card">
+          <span class="case-badge case-tp">True Positive (Caught Risk)</span>
+          <h4>High-Risk Fraud Capture</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 14px;">
+            A $380.00 purchase at 02:45 AM at a high-risk merchant category produced p = 0.892 (operating cutoff p* = 0.023). TreeSHAP confirms trans_hour (+0.42) and amt (+0.31) as principal causes.
+          </p>
+          <img src="assets/figures/case1_tp_fraud.png" style="width: 100%; height: 160px; object-fit: contain; background: #ffffff; border-radius: 6px;" alt="TP Waterfall">
+        </div>
+
+        <div class="case-card">
+          <span class="case-badge case-fp">False Positive (False Alarm)</span>
+          <h4>Operational Travel Friction</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 14px;">
+            A legitimate $410.00 airline booking at 23:15 PM scored p = 0.048. Flagged under p* = 0.023, but low spatial distance (4.2 km) compensated. Safely resolved via zero-friction SMS authentication.
+          </p>
+          <img src="assets/figures/case3_fp_fraud.png" style="width: 100%; height: 160px; object-fit: contain; background: #ffffff; border-radius: 6px;" alt="FP Waterfall">
+        </div>
+
+        <div class="case-card">
+          <span class="case-badge case-fn">False Negative (Escaped)</span>
+          <h4>Stealth Velocity Attack</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 8px 0 14px;">
+            A micro-fraud transaction of $28.50 during business daylight hours scored p = 0.012 (below p* = 0.023). Static tabular models fail on stealth mimicry; demonstrates the need for graph velocity tracking.
+          </p>
+          <img src="assets/figures/case2_fn_fraud.png" style="width: 100%; height: 160px; object-fit: contain; background: #ffffff; border-radius: 6px;" alt="FN Waterfall">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual Gallery -->
+  <section class="section" id="figures">
+    <div class="container">
+      <div class="section-header">
+        <h2>📈 Performance Curves & Reliability Diagrams</h2>
+        <p>Comprehensive diagnostic curves across probability thresholds, precision-recall trade-offs, and calibration.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="assets/figures/fraud_pr_curve.png" alt="Fraud PR Curves">
+          <div class="info">
+            <h4>Precision-Recall Curves (Fraud)</h4>
+            <p>CatBoost achieves the highest PR-AUC (0.8364), maintaining high recall in the low-prevalence 0.58% regime.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/figures/fraud_cost_curve.png" alt="Fraud Cost Curve">
+          <div class="info">
+            <h4>Cost vs. Threshold Curve (Fraud)</h4>
+            <p>Visualizes the steep economic penalty of standard 0.50 cutoff vs the cost-optimal minimum at p* = 0.023.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/figures/fraud_calibration.png" alt="Fraud Calibration">
+          <div class="info">
+            <h4>Probability Calibration (Fraud)</h4>
+            <p>Reliability diagram and Brier score evaluation demonstrating well-calibrated posterior probabilities.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/figures/loan_pr_curve.png" alt="Loan PR Curves">
+          <div class="info">
+            <h4>Precision-Recall Curves (Loan)</h4>
+            <p>Random Forest outperforms gradient boosting models on applicant demographic and solvency attributes (PR-AUC 0.6088).</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/figures/loan_cost_curve.png" alt="Loan Cost Curve">
+          <div class="info">
+            <h4>Cost vs. Threshold Curve (Loan)</h4>
+            <p>Demonstrates 73.41% ($5.21M) loss reduction achieved by shifting from 0.50 to p* = 0.142.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="assets/figures/loan_confusion_matrix.png" alt="Loan Confusion Matrix">
+          <div class="info">
+            <h4>Confusion Matrix (Loan Default)</h4>
+            <p>Quadrant counts at cost-optimal threshold capturing 85.39% of all default write-offs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citation Block -->
+  <section class="section" id="citation">
+    <div class="container">
+      <div class="section-header">
+        <h2>📖 Academic Citation & Reproducibility</h2>
+        <p>This project is open-source under CC0-1.0 and fully reproducible with master seed 42.</p>
+      </div>
+
+      <div class="bibtex-box">
+        <button id="copyBibtexBtn" class="copy-btn">Copy BibTeX</button>
+        <pre id="bibtexCode">@misc{bala2026costsensitive,
+  author = {Bala, Shoumik and Hossen, Md Israfil and Hridoy, Ariyan Islam},
+  title = {Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction},
+  year = {2026},
+  publisher = {GitHub},
+  journal = {CSE431 Machine Learning Course Project},
+  howpublished = {\url{https://github.com/ShoumikBalaSomu/ML-Project-Group-08}}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">
+        <strong>CSE431 Machine Learning &bull; Group 08</strong>
+      </p>
+      <p style="margin-bottom: 12px;">
+        Shoumik Bala &bull; Md Israfil Hossen &bull; Ariyan Islam Hridoy
+      </p>
+      <p>
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank">GitHub Repository</a> &bull;
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08/blob/main/reports/CSE431_Report.md" target="_blank">Research Report</a> &bull;
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08/blob/main/docs/cost_model.md" target="_blank">Cost Model Derivations</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

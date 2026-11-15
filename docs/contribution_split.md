@@ -1,37 +1,37 @@
-# Team Contribution Breakdown & Project Governance
+# Team Collaboration & Governance
 
 **Course:** CSE431 - Machine Learning  
 **Project Title:** Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction  
-**Team Identification:** Group 08  
+**Team:** Group 08  
 
 ---
 
-## Member Matrix & Core Responsibilities
+## Team Members
 
-| Member Name | Student ID / Role | Core Contributions | Work Percentage |
-|---|---|---|:---:|
-| **Shoumik Bala** | Group Lead / Architect | System architecture design, end-to-end pipeline integration (`scripts/run_all.py`), CatBoost/XGBoost/LightGBM hyperparameter optimization, benchmarking (`scripts/benchmark.py`), final technical report synthesis. | **35%** |
-| **Md Israfil Hossen** | Data & Modeling Engineer | Data loading and chronological splitting protocols (`src/data/`), feature engineering pipelines (`src/features/`), baseline modeling (`src/models/baselines.py`), automated unit testing suite (`tests/`). | **33%** |
-| **Ariyan Islam Hridoy** | Cost & XAI Specialist | Mathematical formulation of financial cost matrices (`src/evaluate/cost.py`), cost-optimal threshold tuning algorithm, TreeSHAP global and local waterfall case studies (`src/explain/`), interactive Streamlit application (`app/app.py`). | **32%** |
+- **Shoumik Bala** (`shoumik.bala@gmail.com`)
+- **Md Israfil Hossen**
+- **Ariyan Islam Hridoy**
 
 ---
 
-## Detailed Task Breakdown
+## Collaborative Governance & Equal Contribution Statement
 
-### Shoumik Bala
-- **Pipeline Architecture:** Designed the modular repository layout, configuration management (`configs/`), and unified artifact serialization protocol.
-- **Tree Ensembles & Training:** Implemented scalable training routines for CatBoost, XGBoost, and LightGBM with early stopping and thread-safe headless Matplotlib configuration.
-- **Inference Benchmarking:** Engineered the latency, memory footprint, and throughput profiling suite (`scripts/benchmark.py`).
-- **Academic Reporting:** Lead author for the course paper (`reports/CSE431_Report.md`) and slide defense outline (`reports/slides_outline.md`).
+This project was developed through joint, equal collaboration among all team members. Rather than segregating work into isolated member silos, all three members contributed equally (33.3% each) across every phase of the research, implementation, evaluation, and documentation lifecycle.
 
-### Md Israfil Hossen
-- **Data Ingestion & Integrity:** Created dataset acquisition scripts (`src/data/download_data.py`), provenance hashing (`reports/results/data_audit.json`), and synthetic fixture generators.
-- **Leakage Prevention:** Enforced strict chronological partition for 1.85M fraud records to eradicate look-ahead bias in financial time-series.
-- **Feature Engineering:** Implemented vectorized Haversine distance functions, temporal cyclical transforms, and credit applicant stability metrics.
-- **Quality Assurance:** Authored comprehensive pytest suites (`tests/`) covering data integrity, pipeline round-trips, and cost matrix invariants.
+### Joint Project Milestones
 
-### Ariyan Islam Hridoy
-- **Financial Cost Modeling:** Derived expected loss functions ($C(p) = c_{FN} \cdot FN + c_{FP} \cdot FP + c_{TP} \cdot TP$) and quantified $40:1$ and $10:1$ asymmetric loss matrices.
-- **Threshold Optimization:** Implemented the cross-validated threshold optimization algorithm that achieved 44.01% savings on fraud and 73.41% on loan default.
-- **Explainable AI (XAI):** Generated global TreeSHAP beeswarm summaries and contrastive local waterfall case studies (True Positive, False Positive, False Negative).
-- **Interactive Visualization:** Developed the full-featured multi-tab Streamlit dashboard (`app/app.py`) for executive cost simulation and live sandbox testing.
+1. **Problem Formulation & Asymmetric Cost Modeling:**
+   - Joint derivation of the Bayesian minimum risk decision rule and operational cost matrices ($40:1$ penalty for credit card fraud, $10:1$ penalty for loan default risk).
+2. **Data Pipeline Engineering & Leakage Prevention:**
+   - Strict chronological partitioning on 1.85M credit card transactions (2019 Train vs. 2020 Test) and stratified sampling on 252K loan applicant records.
+   - Vectorized Haversine distance computations, temporal cyclical feature extraction, and credit applicant solvency metrics.
+3. **Model Benchmarking & Calibration:**
+   - Cross-evaluation of five model families (L2-Logistic Regression, Random Forest, XGBoost, LightGBM, and CatBoost).
+   - Probability calibration evaluation via Isotonic Regression, Platt Scaling, and Brier score analysis.
+4. **Cost-Sensitive Threshold Optimization:**
+   - Cross-validated 300-point grid search yielding optimal operational cutoffs ($p^* = 0.023$ for fraud, saving 44.01%; $p^* = 0.142$ for loan default, saving 73.41%).
+5. **Explainable AI (XAI) & Governance:**
+   - Game-theoretic global TreeSHAP beeswarm attributions and contrastive local instance waterfall audits for True Positives, False Positives, and False Negatives.
+   - Authoring Mitchell et al. (2019) Model Cards and adverse action notice pipelines compliant with ECOA and FCRA regulations.
+6. **Application Delivery & Technical Reporting:**
+   - Multi-tab interactive Streamlit web application (`app/app.py`), production latency and throughput benchmarking, comprehensive course research paper (`reports/CSE431_Report.md`), and defense presentation outline (`reports/slides_outline.md`).

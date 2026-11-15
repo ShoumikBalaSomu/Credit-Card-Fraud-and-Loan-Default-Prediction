@@ -5,6 +5,7 @@
 **Team:** Group 08  
 
 [![CI Pipeline](https://github.com/ShoumikBalaSomu/ML-Project-Group-08/actions/workflows/ci.yml/badge.svg)](https://github.com/ShoumikBalaSomu/ML-Project-Group-08/actions)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Interactive%20Showcase-emerald.svg)](https://shoumikbalasomu.github.io/ML-Project-Group-08/)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -12,15 +13,15 @@
 
 ---
 
-## 👥 Team Information & Contribution Matrix
+## 👥 Team Information (Group 08)
 
-| Team Member | Contact | Core Role & Responsibilities | Contribution |
-|---|---|---|:---:|
-| **Shoumik Bala** (Lead) | `shoumik.bala@gmail.com` | End-to-end architecture, training pipelines (`scripts/run_all.py`), CatBoost/XGBoost/LightGBM hyperparameter optimization, benchmarking (`scripts/benchmark.py`), technical report lead author. | **35%** |
-| **Md Israfil Hossen** | Group Member | Data loading & chronological splitting (`src/data/`), feature engineering (`src/features/`), baseline models (`src/models/baselines.py`), regression testing suite (`tests/`). | **33%** |
-| **Ariyan Islam Hridoy** | Group Member | Mathematical cost matrix modeling (`src/evaluate/cost.py`), cost-optimal threshold tuning algorithm, TreeSHAP global and local case studies (`src/explain/`), interactive Streamlit application (`app/app.py`). | **32%** |
+- **Shoumik Bala** (`shoumik.bala@gmail.com`)
+- **Md Israfil Hossen**
+- **Ariyan Islam Hridoy**
 
-*Detailed task ownership documented in [docs/contribution_split.md](docs/contribution_split.md).*
+*All team members contributed equally and collaboratively across all phases of the project: problem formulation, empirical research, data pipeline engineering, model architecture benchmarking, cost-sensitive threshold optimization, explainable AI (TreeSHAP), system optimization, documentation, and defense preparation.*
+
+*See [docs/contribution_split.md](docs/contribution_split.md) for full project governance.*
 
 ---
 

@@ -2,10 +2,10 @@
 
 **Course:** CSE431 - Machine Learning  
 **Group:** Group 08  
-**Authors:**
-- **Shoumik Bala** (`shoumik.bala@gmail.com`) - Group Lead & System Architect
-- **Md Israfil Hossen** - Data & Modeling Engineer
-- **Ariyan Islam Hridoy** - Cost & Explainability Specialist
+**Authors (Group 08):**
+- **Shoumik Bala** (`shoumik.bala@gmail.com`)
+- **Md Israfil Hossen**
+- **Ariyan Islam Hridoy**
 
 **Department of Computer Science and Engineering**  
 **Submission Date:** November 2026

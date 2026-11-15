@@ -12,9 +12,9 @@
 - **Subtitle:** Dual-Domain Evaluation: Credit Card Fraud Detection & Loan Default Prediction
 - **Course:** CSE431 Machine Learning
 - **Presenters (Group 08):**
-  - Shoumik Bala (Group Lead & System Architect)
-  - Md Israfil Hossen (Data & Modeling Engineer)
-  - Ariyan Islam Hridoy (Cost & Explainability Specialist)
+  - Shoumik Bala (`shoumik.bala@gmail.com`)
+  - Md Israfil Hossen
+  - Ariyan Islam Hridoy
 - **Visual:** Project logo / architecture diagram thumbnail.
 
 ---
