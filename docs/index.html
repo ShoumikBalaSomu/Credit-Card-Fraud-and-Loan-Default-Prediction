@@ -7,6 +7,18 @@
   <meta name="description" content="CSE431 Machine Learning Course Project: Cost-sensitive learning and explainable AI for credit card fraud detection and loan default prediction under severe class imbalance.">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💳</text></svg>">
+  <!-- KaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ],
+      throwOnError: false
+    });"></script>
 </head>
 <body>
 
@@ -49,13 +61,24 @@
         Empirical dual-domain evaluation across extreme (0.58%) and moderate (12.30%) class imbalances in credit card fraud detection and loan default underwriting using Bayesian minimum-risk thresholding and TreeSHAP.
       </p>
 
-      <div class="authors-list">
-        <span>Shoumik Bala Somu</span> &bull; 
-        <span>Md Israfil Hossen</span> &bull; 
-        <span>Ariyan Islam Hridoy</span>
-      </div>
-      <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: -20px; margin-bottom: 25px;">
-        Equal Co-Authors &bull; Group 08 &bull; CSE431 Machine Learning
+      <div class="authors-wrapper">
+        <div class="authors-list">
+          <span class="author-pill">
+            <span>Shoumik Bala Somu</span>
+            <span class="author-badge">Equal Co-Author</span>
+          </span>
+          <span class="author-pill">
+            <span>Md Israfil Hossen</span>
+            <span class="author-badge">Equal Co-Author</span>
+          </span>
+          <span class="author-pill">
+            <span>Ariyan Islam Hridoy</span>
+            <span class="author-badge">Equal Co-Author</span>
+          </span>
+        </div>
+        <div class="authors-meta">
+          Group 08 &bull; Department of Computer Science &amp; Engineering &bull; CSE431 Machine Learning
+        </div>
       </div>
 
       <div class="cta-group">
@@ -137,7 +160,7 @@
             <span class="badge badge-danger">10:1 Loss Asymmetry</span>
           </div>
           <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6;">
-            Originating a loan to a borrower who subsequently defaults (False Negative) triggers an average principal write-off of <strong>$5,000.00</strong>. Rejecting a qualified applicant (False Positive) foregoes approximately <strong>$500.00</strong> in net interest margin. Shifting the threshold to $p^* = 0.142$ recaptures over $5.2M in write-downs.
+            Originating a loan to a borrower who subsequently defaults (False Negative) triggers an average principal write-off of <strong>$5,000.00</strong>. Rejecting a qualified applicant (False Positive) foregoes approximately <strong>$500.00</strong> in net interest margin. Shifting the threshold to \( p^* = 0.142 \) recaptures over $5.2M in write-downs.
           </p>
         </div>
       </div>

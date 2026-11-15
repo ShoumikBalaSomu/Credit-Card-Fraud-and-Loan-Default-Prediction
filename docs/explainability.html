@@ -6,6 +6,18 @@
   <title>Explainability & Auditing | FinRisk ML Group 08</title>
   <meta name="description" content="Explainable AI, TreeSHAP global beeswarm attributions, and local contrastive case studies for financial risk regulatory compliance.">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- KaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ],
+      throwOnError: false
+    });"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
 </head>
 <body>
@@ -110,9 +122,9 @@
         <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
             <h3 style="font-size: 1.25rem;">Case 1: Correctly Intercepted Fraud (True Positive)</h3>
-            <span class="badge badge-accent">Task A: Fraud | Caught (p = 0.942 &ge; p* = 0.023)</span>
+            <span class="badge badge-accent">Task A: Fraud | Caught (\( p = 0.942 \ge p^* = 0.023 \))</span>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div class="case-study-row">
             <div>
               <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
                 <strong>Transaction Profile:</strong> Online electronic equipment purchase of $982.50 at 02:45 AM from a merchant located 640 km away from the cardholder's billing residence.
@@ -135,9 +147,9 @@
         <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
             <h3 style="font-size: 1.25rem;">Case 2: Escaped Stealth Attack (False Negative)</h3>
-            <span class="badge badge-danger">Task A: Fraud | Escaped (p = 0.012 &lt; p* = 0.023)</span>
+            <span class="badge badge-danger">Task A: Fraud | Escaped (\( p = 0.012 < p^* = 0.023 \))</span>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div class="case-study-row">
             <div>
               <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
                 <strong>Transaction Profile:</strong> Micro-fraud charge of $28.50 at a local grocery store during regular business hours (14:30 PM). Cardholder was in the same zip code.
@@ -160,9 +172,9 @@
         <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
             <h3 style="font-size: 1.25rem;">Case 3: Customer Verification Friction (False Positive)</h3>
-            <span class="badge" style="background: var(--accent-amber); color: #000;">Task A: Fraud | False Alarm (p = 0.038 &ge; p* = 0.023)</span>
+            <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border-color: rgba(245, 158, 11, 0.4);">Task A: Fraud | False Alarm (\( p = 0.038 \ge p^* = 0.023 \))</span>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div class="case-study-row">
             <div>
               <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
                 <strong>Transaction Profile:</strong> Legitimate holiday flight booking of $840.00 made by the cardholder while traveling abroad.
@@ -185,9 +197,9 @@
         <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
             <h3 style="font-size: 1.25rem;">Case 4: Caught Loan Default Risk (True Positive)</h3>
-            <span class="badge badge-accent">Task B: Loan | Denied (p = 0.640 &ge; p* = 0.142)</span>
+            <span class="badge badge-accent">Task B: Loan | Denied (\( p = 0.640 \ge p^* = 0.142 \))</span>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div class="case-study-row">
             <div>
               <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
                 <strong>Applicant Profile:</strong> Junior professional with low annual income ($18,000), living in rented accommodation with under 1 year of continuous job experience.

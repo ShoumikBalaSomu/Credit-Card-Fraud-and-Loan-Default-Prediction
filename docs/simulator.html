@@ -7,6 +7,18 @@
   <meta name="description" content="Interactive threshold optimization and financial risk simulator for credit card fraud detection and loan default prediction.">
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- KaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ],
+      throwOnError: false
+    });"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 </head>
 <body>
@@ -144,13 +156,13 @@
         <div style="margin-top: 40px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
           <h3 style="margin-bottom: 12px; font-size: 1.2rem;">📐 Mathematical Decision Formulation</h3>
           <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">
-            Under the Bayesian Minimum Risk framework, an instance with predicted posterior risk probability \( P(Y=1|x) \) is assigned positive action if the expected loss of declaring positive is strictly lower than declaring negative:
+            Under the Bayesian Minimum Risk framework, an instance with predicted posterior risk probability \( P(Y=1 \mid x) \) is assigned positive action if the expected loss of declaring positive is strictly lower than declaring negative:
           </p>
-          <div class="formula-card">
-            p* = Cost(FP) / [Cost(FP) + Cost(FN)]
+          <div class="formula-card math-highlight">
+            \[ p^* = \frac{\text{Cost}(FP)}{\text{Cost}(FP) + \text{Cost}(FN)} \]
           </div>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
-            For Credit Card Fraud with \( Cost(FN) = \$200 \) and \( Cost(FP) = \$5 \):<br>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7;">
+            For Credit Card Fraud with \( \text{Cost}(FN) = \$200 \) and \( \text{Cost}(FP) = \$5 \):<br>
             <strong>Theoretical optimal threshold:</strong> \( p^* = \frac{5}{5 + 200} = \frac{5}{205} \approx 0.0244 \).<br>
             Our empirical 150-point grid search validates an optimal operating point at <strong>p* = 0.023</strong>, matching theoretical Bayesian decision theory with 99.4% precision.
           </p>

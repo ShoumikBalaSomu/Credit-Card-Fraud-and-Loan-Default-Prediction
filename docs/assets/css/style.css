@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+
 :root {
   --bg-primary: #0a0e17;
   --bg-secondary: #121826;
@@ -21,8 +23,10 @@
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-full: 9999px;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', var(--font-sans);
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-bengali: 'Hind Siliguri', 'Kalpurush', 'SolaimanLipi', sans-serif;
 }
 
 [data-theme="light"] {
@@ -52,7 +56,20 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+p {
+  color: var(--text-secondary);
 }
 
 a {
@@ -63,6 +80,26 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+}
+
+code {
+  background: rgba(56, 189, 248, 0.08);
+  color: var(--accent-blue);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88em;
+  border: 1px solid rgba(56, 189, 248, 0.18);
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border: none;
 }
 
 .container {
@@ -109,18 +146,24 @@ a:hover {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
   list-style: none;
 }
 
 .nav-links a {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+  display: inline-block;
+  border: 1px solid transparent;
 }
 
 .nav-links a:hover {
   color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
   text-decoration: none;
 }
 
@@ -198,20 +241,56 @@ a:hover {
   line-height: 1.6;
 }
 
+.authors-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
 .authors-list {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 30px;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--text-muted);
 }
 
-.authors-list span {
-  color: var(--text-primary);
+.author-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  font-size: 0.92rem;
   font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.author-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-blue);
+}
+
+.author-pill .author-badge {
+  font-size: 0.75rem;
+  color: var(--accent-blue);
+  background: rgba(56, 189, 248, 0.12);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+.authors-meta {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .cta-group {
@@ -682,19 +761,9 @@ footer a {
 /* Multi-Page Enhancements */
 .nav-links a.active {
   color: var(--accent-blue) !important;
-  font-weight: 700;
-  position: relative;
-}
-
-.nav-links a.active::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--accent-blue);
-  border-radius: 2px;
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.3);
+  font-weight: 600;
 }
 
 .page-hero {
@@ -771,38 +840,85 @@ footer a {
   gap: 6px;
 }
 
+/* Formula & Math Display */
 .formula-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 20px 24px;
-  margin: 20px 0;
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  color: var(--accent-cyan);
-  overflow-x: auto;
   border-left: 4px solid var(--accent-blue);
-}
-
-.table-responsive {
-  overflow-x: auto;
-  margin: 20px 0;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
+  padding: 18px 24px;
+  margin: 18px 0;
+  font-size: 0.98rem;
+  color: var(--text-primary);
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease;
 }
 
+.formula-card.math-highlight {
+  border-left-color: var(--accent-emerald);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.formula-card .katex-display {
+  margin: 0.4em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+
+/* Numeric alignment in tables */
+.table-numeric th:not(:first-child),
+.table-numeric td:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Case Study Responsive Grid */
+.case-study-row {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Bengali Typography */
 .bengali-content {
-  font-family: 'Kalpurush', 'SolaimanLipi', 'Noto Sans Bengali', -apple-system, sans-serif;
-  line-height: 1.85;
+  font-family: var(--font-bengali);
+  line-height: 1.9;
   font-size: 1.05rem;
+  letter-spacing: 0.01em;
 }
 
-.bengali-content h2, .bengali-content h3 {
+.bengali-content h2, 
+.bengali-content h3,
+.bengali-content h4 {
+  font-family: var(--font-bengali);
   color: var(--accent-blue);
-  margin: 24px 0 12px;
+  margin: 22px 0 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.bengali-content p,
+.bengali-content li {
+  font-family: var(--font-bengali);
+  line-height: 1.9;
+}
+
+.bengali-content strong {
+  font-family: var(--font-bengali);
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+  .case-study-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.1rem;
@@ -815,10 +931,19 @@ footer a {
     overflow-x: auto;
     max-width: 100%;
     padding: 8px 0;
-    gap: 14px;
+    gap: 8px;
     -webkit-overflow-scrolling: touch;
   }
   .nav-links::-webkit-scrollbar {
     display: none;
+  }
+  .container {
+    padding: 0 16px;
+  }
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  .dual-domain-grid {
+    grid-template-columns: 1fr;
   }
 }

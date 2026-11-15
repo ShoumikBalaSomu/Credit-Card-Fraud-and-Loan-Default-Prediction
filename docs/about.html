@@ -6,6 +6,18 @@
   <title>Team & Reproducibility | FinRisk ML Group 08</title>
   <meta name="description" content="Research team governance, Bengali executive summary, and complete reproducibility guide for CSE431 Financial Risk ML project.">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- KaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ],
+      throwOnError: false
+    });"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>">
 </head>
 <body>
@@ -105,8 +117,8 @@
 
           <h3 style="font-size: 1.2rem; color: var(--text-primary);">২. মূল গবেষণার ফলাফল ও আর্থিক সঞ্চয়</h3>
           <ul style="padding-left: 20px; margin-bottom: 16px; line-height: 1.8;">
-            <li><strong>ক্রেডিট কার্ড প্রতারণা প্রতিরোধ (Task A):</strong> CatBoost এবং Ensemble Blend সর্বোচ্চ PR-AUC (০.৮৩৯৮) অর্জন করেছে। সনাতন ০.৫০ থ্রেশহোল্ডের পরিবর্তে অপ্টিমাল কাটঅফ \( p^* = ০.০২৩ \) নির্ধারণ করে মোট আর্থিক ক্ষতি $২১,৭২০ থেকে কমিয়ে $১২,১৬০-এ নামিয়ে আনা সম্ভব হয়েছে, যা <strong>৪৪.০১% আর্থিক সাশ্রয়</strong> নিশ্চিত করে।</li>
-            <li><strong>ঋণ খেলাপি পূর্বাভাস (Task B):</strong> Random Forest এবং Ensemble Blend সর্বোচ্চ PR-AUC (০.৬২৫৯) এবং ROC-AUC (০.৯১৩৫) অর্জন করেছে। সিদ্ধান্ত থ্রেশহোল্ড \( p^* = ০.১৪২ \)-তে নামিয়ে এনে ঋণ খেলাপি ক্ষতি $৭.০৯ মিলিয়ন থেকে $১.৮৯ মিলিয়নে নামিয়ে আনা হয়েছে, যা <strong>৭৩.৪১% আর্থিক সাশ্রয়</strong> নিশ্চিত করে।</li>
+            <li><strong>ক্রেডিট কার্ড প্রতারণা প্রতিরোধ (Task A):</strong> CatBoost এবং Ensemble Blend সর্বোচ্চ PR-AUC (০.৮৩৯৮) অর্জন করেছে। সনাতন ০.৫০ থ্রেশহোল্ডের পরিবর্তে অপ্টিমাল কাটঅফ \( p^* = 0.023 \) নির্ধারণ করে মোট আর্থিক ক্ষতি $২১,৭২০ থেকে কমিয়ে $১২,১৬০-এ নামিয়ে আনা সম্ভব হয়েছে, যা <strong>৪৪.০১% আর্থিক সাশ্রয়</strong> নিশ্চিত করে।</li>
+            <li><strong>ঋণ খেলাপি পূর্বাভাস (Task B):</strong> Random Forest এবং Ensemble Blend সর্বোচ্চ PR-AUC (০.৬২৫৯) এবং ROC-AUC (০.৯১৩৫) অর্জন করেছে। সিদ্ধান্ত থ্রেশহোল্ড \( p^* = 0.142 \)-তে নামিয়ে এনে ঋণ খেলাপি ক্ষতি $৭.০৯ মিলিয়ন থেকে $১.৮৯ মিলিয়নে নামিয়ে আনা হয়েছে, যা <strong>৭৩.৪১% আর্থিক সাশ্রয়</strong> নিশ্চিত করে।</li>
             <li><strong>রিয়েল-টাইম সক্ষমতা:</strong> প্রতি লেনদেনে ইনফারেন্স লেটেন্সি মাত্র ০.০১৪৯ মিলি-সেকেন্ড (প্রতি সেকেন্ডে ৬৭,০০০+ লেনদেন যাচাই সম্ভব), যা পেমেন্ট গেটওয়ের সাব-১০ms এসএলএ শর্তের সাথে সম্পূর্ণ সঙ্গতিপূর্ণ।</li>
           </ul>
 

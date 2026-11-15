@@ -6,6 +6,18 @@
   <title>Scientific Methodology | FinRisk ML Group 08</title>
   <meta name="description" content="Bayesian minimum expected loss derivation, chronological validation protocols, and feature engineering for financial risk modeling.">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- KaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ],
+      throwOnError: false
+    });"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
 </head>
 <body>
@@ -71,25 +83,27 @@
           </ul>
 
           <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 12px;">
-            The conditional expected financial loss of action \( d=1 \) (predict risk / flag) versus \( d=0 \) (predict clean / approve) given posterior risk \( P(Y=1|x) \) is:
+            The conditional expected financial loss of action \( d=1 \) (predict risk / flag) versus \( d=0 \) (predict clean / approve) given posterior risk \( P(Y=1 \mid x) \) is:
           </p>
           <div class="formula-card">
-            Expected_Loss(d=1|x) = C(TP) &middot; P(Y=1|x) + C(FP) &middot; [1 - P(Y=1|x)]<br>
-            Expected_Loss(d=0|x) = C(FN) &middot; P(Y=1|x) + C(TN) &middot; [1 - P(Y=1|x)]
+            \[ \mathcal{L}(d=1 \mid x) = C(TP) \cdot P(Y=1 \mid x) + C(FP) \cdot [1 - P(Y=1 \mid x)] \]
+            \[ \mathcal{L}(d=0 \mid x) = C(FN) \cdot P(Y=1 \mid x) + C(TN) \cdot [1 - P(Y=1 \mid x)] \]
           </div>
 
           <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 12px;">
-            By the Bayes decision rule, we flag the transaction as positive whenever \( Expected\_Loss(d=1|x) \le Expected\_Loss(d=0|x) \). Solving for \( P(Y=1|x) \) yields the exact analytical optimal threshold \( p^* \):
+            By the Bayes decision rule, we flag the transaction as positive whenever \( \mathcal{L}(d=1 \mid x) \le \mathcal{L}(d=0 \mid x) \). Solving for \( P(Y=1 \mid x) \) yields the exact analytical optimal threshold \( p^* \):
           </p>
-          <div class="formula-card" style="font-size: 1.15rem; font-weight: 700; color: var(--accent-blue);">
-            p* = [C(FP) - C(TN)] / [ (C(FP) - C(TN)) + (C(FN) - C(TP)) ]
+          <div class="formula-card math-highlight">
+            \[ p^* = \frac{C(FP) - C(TN)}{[C(FP) - C(TN)] + [C(FN) - C(TP)]} \]
           </div>
 
-          <p style="font-size: 0.92rem; color: var(--text-secondary);">
-            Under normalized frictionless baselines (\( C(TN) = 0 \), \( C(TP) = 0 \)), this simplifies to:
-            <br>
-            <strong style="color: var(--text-primary); font-family: var(--font-mono);">p* = C(FP) / [ C(FP) + C(FN) ]</strong>.
-            <br>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7;">
+            Under normalized frictionless baselines (\( C(TN) = 0 \), \( C(TP) = 0 \)), this simplifies directly to:
+          </p>
+          <div class="formula-card">
+            \[ p^* = \frac{C(FP)}{C(FP) + C(FN)} \]
+          </div>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7;">
             Because \( C(FN) \gg C(FP) \) in credit risk, the denominator dominates, mathematically guaranteeing that the loss-minimizing decision cutoff \( p^* \) lies substantially below 0.50.
           </p>
         </div>
@@ -221,8 +235,8 @@
             <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
               Vectorized distance computation between cardholder residence coordinates \( (\text{lat}_1, \text{long}_1) \) and merchant POS terminal \( (\text{lat}_2, \text{long}_2) \):
             </p>
-            <div class="formula-card" style="font-size: 0.85rem;">
-              d = 2R &middot; arcsin( &radic;[ sin&sup2;(&Delta;&phi;/2) + cos(&phi;&sub1;)cos(&phi;&sub2;)sin&sup2;(&Delta;&lambda;/2) ] )
+            <div class="formula-card">
+              \[ d = 2R \arcsin \left( \sqrt{\sin^2\left(\frac{\Delta \phi}{2}\right) + \cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\Delta \lambda}{2}\right)} \right) \]
             </div>
           </div>
 
@@ -231,9 +245,8 @@
             <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
               Mapping hour-of-day \( t \in [0, 23] \) to continuous circular coordinates preserving continuity between 23:59 and 00:00:
             </p>
-            <div class="formula-card" style="font-size: 0.85rem;">
-              hour_sin = sin( 2&pi;t / 24 )<br>
-              hour_cos = cos( 2&pi;t / 24 )
+            <div class="formula-card">
+              \[ \text{hour\_sin} = \sin\left(\frac{2\pi t}{24}\right), \quad \text{hour\_cos} = \cos\left(\frac{2\pi t}{24}\right) \]
             </div>
           </div>
 
@@ -242,9 +255,8 @@
             <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
               Deriving applicant employment stability ratio and continuous home equity interaction to quantify borrower vulnerability:
             </p>
-            <div class="formula-card" style="font-size: 0.85rem;">
-              stability_ratio = Current_Job_Yrs / max(1, Experience)<br>
-              income_bracket = log1p( Income )
+            <div class="formula-card">
+              \[ \text{stability\_ratio} = \frac{\text{Current\_Job\_Yrs}}{\max(1, \text{Experience})}, \quad \text{income\_bracket} = \ln(1 + \text{Income}) \]
             </div>
           </div>
         </div>

@@ -6,6 +6,18 @@
   <title>Model Benchmarks | FinRisk ML Group 08</title>
   <meta name="description" content="Empirical performance benchmarks across 6 machine learning model families on credit card fraud and loan default prediction tasks.">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- KaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ],
+      throwOnError: false
+    });"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 </head>
 <body>
@@ -68,14 +80,14 @@
         </div>
 
         <div class="table-responsive">
-          <table class="benchmark-table">
+          <table class="benchmark-table table-numeric">
             <thead>
               <tr>
                 <th>Model Architecture</th>
                 <th>PR-AUC (Headline)</th>
                 <th>ROC-AUC</th>
-                <th>Recall @ p*</th>
-                <th>Precision @ p*</th>
+                <th>Recall @ \( p^* \)</th>
+                <th>Precision @ \( p^* \)</th>
                 <th>F1 Score</th>
                 <th>F2 Score</th>
                 <th>MCC</th>
@@ -172,7 +184,7 @@
           <h3 style="font-size: 1.2rem; margin-bottom: 12px;">📈 5-Fold Stratified Cross-Validation Summary (Fraud)</h3>
           <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 14px;">Mean ± Standard Deviation across 5 independent validation folds confirms statistical separation.</p>
           <div class="table-responsive">
-            <table class="benchmark-table">
+            <table class="benchmark-table table-numeric">
               <thead>
                 <tr>
                   <th>Model</th>
@@ -225,14 +237,14 @@
         </div>
 
         <div class="table-responsive">
-          <table class="benchmark-table">
+          <table class="benchmark-table table-numeric">
             <thead>
               <tr>
                 <th>Model Architecture</th>
                 <th>PR-AUC (Headline)</th>
                 <th>ROC-AUC</th>
-                <th>Recall @ p*</th>
-                <th>Precision @ p*</th>
+                <th>Recall @ \( p^* \)</th>
+                <th>Precision @ \( p^* \)</th>
                 <th>F1 Score</th>
                 <th>F2 Score</th>
                 <th>MCC</th>
@@ -328,7 +340,7 @@
         <div style="margin-top: 30px;">
           <h3 style="font-size: 1.2rem; margin-bottom: 12px;">📈 5-Fold Stratified Cross-Validation Summary (Loan)</h3>
           <div class="table-responsive">
-            <table class="benchmark-table">
+            <table class="benchmark-table table-numeric">
               <thead>
                 <tr>
                   <th>Model</th>
@@ -381,7 +393,7 @@
         </div>
 
         <div class="table-responsive">
-          <table class="benchmark-table">
+          <table class="benchmark-table table-numeric">
             <thead>
               <tr>
                 <th>Domain Task</th>
