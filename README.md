@@ -235,11 +235,10 @@ If you reference this work or codebase in academic or industrial research, pleas
 
 ```text
 @misc{bala2026costsensitive,
-  author = {Bala, Shoumik and Hossen, Md Israfil and Hridoy, Ariyan Islam},
   title = {Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction},
+  author = {Bala, Shoumik and Hossen, Md Israfil and Hridoy, Ariyan Islam},
   year = {2026},
-  publisher = {GitHub},
-  journal = {CSE431 Machine Learning Course Project},
-  howpublished = {https://github.com/ShoumikBalaSomu/ML-Project-Group-08}
+  howpublished = {https://github.com/ShoumikBalaSomu/ML-Project-Group-08},
+  note = {CSE431 Machine Learning Course Project, Group 08}
 }
 ```

@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you reference this work or codebase, please cite it as below."
+title: "Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction"
+authors:
+  - family-names: "Bala"
+    given-names: "Shoumik"
+    email: "shoumik.bala@gmail.com"
+  - family-names: "Hossen"
+    given-names: "Md Israfil"
+  - family-names: "Hridoy"
+    given-names: "Ariyan Islam"
+version: "1.0.0"
+date-released: "2026-11-15"
+url: "https://github.com/ShoumikBalaSomu/ML-Project-Group-08"
+repository-code: "https://github.com/ShoumikBalaSomu/ML-Project-Group-08"
+license: "CC0-1.0"
+preferred-citation:
+  type: generic
+  title: "Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction"
+  authors:
+    - family-names: "Bala"
+      given-names: "Shoumik"
+    - family-names: "Hossen"
+      given-names: "Md Israfil"
+    - family-names: "Hridoy"
+      given-names: "Ariyan Islam"
+  year: 2026
+  url: "https://github.com/ShoumikBalaSomu/ML-Project-Group-08"
+  institution:
+    name: "Department of Computer Science and Engineering"
