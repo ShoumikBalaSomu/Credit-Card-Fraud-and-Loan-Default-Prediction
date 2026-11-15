@@ -1,0 +1,6 @@
+theme: []
+markdown: kramdown
+highlighter: rouge
+include:
+  - assets
+  - figures
