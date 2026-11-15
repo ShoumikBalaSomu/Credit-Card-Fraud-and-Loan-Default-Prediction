@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explainability & Auditing | FinRisk ML Group 08</title>
+  <meta name="description" content="Explainable AI, TreeSHAP global beeswarm attributions, and local contrastive case studies for financial risk regulatory compliance.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <span>💳</span> FinRisk ML <span class="badge badge-accent">Group 08</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="simulator.html">Cost Simulator</a></li>
+        <li><a href="benchmarks.html">Benchmarks</a></li>
+        <li><a href="explainability.html" class="active">Explainability</a></li>
+        <li><a href="methodology.html">Methodology</a></li>
+        <li><a href="about.html">Team & Docs</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Light Mode</button>
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+          ⭐ GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container">
+      <div class="badge-wrapper">
+        <span class="badge badge-accent">Regulatory Compliance</span>
+        <span class="badge">TreeSHAP (Lundberg et al.)</span>
+        <span class="badge">ECOA / FCRA Ready</span>
+      </div>
+      <h1>🔍 Explainable AI & Regulatory Auditing</h1>
+      <p>
+        Black-box predictive algorithms cannot be deployed in consumer finance without full auditability. We integrate game-theoretic TreeSHAP feature attributions and contrastive local waterfall case studies to satisfy US Equal Credit Opportunity Act (ECOA) and Fair Credit Reporting Act (FCRA) adverse action mandates.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <!-- Regulatory Context Banner -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; margin-bottom: 40px;">
+        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: var(--accent-blue);">⚖️ Regulatory Mandate: Adverse Action Notices (ECOA &amp; FCRA)</h3>
+        <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+          Under 12 CFR § 1002.9 (Regulation B), financial institutions utilizing algorithmic underwriting or automated fraud blocking must provide applicants with specific, verifiable principal reasons for adverse credit decisions. TreeSHAP provides mathematically guaranteed local accuracy and consistency, extracting the exact top factors that increased risk above the decision cutoff \( p^* \).
+        </p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <span class="badge badge-accent">12 CFR § 1002.9 (Regulation B)</span>
+          <span class="badge">FCRA § 615(a) Compliance</span>
+          <span class="badge badge-danger">Algorithmic Disparity Audited</span>
+        </div>
+      </div>
+
+      <!-- Global Feature Importance -->
+      <div class="section-header" style="text-align: left; margin-bottom: 25px;">
+        <h2 style="font-size: 1.6rem;">🌐 Global Feature Attributions (TreeSHAP Beeswarms)</h2>
+        <p>Aggregate feature importance computed over representative holdout instances illustrating directional impact on risk logits.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 28px; margin-bottom: 50px;">
+        
+        <!-- Fraud SHAP -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+          <h3 style="margin-bottom: 14px; font-size: 1.15rem;">Task A: Credit Card Fraud Risk Drivers</h3>
+          <img src="assets/figures/fraud_shap_summary.png" alt="Fraud SHAP Summary" style="width: 100%; border-radius: var(--radius-sm); background: #ffffff; padding: 8px;">
+          <ul style="margin-top: 16px; font-size: 0.9rem; color: var(--text-secondary); padding-left: 20px; line-height: 1.6;">
+            <li><strong>Transaction Amount (<code>amt</code>):</strong> Extremely strong non-linear risk escalation above $200.00.</li>
+            <li><strong>Haversine Distance (<code>dist_km</code>):</strong> Physical displacement between cardholder home and merchant POS.</li>
+            <li><strong>Category Effects:</strong> High positive attributions for <code>shopping_net</code>, <code>grocery_pos</code>, and <code>misc_net</code>.</li>
+            <li><strong>Cyclical Time of Day:</strong> Severe risk elevation between 23:00 and 04:00 (night-owl bursts).</li>
+          </ul>
+        </div>
+
+        <!-- Loan SHAP -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+          <h3 style="margin-bottom: 14px; font-size: 1.15rem;">Task B: Loan Default Risk Drivers</h3>
+          <img src="assets/figures/loan_shap_summary.png" alt="Loan SHAP Summary" style="width: 100%; border-radius: var(--radius-sm); background: #ffffff; padding: 8px;">
+          <ul style="margin-top: 16px; font-size: 0.9rem; color: var(--text-secondary); padding-left: 20px; line-height: 1.6;">
+            <li><strong>Applicant Income:</strong> Lower income brackets strongly pull default probabilities upwards.</li>
+            <li><strong>Years in Current Job:</strong> Employment stability under 2 years increases risk significantly.</li>
+            <li><strong>Home Ownership:</strong> Renters show elevated default propensity compared to homeowners.</li>
+            <li><strong>Experience-to-Age Ratio:</strong> Low solvency ratio flags potential financial vulnerability.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Local Case Studies -->
+      <div class="section-header" style="text-align: left; margin-bottom: 25px;">
+        <h2 style="font-size: 1.6rem;">🔬 Local Case Studies & Contrastive Explanations</h2>
+        <p>Individual prediction audits evaluating True Positives, False Negatives, and False Positives with SHAP waterfall plots.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 50px;">
+
+        <!-- Case 1: TP Fraud -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="font-size: 1.25rem;">Case 1: Correctly Intercepted Fraud (True Positive)</h3>
+            <span class="badge badge-accent">Task A: Fraud | Caught (p = 0.942 &ge; p* = 0.023)</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+            <div>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+                <strong>Transaction Profile:</strong> Online electronic equipment purchase of $982.50 at 02:45 AM from a merchant located 640 km away from the cardholder's billing residence.
+              </p>
+              <div class="formula-card" style="font-size: 0.85rem; color: var(--text-primary); margin-bottom: 12px;">
+                Human-Readable Contrastive Explanation:<br>
+                "TRANSACTION FLAGGED: Amount ($982.50) is 4.8 standard deviations above profile baseline; physical merchant distance (640 km) exceeds diurnal travel feasibility; transaction occurred during high-risk night window (02:45 AM)."
+              </div>
+              <p style="font-size: 0.88rem; color: var(--accent-emerald); font-weight: 600;">
+                Economic Outcome: Saved $200.00 direct chargeback liability for a friction cost of $5.00.
+              </p>
+            </div>
+            <div>
+              <img src="assets/figures/case1_tp_fraud.png" alt="Case 1 TP Waterfall" style="width: 100%; border-radius: var(--radius-sm); background: #ffffff; padding: 6px;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Case 2: FN Fraud -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="font-size: 1.25rem;">Case 2: Escaped Stealth Attack (False Negative)</h3>
+            <span class="badge badge-danger">Task A: Fraud | Escaped (p = 0.012 &lt; p* = 0.023)</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+            <div>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+                <strong>Transaction Profile:</strong> Micro-fraud charge of $28.50 at a local grocery store during regular business hours (14:30 PM). Cardholder was in the same zip code.
+              </p>
+              <div class="formula-card" style="font-size: 0.85rem; color: var(--text-primary); margin-bottom: 12px;">
+                Forensic Analysis & Limitations:<br>
+                "Static tabular classifiers fail to identify micro-mimicry fraud where amount, time, and distance match legitimate baseline habits. Mitigating this vulnerability requires streaming temporal graph velocity (e.g. 5 rapid charges in 60 seconds)."
+              </div>
+              <p style="font-size: 0.88rem; color: var(--accent-rose); font-weight: 600;">
+                Economic Outcome: Incurred $200.00 unrecovered loss. Demonstrates explicit stop-condition for tabular models.
+              </p>
+            </div>
+            <div>
+              <img src="assets/figures/case2_fn_fraud.png" alt="Case 2 FN Waterfall" style="width: 100%; border-radius: var(--radius-sm); background: #ffffff; padding: 6px;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Case 3: FP Fraud -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="font-size: 1.25rem;">Case 3: Customer Verification Friction (False Positive)</h3>
+            <span class="badge" style="background: var(--accent-amber); color: #000;">Task A: Fraud | False Alarm (p = 0.038 &ge; p* = 0.023)</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+            <div>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+                <strong>Transaction Profile:</strong> Legitimate holiday flight booking of $840.00 made by the cardholder while traveling abroad.
+              </p>
+              <div class="formula-card" style="font-size: 0.85rem; color: var(--text-primary); margin-bottom: 12px;">
+                Operational Protocol:<br>
+                "Automated 2FA verification push notification delivered to cardholder smartphone. Customer confirmed legitimate identity within 15 seconds. Friction cost incurred: $5.00."
+              </div>
+              <p style="font-size: 0.88rem; color: var(--accent-emerald); font-weight: 600;">
+                Economic Outcome: Acceptable operational friction designed by the 40:1 cost matrix.
+              </p>
+            </div>
+            <div>
+              <img src="assets/figures/case3_fp_fraud.png" alt="Case 3 FP Waterfall" style="width: 100%; border-radius: var(--radius-sm); background: #ffffff; padding: 6px;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Case 4: TP Loan Default -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="font-size: 1.25rem;">Case 4: Caught Loan Default Risk (True Positive)</h3>
+            <span class="badge badge-accent">Task B: Loan | Denied (p = 0.640 &ge; p* = 0.142)</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+            <div>
+              <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+                <strong>Applicant Profile:</strong> Junior professional with low annual income ($18,000), living in rented accommodation with under 1 year of continuous job experience.
+              </p>
+              <div class="formula-card" style="font-size: 0.85rem; color: var(--text-primary); margin-bottom: 12px;">
+                ECOA Adverse Action Reasons:<br>
+                "1. Low annual household income relative to requested credit facility.<br>
+                 2. Insufficient tenure at current employment (&lt; 12 months).<br>
+                 3. Non-equity residential status (Rented)."
+              </div>
+              <p style="font-size: 0.88rem; color: var(--accent-emerald); font-weight: 600;">
+                Economic Outcome: Prevented $5,000.00 principal default write-down.
+              </p>
+            </div>
+            <div>
+              <img src="assets/figures/case4_tp_loan.png" alt="Case 4 TP Waterfall" style="width: 100%; border-radius: var(--radius-sm); background: #ffffff; padding: 6px;">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Adverse Action Notice Sample -->
+      <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px;">
+        <h3 style="font-size: 1.25rem; margin-bottom: 14px; color: var(--text-primary);">📋 Sample Compliant Adverse Action Notice (12 CFR § 1002.9)</h3>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 20px; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.7; color: var(--text-secondary);">
+          NOTICE OF ADVERSE ACTION AND CREDIT SCORE DISCLOSURE<br>
+          Date: November 15, 2026<br>
+          Applicant Reference ID: #LN-849201<br><br>
+          Dear Applicant,<br>
+          Thank you for your recent application for credit. Following evaluation under our algorithmic risk assessment model, we regret to inform you that we are unable to approve your application at this time.<br><br>
+          PRINCIPAL REASONS FOR ADVERSE ACTION (Ranked by Model Attribution):<br>
+          1. Debt-to-income solvency ratio below minimum underwriting threshold (TreeSHAP impact: +0.28).<br>
+          2. Length of employment at current organization insufficient (&lt; 2 years, TreeSHAP impact: +0.19).<br>
+          3. Residential equity stability profile (Rented vs. Owned, TreeSHAP impact: +0.14).<br><br>
+          EQUAL CREDIT OPPORTUNITY ACT NOTICE:<br>
+          The federal Equal Credit Opportunity Act prohibits creditors from discriminating against credit applicants on the basis of race, color, religion, national origin, sex, marital status, or age.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">
+        <strong>CSE431 Machine Learning &bull; Group 08</strong>
+      </p>
+      <p style="margin-bottom: 12px;">
+        Shoumik Bala Somu &bull; Md Israfil Hossen &bull; Ariyan Islam Hridoy
+      </p>
+      <p>
+        <a href="index.html">Overview</a> &bull;
+        <a href="simulator.html">Cost Simulator</a> &bull;
+        <a href="benchmarks.html">Benchmarks</a> &bull;
+        <a href="explainability.html">Explainability</a> &bull;
+        <a href="methodology.html">Methodology</a> &bull;
+        <a href="about.html">Team & Docs</a> &bull;
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

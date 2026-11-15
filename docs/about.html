@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team & Reproducibility | FinRisk ML Group 08</title>
+  <meta name="description" content="Research team governance, Bengali executive summary, and complete reproducibility guide for CSE431 Financial Risk ML project.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <span>💳</span> FinRisk ML <span class="badge badge-accent">Group 08</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="simulator.html">Cost Simulator</a></li>
+        <li><a href="benchmarks.html">Benchmarks</a></li>
+        <li><a href="explainability.html">Explainability</a></li>
+        <li><a href="methodology.html">Methodology</a></li>
+        <li><a href="about.html" class="active">Team & Docs</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Light Mode</button>
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+          ⭐ GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container">
+      <div class="badge-wrapper">
+        <span class="badge badge-accent">Academic Governance</span>
+        <span class="badge">Master Seed 42</span>
+        <span class="badge">বাংলা সারসংক্ষেপ</span>
+      </div>
+      <h1>👥 Research Team &amp; Reproducibility Guide</h1>
+      <p>
+        Full documentation of collaborative governance, equal contribution commitments, complete Bengali executive summary, and step-by-step reproduction instructions.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <!-- Section 1: Team Governance -->
+      <div style="margin-bottom: 50px;">
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.6rem;">1. Research Team &amp; Equal Collaboration Statement</h2>
+          <p>CSE431 Machine Learning &bull; Group 08 &bull; Department of Computer Science and Engineering</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 24px;">
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; text-align: center;">
+            <div style="font-size: 2.2rem; margin-bottom: 10px;">🎓</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 6px;">Shoumik Bala Somu</h3>
+            <p style="font-size: 0.88rem; color: var(--accent-blue); margin-bottom: 10px;"><code>shoumik.bala@gmail.com</code></p>
+            <span class="badge badge-accent">Equal Co-Author (33.3%)</span>
+          </div>
+
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; text-align: center;">
+            <div style="font-size: 2.2rem; margin-bottom: 10px;">🎓</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 6px;">Md Israfil Hossen</h3>
+            <p style="font-size: 0.88rem; color: var(--accent-blue); margin-bottom: 10px;">Co-Researcher</p>
+            <span class="badge badge-accent">Equal Co-Author (33.3%)</span>
+          </div>
+
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; text-align: center;">
+            <div style="font-size: 2.2rem; margin-bottom: 10px;">🎓</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 6px;">Ariyan Islam Hridoy</h3>
+            <p style="font-size: 0.88rem; color: var(--accent-blue); margin-bottom: 10px;">Co-Researcher</p>
+            <span class="badge badge-accent">Equal Co-Author (33.3%)</span>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Collaborative Statement</h4>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+            All three members contributed equally and collaboratively across every phase of the project: problem formulation, empirical research, data pipeline engineering, model architecture benchmarking, cost-sensitive threshold optimization, explainable AI (TreeSHAP), system optimization, documentation, and defense preparation.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 2: Bengali Executive Summary -->
+      <div style="margin-bottom: 50px;">
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.6rem;">2. বাংলা সারসংক্ষেপ (Executive Summary in Bengali)</h2>
+          <p>আর্থিক ঝুঁকি বিশ্লেষণে খরচ-সংবেদনশীল এবং ব্যাখ্যাযোগ্য মেশিন লার্নিং গবেষণা</p>
+        </div>
+
+        <div class="bengali-content" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; color: var(--text-secondary);">
+          <h3 style="font-size: 1.2rem; color: var(--text-primary); margin-top: 0;">১. প্রকল্পের পটভূমি ও মূল উদ্দেশ্য</h3>
+          <p style="margin-bottom: 16px;">
+            আর্থিক খাতে মেশিন লার্নিং মডেল ব্যবহারের ক্ষেত্রে সাধারণ অ্যাকুরেসি (Accuracy) বা সুষম মেট্রিক সম্পূর্ণ অকার্যকর। কারণ ক্রেডিট কার্ড প্রতারণায় হার মাত্র ০.৫৮% এবং ঋণ খেলাপি হার ১২.৩০%। তদুপরি, একটি প্রতারণামূলক লেনদেন বা ঋণ খেলাপি ধরতে না পারার আর্থিক ক্ষতি (False Negative) একটি বৈধ লেনদেন যাচাই করার খরচের (False Positive) চেয়ে বহুগুণ বেশি। এই গবেষণায় আমরা কঠোর সময়ভিত্তিক বিভাজন (Chronological Split), কস্ট-অপ্টিমাল থ্রেশহোল্ড টিউনিং এবং গেম-তাত্ত্বিক SHAP প্রয়োগের মাধ্যমে সর্বোচ্চ আর্থিক সঞ্চয় নিশ্চিত করেছি।
+          </p>
+
+          <h3 style="font-size: 1.2rem; color: var(--text-primary);">২. মূল গবেষণার ফলাফল ও আর্থিক সঞ্চয়</h3>
+          <ul style="padding-left: 20px; margin-bottom: 16px; line-height: 1.8;">
+            <li><strong>ক্রেডিট কার্ড প্রতারণা প্রতিরোধ (Task A):</strong> CatBoost এবং Ensemble Blend সর্বোচ্চ PR-AUC (০.৮৩৯৮) অর্জন করেছে। সনাতন ০.৫০ থ্রেশহোল্ডের পরিবর্তে অপ্টিমাল কাটঅফ \( p^* = ০.০২৩ \) নির্ধারণ করে মোট আর্থিক ক্ষতি $২১,৭২০ থেকে কমিয়ে $১২,১৬০-এ নামিয়ে আনা সম্ভব হয়েছে, যা <strong>৪৪.০১% আর্থিক সাশ্রয়</strong> নিশ্চিত করে।</li>
+            <li><strong>ঋণ খেলাপি পূর্বাভাস (Task B):</strong> Random Forest এবং Ensemble Blend সর্বোচ্চ PR-AUC (০.৬২৫৯) এবং ROC-AUC (০.৯১৩৫) অর্জন করেছে। সিদ্ধান্ত থ্রেশহোল্ড \( p^* = ০.১৪২ \)-তে নামিয়ে এনে ঋণ খেলাপি ক্ষতি $৭.০৯ মিলিয়ন থেকে $১.৮৯ মিলিয়নে নামিয়ে আনা হয়েছে, যা <strong>৭৩.৪১% আর্থিক সাশ্রয়</strong> নিশ্চিত করে।</li>
+            <li><strong>রিয়েল-টাইম সক্ষমতা:</strong> প্রতি লেনদেনে ইনফারেন্স লেটেন্সি মাত্র ০.০১৪৯ মিলি-সেকেন্ড (প্রতি সেকেন্ডে ৬৭,০০০+ লেনদেন যাচাই সম্ভব), যা পেমেন্ট গেটওয়ের সাব-১০ms এসএলএ শর্তের সাথে সম্পূর্ণ সঙ্গতিপূর্ণ।</li>
+          </ul>
+
+          <h3 style="font-size: 1.2rem; color: var(--text-primary);">৩. ব্যাখ্যাযোগ্যতা এবং নিয়ন্ত্রক বিধিমালা</h3>
+          <p>
+            ইউএস ইকুয়াল ক্রেডিট অপরচুনিটি অ্যাক্ট (ECOA) এবং ফেয়ার ক্রেডিট রিপোর্টিং অ্যাক্ট (FCRA) বিধিমালা অনুযায়ী প্রতিটি প্রত্যাখ্যানের সুনির্দিষ্ট কারণ প্রকাশ করা বাধ্যতামূলক। আমরা TreeSHAP এবং ওয়াটারফল ডায়াগ্রামের মাধ্যমে প্রতিটি সিদ্ধান্তের পেছনে শীর্ষ বৈশিষ্ট্যসমূহ (লেনদেনের পরিমাণ, ভৌগোলিক দূরত্ব, ঋণ-আয়ের অনুপাত) স্বয়ংক্রিয়ভাবে উপস্থাপনের পাইপলাইন তৈরি করেছি।
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 3: Reproducibility Protocol -->
+      <div style="margin-bottom: 50px;">
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.6rem;">3. Step-by-Step Reproducibility Protocol</h2>
+          <p>Fully deterministic execution verified with master seed 42 on Fedora Linux.</p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 26px; line-height: 1.7;">
+          <h4 style="font-size: 1.05rem; margin-bottom: 10px; color: var(--accent-blue);">Step 1: Clone Repository and Setup Environment</h4>
+          <div class="formula-card" style="color: var(--text-primary);">
+            git clone https://github.com/ShoumikBalaSomu/ML-Project-Group-08.git<br>
+            cd ML-Project-Group-08<br>
+            python3 -m venv venv<br>
+            source venv/bin/activate<br>
+            pip install -r requirements.txt
+          </div>
+
+          <h4 style="font-size: 1.05rem; margin-top: 20px; margin-bottom: 10px; color: var(--accent-emerald);">Step 2: Run End-to-End Pipeline</h4>
+          <div class="formula-card" style="color: var(--text-primary);">
+            python scripts/run_all.py --phase all
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">
+            Executes training across all 6 model architectures, computes optimal Bayesian thresholds, generates diagnostic curves and SHAP beeswarms, and writes 5 local case studies into <code>reports/case_studies.md</code>.
+          </p>
+
+          <h4 style="font-size: 1.05rem; margin-top: 20px; margin-bottom: 10px; color: var(--accent-amber);">Step 3: Run Verification Test Suite (35 Invariants)</h4>
+          <div class="formula-card" style="color: var(--text-primary);">
+            pytest -v tests/
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">
+            Verifies 35 automated invariants: lack of lookahead leakage, cost matrix arithmetic, Population Stability Index (PSI) drift detection, 80% four-fifths fairness rule, Shapley efficiency properties, and sub-10ms inference SLAs.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 4: Academic Citation -->
+      <div>
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.6rem;">4. Academic Citation</h2>
+          <p>Please cite this project if you reference the methodologies, cost matrices, or benchmarks in academic work.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px;">
+          <!-- BibTeX -->
+          <div class="bibtex-box">
+            <button id="copyBibtexBtn" class="copy-btn">Copy BibTeX</button>
+            <pre id="bibtexCode">@misc{somu2026costsensitive,
+  title = {Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction},
+  author = {Shoumik Bala Somu and Md Israfil Hossen and Ariyan Islam Hridoy},
+  year = {2026},
+  howpublished = {https://github.com/ShoumikBalaSomu/ML-Project-Group-08},
+  note = {CSE431 Machine Learning Course Project, Group 08}
+}</pre>
+          </div>
+
+          <!-- APA -->
+          <div class="bibtex-box">
+            <button id="copyApaBtn" class="copy-btn">Copy APA</button>
+            <pre id="apaCode" style="white-space: pre-wrap; font-family: var(--font-sans); font-size: 0.9rem; line-height: 1.6; color: var(--text-primary);">Somu, S. B., Hossen, M. I., &amp; Hridoy, A. I. (2026). Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction. GitHub. https://github.com/ShoumikBalaSomu/ML-Project-Group-08</pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">
+        <strong>CSE431 Machine Learning &bull; Group 08</strong>
+      </p>
+      <p style="margin-bottom: 12px;">
+        Shoumik Bala Somu &bull; Md Israfil Hossen &bull; Ariyan Islam Hridoy
+      </p>
+      <p>
+        <a href="index.html">Overview</a> &bull;
+        <a href="simulator.html">Cost Simulator</a> &bull;
+        <a href="benchmarks.html">Benchmarks</a> &bull;
+        <a href="explainability.html">Explainability</a> &bull;
+        <a href="methodology.html">Methodology</a> &bull;
+        <a href="about.html">Team & Docs</a> &bull;
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

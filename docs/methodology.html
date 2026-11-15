@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scientific Methodology | FinRisk ML Group 08</title>
+  <meta name="description" content="Bayesian minimum expected loss derivation, chronological validation protocols, and feature engineering for financial risk modeling.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <span>💳</span> FinRisk ML <span class="badge badge-accent">Group 08</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="simulator.html">Cost Simulator</a></li>
+        <li><a href="benchmarks.html">Benchmarks</a></li>
+        <li><a href="explainability.html">Explainability</a></li>
+        <li><a href="methodology.html" class="active">Methodology</a></li>
+        <li><a href="about.html">Team & Docs</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Light Mode</button>
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+          ⭐ GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container">
+      <div class="badge-wrapper">
+        <span class="badge badge-accent">Mathematical Rigor</span>
+        <span class="badge">Bayesian Decision Theory</span>
+        <span class="badge">Temporal Validation</span>
+      </div>
+      <h1>📐 Scientific Methodology &amp; Cost Modeling</h1>
+      <p>
+        A formal mathematical derivation of expected loss minimization under asymmetric misclassification costs, leakage-free chronological partitioning protocols, and vectorized spatial-temporal feature engineering.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <!-- Section 1: Bayesian Decision Theory -->
+      <div style="margin-bottom: 50px;">
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.6rem;">1. Derivation of Bayesian Minimum Expected Loss</h2>
+          <p>Standard empirical risk minimization assumes symmetric binary loss (0-1 loss). In banking, we formulate decision theory over explicit cost matrices.</p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 26px; line-height: 1.7;">
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 16px;">
+            Let \( x \in \mathcal{X} \) denote an instance vector and \( Y \in \{0, 1\} \) the true ground-truth risk state. A decision rule \( d(x) \in \{0, 1\} \) incurs financial loss specified by the cost tensor \( C(d, Y) \):
+          </p>
+          <ul style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px; padding-left: 20px;">
+            <li>\( C_{11} = C(TP) \): Operational cost of investigating a correctly caught risk.</li>
+            <li>\( C_{10} = C(FP) \): Friction cost of querying a legitimate transaction or applicant.</li>
+            <li>\( C_{01} = C(FN) \): Direct unrecovered financial charge-off or default write-down.</li>
+            <li>\( C_{00} = C(TN) \): Frictionless approval of legitimate transaction.</li>
+          </ul>
+
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 12px;">
+            The conditional expected financial loss of action \( d=1 \) (predict risk / flag) versus \( d=0 \) (predict clean / approve) given posterior risk \( P(Y=1|x) \) is:
+          </p>
+          <div class="formula-card">
+            Expected_Loss(d=1|x) = C(TP) &middot; P(Y=1|x) + C(FP) &middot; [1 - P(Y=1|x)]<br>
+            Expected_Loss(d=0|x) = C(FN) &middot; P(Y=1|x) + C(TN) &middot; [1 - P(Y=1|x)]
+          </div>
+
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 12px;">
+            By the Bayes decision rule, we flag the transaction as positive whenever \( Expected\_Loss(d=1|x) \le Expected\_Loss(d=0|x) \). Solving for \( P(Y=1|x) \) yields the exact analytical optimal threshold \( p^* \):
+          </p>
+          <div class="formula-card" style="font-size: 1.15rem; font-weight: 700; color: var(--accent-blue);">
+            p* = [C(FP) - C(TN)] / [ (C(FP) - C(TN)) + (C(FN) - C(TP)) ]
+          </div>
+
+          <p style="font-size: 0.92rem; color: var(--text-secondary);">
+            Under normalized frictionless baselines (\( C(TN) = 0 \), \( C(TP) = 0 \)), this simplifies to:
+            <br>
+            <strong style="color: var(--text-primary); font-family: var(--font-mono);">p* = C(FP) / [ C(FP) + C(FN) ]</strong>.
+            <br>
+            Because \( C(FN) \gg C(FP) \) in credit risk, the denominator dominates, mathematically guaranteeing that the loss-minimizing decision cutoff \( p^* \) lies substantially below 0.50.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 2: Domain Cost Matrices -->
+      <div style="margin-bottom: 50px;">
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.6rem;">2. Empirical Domain Cost Matrix Specifications</h2>
+          <p>Quantifying financial loss parameters based on retail banking and consumer credit industry benchmarks.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px;">
+          
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+            <h3 style="margin-bottom: 12px; font-size: 1.2rem;">💳 Credit Card Fraud Cost Matrix (40:1 Ratio)</h3>
+            <div class="table-responsive">
+              <table class="benchmark-table">
+                <thead>
+                  <tr>
+                    <th>Outcome</th>
+                    <th>Financial Cost</th>
+                    <th>Industry Justification</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>False Negative (FN)</strong></td>
+                    <td style="color: var(--accent-rose); font-weight: 700;">$200.00</td>
+                    <td>Direct merchant chargeback liability, interchange fines, manual dispute overhead.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>False Positive (FP)</strong></td>
+                    <td style="color: var(--accent-amber); font-weight: 700;">$5.00</td>
+                    <td>Automated 2FA push notification / SMS verification friction cost.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>True Positive (TP)</strong></td>
+                    <td>$0.00</td>
+                    <td>Fraud averted; automated block.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>True Negative (TN)</strong></td>
+                    <td>$0.00</td>
+                    <td>Seamless authorization of legitimate cardholder payment.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+            <h3 style="margin-bottom: 12px; font-size: 1.2rem;">🏦 Loan Default Cost Matrix (10:1 Ratio)</h3>
+            <div class="table-responsive">
+              <table class="benchmark-table">
+                <thead>
+                  <tr>
+                    <th>Outcome</th>
+                    <th>Financial Cost</th>
+                    <th>Industry Justification</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>False Negative (FN)</strong></td>
+                    <td style="color: var(--accent-rose); font-weight: 700;">$5,000.00</td>
+                    <td>Unrecoverable principal loan balance written off, legal and collection fees.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>False Positive (FP)</strong></td>
+                    <td style="color: var(--accent-amber); font-weight: 700;">$500.00</td>
+                    <td>Lost net interest margin (NIM) and amortized applicant acquisition cost (CAC).</td>
+                  </tr>
+                  <tr>
+                    <td><strong>True Positive (TP)</strong></td>
+                    <td>$0.00</td>
+                    <td>Default averted via rejection.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>True Negative (TN)</strong></td>
+                    <td>$0.00</td>
+                    <td>Profitable loan origination and full repayment schedule.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Section 3: Leakage-Free Temporal Partitioning -->
+      <div style="margin-bottom: 50px;">
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.6rem;">3. Leakage Prevention: Strict Chronological Partitioning</h2>
+          <p>Why standard K-Fold cross-validation invalidates financial risk evaluations through lookahead leakage.</p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 26px; line-height: 1.7;">
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 14px;">
+            In transaction streaming, random train/test splits violate causality: models train on future fraud patterns (e.g. December 2020) and evaluate on past transactions (e.g. March 2019). This creates artificial feature correlations and drastically inflates reported accuracy.
+          </p>
+          <div class="badge-wrapper" style="margin-bottom: 16px;">
+            <span class="badge badge-accent">Training Partition: 2019 (100,000 Txns)</span>
+            <span class="badge badge-danger">&rarr; Chronological Boundary &rarr;</span>
+            <span class="badge badge-accent">Holdout Test Partition: 2020 (40,000 Txns)</span>
+          </div>
+          <p style="font-size: 0.92rem; color: var(--text-secondary);">
+            To prevent statistical leakage:
+          </p>
+          <ul style="color: var(--text-secondary); font-size: 0.92rem; padding-left: 20px; line-height: 1.7;">
+            <li>All target encoders, standard scalers, and frequency mappers are encapsulated strictly inside scikit-learn <code>Pipeline</code> objects fit exclusively on training data.</li>
+            <li>No test sample statistics are ever seen during preprocessor fitting.</li>
+            <li>Threshold optimizer search is strictly fit on training/validation out-of-fold predictions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section 4: Feature Engineering Specification -->
+      <div>
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.6rem;">4. Domain Feature Engineering Specifications</h2>
+          <p>Extracting high-signal spatial, temporal, and credit solvency indicators.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px;">
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+            <h3 style="font-size: 1.15rem; margin-bottom: 12px; color: var(--accent-blue);">Spatial: Great-Circle Haversine</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+              Vectorized distance computation between cardholder residence coordinates \( (\text{lat}_1, \text{long}_1) \) and merchant POS terminal \( (\text{lat}_2, \text{long}_2) \):
+            </p>
+            <div class="formula-card" style="font-size: 0.85rem;">
+              d = 2R &middot; arcsin( &radic;[ sin&sup2;(&Delta;&phi;/2) + cos(&phi;&sub1;)cos(&phi;&sub2;)sin&sup2;(&Delta;&lambda;/2) ] )
+            </div>
+          </div>
+
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+            <h3 style="font-size: 1.15rem; margin-bottom: 12px; color: var(--accent-emerald);">Temporal: Cyclical Trigonometric</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+              Mapping hour-of-day \( t \in [0, 23] \) to continuous circular coordinates preserving continuity between 23:59 and 00:00:
+            </p>
+            <div class="formula-card" style="font-size: 0.85rem;">
+              hour_sin = sin( 2&pi;t / 24 )<br>
+              hour_cos = cos( 2&pi;t / 24 )
+            </div>
+          </div>
+
+          <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+            <h3 style="font-size: 1.15rem; margin-bottom: 12px; color: var(--accent-amber);">Solvency: Experience &amp; Stability</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+              Deriving applicant employment stability ratio and continuous home equity interaction to quantify borrower vulnerability:
+            </p>
+            <div class="formula-card" style="font-size: 0.85rem;">
+              stability_ratio = Current_Job_Yrs / max(1, Experience)<br>
+              income_bracket = log1p( Income )
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">
+        <strong>CSE431 Machine Learning &bull; Group 08</strong>
+      </p>
+      <p style="margin-bottom: 12px;">
+        Shoumik Bala Somu &bull; Md Israfil Hossen &bull; Ariyan Islam Hridoy
+      </p>
+      <p>
+        <a href="index.html">Overview</a> &bull;
+        <a href="simulator.html">Cost Simulator</a> &bull;
+        <a href="benchmarks.html">Benchmarks</a> &bull;
+        <a href="explainability.html">Explainability</a> &bull;
+        <a href="methodology.html">Methodology</a> &bull;
+        <a href="about.html">Team & Docs</a> &bull;
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

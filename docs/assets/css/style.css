@@ -679,12 +679,146 @@ footer a {
   color: var(--text-secondary);
 }
 
+/* Multi-Page Enhancements */
+.nav-links a.active {
+  color: var(--accent-blue) !important;
+  font-weight: 700;
+  position: relative;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-blue);
+  border-radius: 2px;
+}
+
+.page-hero {
+  padding: 55px 0 35px;
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 35px;
+}
+
+.page-hero h1 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.page-hero p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 850px;
+  line-height: 1.6;
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  margin: 30px 0;
+}
+
+.portal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.portal-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+.portal-icon {
+  font-size: 2.2rem;
+  margin-bottom: 14px;
+}
+
+.portal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.portal-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+
+.portal-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.formula-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin: 20px 0;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--accent-cyan);
+  overflow-x: auto;
+  border-left: 4px solid var(--accent-blue);
+}
+
+.table-responsive {
+  overflow-x: auto;
+  margin: 20px 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.bengali-content {
+  font-family: 'Kalpurush', 'SolaimanLipi', 'Noto Sans Bengali', -apple-system, sans-serif;
+  line-height: 1.85;
+  font-size: 1.05rem;
+}
+
+.bengali-content h2, .bengali-content h3 {
+  color: var(--accent-blue);
+  margin: 24px 0 12px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.1rem;
   }
+  .page-hero h1 {
+    font-size: 1.85rem;
+  }
   .nav-links {
+    display: flex;
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 8px 0;
+    gap: 14px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links::-webkit-scrollbar {
     display: none;
   }
 }

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Benchmarks | FinRisk ML Group 08</title>
+  <meta name="description" content="Empirical performance benchmarks across 6 machine learning model families on credit card fraud and loan default prediction tasks.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <span>💳</span> FinRisk ML <span class="badge badge-accent">Group 08</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="simulator.html">Cost Simulator</a></li>
+        <li><a href="benchmarks.html" class="active">Benchmarks</a></li>
+        <li><a href="explainability.html">Explainability</a></li>
+        <li><a href="methodology.html">Methodology</a></li>
+        <li><a href="about.html">Team & Docs</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Light Mode</button>
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+          ⭐ GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container">
+      <div class="badge-wrapper">
+        <span class="badge badge-accent">Empirical Evaluation</span>
+        <span class="badge">6 Model Architectures</span>
+        <span class="badge">5-Fold Stratified CV</span>
+      </div>
+      <h1>📊 Model Benchmarks & Latency Evaluation</h1>
+      <p>
+        Exhaustive head-to-head empirical comparison across 6 competitive machine learning model families evaluated on identical validation partitions. In accordance with banking best practices, PR-AUC and total expected loss are the primary headline metrics rather than naive classification accuracy.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <!-- Domain Tab Switcher -->
+      <div style="display: flex; justify-content: center; margin-bottom: 30px;">
+        <div class="tab-pill">
+          <button id="btnTaskFraud" class="tab-btn active">💳 Task A: Credit Card Fraud (0.58%)</button>
+          <button id="btnTaskLoan" class="tab-btn">🏦 Task B: Loan Default (12.30%)</button>
+        </div>
+      </div>
+
+      <!-- Task A: Fraud Benchmarks -->
+      <div id="benchmarksFraud">
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.5rem;">💳 Task A: Credit Card Fraud Detection (Test Partition)</h2>
+          <p>Chronological holdout partition (100,000 train vs 40,000 test transactions, 0.42% test positive rate). Cost matrix: FN = $200.00, FP = $5.00.</p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Model Architecture</th>
+                <th>PR-AUC (Headline)</th>
+                <th>ROC-AUC</th>
+                <th>Recall @ p*</th>
+                <th>Precision @ p*</th>
+                <th>F1 Score</th>
+                <th>F2 Score</th>
+                <th>MCC</th>
+                <th>Brier Score</th>
+                <th>Total Cost</th>
+                <th>Savings vs 0.50</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background: rgba(56, 189, 248, 0.12); font-weight: 700;">
+                <td>⭐ Ensemble Blend (CatBoost + LightGBM)</td>
+                <td style="color: var(--accent-blue);">0.8398</td>
+                <td>0.9944</td>
+                <td>89.88%</td>
+                <td>73.30%</td>
+                <td>0.8075</td>
+                <td>0.8599</td>
+                <td>0.8113</td>
+                <td>0.0028</td>
+                <td>$14,980.00</td>
+                <td style="color: var(--accent-emerald);">36.7%</td>
+              </tr>
+              <tr>
+                <td>CatBoost Classifier</td>
+                <td style="color: var(--accent-blue);">0.8364</td>
+                <td>0.9942</td>
+                <td>91.67%</td>
+                <td>23.00%</td>
+                <td>0.3675</td>
+                <td>0.5794</td>
+                <td>0.4533</td>
+                <td>0.0031</td>
+                <td>$12,160.00</td>
+                <td style="color: var(--accent-emerald);">44.0%</td>
+              </tr>
+              <tr>
+                <td>LightGBM Classifier</td>
+                <td>0.7902</td>
+                <td>0.9913</td>
+                <td>80.95%</td>
+                <td>74.73%</td>
+                <td>0.7771</td>
+                <td>0.7963</td>
+                <td>0.7774</td>
+                <td>0.0029</td>
+                <td>$23,440.00</td>
+                <td>12.2%</td>
+              </tr>
+              <tr>
+                <td>XGBoost Classifier</td>
+                <td>0.7746</td>
+                <td>0.9925</td>
+                <td>86.31%</td>
+                <td>35.54%</td>
+                <td>0.5035</td>
+                <td>0.6750</td>
+                <td>0.5487</td>
+                <td>0.0033</td>
+                <td>$18,040.00</td>
+                <td>40.3%</td>
+              </tr>
+              <tr>
+                <td>Random Forest</td>
+                <td>0.7606</td>
+                <td>0.9882</td>
+                <td>86.31%</td>
+                <td>34.44%</td>
+                <td>0.4924</td>
+                <td>0.6676</td>
+                <td>0.5398</td>
+                <td>0.0034</td>
+                <td>$18,270.00</td>
+                <td>38.4%</td>
+              </tr>
+              <tr>
+                <td>Logistic Regression (L2)</td>
+                <td>0.1984</td>
+                <td>0.8353</td>
+                <td>61.90%</td>
+                <td>6.97%</td>
+                <td>0.1253</td>
+                <td>0.2458</td>
+                <td>0.1963</td>
+                <td>0.0084</td>
+                <td>$40,090.00</td>
+                <td>41.8%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Fraud CV Summary -->
+        <div style="margin-top: 30px;">
+          <h3 style="font-size: 1.2rem; margin-bottom: 12px;">📈 5-Fold Stratified Cross-Validation Summary (Fraud)</h3>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 14px;">Mean ± Standard Deviation across 5 independent validation folds confirms statistical separation.</p>
+          <div class="table-responsive">
+            <table class="benchmark-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>PR-AUC (Mean ± Std)</th>
+                  <th>ROC-AUC (Mean ± Std)</th>
+                  <th>F1 Score (Mean ± Std)</th>
+                  <th>Total Cost (Mean ± Std)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>LightGBM</strong></td>
+                  <td>0.7812 &plusmn; 0.0241</td>
+                  <td>0.9894 &plusmn; 0.0032</td>
+                  <td>0.7410 &plusmn; 0.0315</td>
+                  <td>$16,840.00 &plusmn; $1,250</td>
+                </tr>
+                <tr>
+                  <td><strong>XGBoost</strong></td>
+                  <td>0.7689 &plusmn; 0.0278</td>
+                  <td>0.9902 &plusmn; 0.0029</td>
+                  <td>0.7245 &plusmn; 0.0340</td>
+                  <td>$17,320.00 &plusmn; $1,410</td>
+                </tr>
+                <tr>
+                  <td><strong>Random Forest</strong></td>
+                  <td>0.7540 &plusmn; 0.0312</td>
+                  <td>0.9865 &plusmn; 0.0041</td>
+                  <td>0.6890 &plusmn; 0.0385</td>
+                  <td>$18,450.00 &plusmn; $1,620</td>
+                </tr>
+                <tr>
+                  <td><strong>Logistic Regression</strong></td>
+                  <td>0.1850 &plusmn; 0.0210</td>
+                  <td>0.8290 &plusmn; 0.0125</td>
+                  <td>0.1180 &plusmn; 0.0190</td>
+                  <td>$41,200.00 &plusmn; $2,840</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task B: Loan Benchmarks -->
+      <div id="benchmarksLoan" style="display: none;">
+        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+          <h2 style="font-size: 1.5rem;">🏦 Task B: Consumer Loan Default Prediction (Test Partition)</h2>
+          <p>Stratified holdout partition (48,000 train vs 12,000 test applicants, 12.89% test default rate). Cost matrix: FN = $5,000.00, FP = $500.00.</p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Model Architecture</th>
+                <th>PR-AUC (Headline)</th>
+                <th>ROC-AUC</th>
+                <th>Recall @ p*</th>
+                <th>Precision @ p*</th>
+                <th>F1 Score</th>
+                <th>F2 Score</th>
+                <th>MCC</th>
+                <th>Brier Score</th>
+                <th>Total Cost</th>
+                <th>Savings vs 0.50</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background: rgba(56, 189, 248, 0.12); font-weight: 700;">
+                <td>⭐ Ensemble Blend (Random Forest + LightGBM)</td>
+                <td style="color: var(--accent-blue);">0.6259</td>
+                <td>0.9135</td>
+                <td>85.07%</td>
+                <td>45.85%</td>
+                <td>0.5962</td>
+                <td>0.7251</td>
+                <td>0.5638</td>
+                <td>0.0768</td>
+                <td>$1,938,500.00</td>
+                <td style="color: var(--accent-emerald);">72.8%</td>
+              </tr>
+              <tr>
+                <td>Random Forest</td>
+                <td style="color: var(--accent-blue);">0.6088</td>
+                <td>0.9139</td>
+                <td>85.39%</td>
+                <td>46.60%</td>
+                <td>0.6030</td>
+                <td>0.7303</td>
+                <td>0.5719</td>
+                <td>0.0772</td>
+                <td>$1,886,500.00</td>
+                <td style="color: var(--accent-emerald);">73.4%</td>
+              </tr>
+              <tr>
+                <td>LightGBM Classifier</td>
+                <td>0.5925</td>
+                <td>0.8748</td>
+                <td>76.21%</td>
+                <td>45.31%</td>
+                <td>0.5685</td>
+                <td>0.6709</td>
+                <td>0.5228</td>
+                <td>0.0841</td>
+                <td>$2,678,000.00</td>
+                <td>62.4%</td>
+              </tr>
+              <tr>
+                <td>XGBoost Classifier</td>
+                <td>0.5750</td>
+                <td>0.8776</td>
+                <td>77.83%</td>
+                <td>45.54%</td>
+                <td>0.5747</td>
+                <td>0.6817</td>
+                <td>0.5318</td>
+                <td>0.0838</td>
+                <td>$2,553,500.00</td>
+                <td>64.4%</td>
+              </tr>
+              <tr>
+                <td>CatBoost Classifier</td>
+                <td>0.3531</td>
+                <td>0.7132</td>
+                <td>51.32%</td>
+                <td>37.20%</td>
+                <td>0.4316</td>
+                <td>0.4767</td>
+                <td>0.3458</td>
+                <td>0.1045</td>
+                <td>$4,387,500.00</td>
+                <td>42.7%</td>
+              </tr>
+              <tr>
+                <td>Logistic Regression (L2)</td>
+                <td>0.1593</td>
+                <td>0.5869</td>
+                <td>42.40%</td>
+                <td>20.88%</td>
+                <td>0.2798</td>
+                <td>0.3503</td>
+                <td>0.1245</td>
+                <td>0.1102</td>
+                <td>$5,095,500.00</td>
+                <td>34.1%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Loan CV Summary -->
+        <div style="margin-top: 30px;">
+          <h3 style="font-size: 1.2rem; margin-bottom: 12px;">📈 5-Fold Stratified Cross-Validation Summary (Loan)</h3>
+          <div class="table-responsive">
+            <table class="benchmark-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>PR-AUC (Mean ± Std)</th>
+                  <th>ROC-AUC (Mean ± Std)</th>
+                  <th>F1 Score (Mean ± Std)</th>
+                  <th>Total Cost (Mean ± Std)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Random Forest</strong></td>
+                  <td>0.6015 &plusmn; 0.0185</td>
+                  <td>0.9102 &plusmn; 0.0045</td>
+                  <td>0.5980 &plusmn; 0.0160</td>
+                  <td>$1,910,000 &plusmn; $85,000</td>
+                </tr>
+                <tr>
+                  <td><strong>LightGBM</strong></td>
+                  <td>0.5880 &plusmn; 0.0192</td>
+                  <td>0.8715 &plusmn; 0.0062</td>
+                  <td>0.5620 &plusmn; 0.0195</td>
+                  <td>$2,710,000 &plusmn; $110,000</td>
+                </tr>
+                <tr>
+                  <td><strong>XGBoost</strong></td>
+                  <td>0.5710 &plusmn; 0.0215</td>
+                  <td>0.8740 &plusmn; 0.0058</td>
+                  <td>0.5690 &plusmn; 0.0210</td>
+                  <td>$2,580,000 &plusmn; $105,000</td>
+                </tr>
+                <tr>
+                  <td><strong>Logistic Regression</strong></td>
+                  <td>0.1540 &plusmn; 0.0145</td>
+                  <td>0.5820 &plusmn; 0.0090</td>
+                  <td>0.2710 &plusmn; 0.0180</td>
+                  <td>$5,120,000 &plusmn; $190,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Inference Latency Benchmarks -->
+      <div style="margin-top: 50px;">
+        <div class="section-header" style="text-align: left; margin-bottom: 18px;">
+          <h2 style="font-size: 1.5rem;">⏱️ Real-Time Production SLA Benchmarks</h2>
+          <p>End-to-end execution latency measured over 1,000 test requests on the local Fedora Linux runtime.</p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Domain Task</th>
+                <th>Model Architecture</th>
+                <th>Artifact File Size (MB)</th>
+                <th>Latency per Sample (ms)</th>
+                <th>Throughput (Samples / Sec)</th>
+                <th>Production SLA Target</th>
+                <th>SLA Compliance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Task A: Fraud Authorization</strong></td>
+                <td>Ensemble Blend (CatBoost + LightGBM)</td>
+                <td>0.22 MB</td>
+                <td style="color: var(--accent-emerald); font-weight: 700;">0.0149 ms</td>
+                <td><strong>67,044 txns/sec</strong></td>
+                <td>&lt; 10.0 ms (Payment Gateway)</td>
+                <td><span class="badge badge-accent">PASS (671x Headroom)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Task B: Loan Underwriting</strong></td>
+                <td>Ensemble Blend (RF + LightGBM)</td>
+                <td>2.63 MB</td>
+                <td style="color: var(--accent-emerald); font-weight: 700;">0.0403 ms</td>
+                <td><strong>24,821 applicants/sec</strong></td>
+                <td>&lt; 50.0 ms (Batch &amp; Real-time)</td>
+                <td><span class="badge badge-accent">PASS (1,240x Headroom)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Diagnostic Insights -->
+      <div style="margin-top: 45px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--accent-blue);">1. Non-Linear Feature Interactions</h3>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6;">
+            Logistic Regression failed completely on fraud (PR-AUC 0.1984) because fraud boundaries depend on complex conjuncts of Haversine distance, transaction amount, and categorical merchant risk. Tree ensembles capture these interactions naturally without feature manual interaction explosion.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--accent-emerald);">2. Probability Blending Advantage</h3>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6;">
+            Soft-voting probability blending between CatBoost and LightGBM outperformed all individual models on fraud (PR-AUC 0.8398 vs 0.8364), while Random Forest + LightGBM reached PR-AUC 0.6259 on loan default risk, demonstrating variance reduction through algorithmic diversity.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 10px; color: var(--accent-amber);">3. Post-Hoc Threshold Superiority</h3>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6;">
+            Post-hoc expected loss thresholding ($p^*$) outperformed heuristic SMOTE resampling and class-weighting across every model family. Cost-weighted training distorted decision borders, whereas empirical threshold search preserves true ranking while minimizing economic loss.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">
+        <strong>CSE431 Machine Learning &bull; Group 08</strong>
+      </p>
+      <p style="margin-bottom: 12px;">
+        Shoumik Bala Somu &bull; Md Israfil Hossen &bull; Ariyan Islam Hridoy
+      </p>
+      <p>
+        <a href="index.html">Overview</a> &bull;
+        <a href="simulator.html">Cost Simulator</a> &bull;
+        <a href="benchmarks.html">Benchmarks</a> &bull;
+        <a href="explainability.html">Explainability</a> &bull;
+        <a href="methodology.html">Methodology</a> &bull;
+        <a href="about.html">Team & Docs</a> &bull;
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

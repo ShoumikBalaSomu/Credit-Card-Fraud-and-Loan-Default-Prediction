@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cost Simulator | FinRisk ML Group 08</title>
+  <meta name="description" content="Interactive threshold optimization and financial risk simulator for credit card fraud detection and loan default prediction.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">
+        <span>💳</span> FinRisk ML <span class="badge badge-accent">Group 08</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="simulator.html" class="active">Cost Simulator</a></li>
+        <li><a href="benchmarks.html">Benchmarks</a></li>
+        <li><a href="explainability.html">Explainability</a></li>
+        <li><a href="methodology.html">Methodology</a></li>
+        <li><a href="about.html">Team & Docs</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Light Mode</button>
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+          ⭐ GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container">
+      <div class="badge-wrapper">
+        <span class="badge badge-accent">Interactive Laboratory</span>
+        <span class="badge">Bayesian Risk Minimization</span>
+      </div>
+      <h1>⚡ Interactive Cost & Threshold Simulator</h1>
+      <p>
+        Explore how threshold optimization minimizes expected dollar loss compared to the naive 0.50 cutoff. Drag the probability threshold slider to observe real-time dynamic recalculations of operational costs, precision, recall, and confusion matrix quadrants.
+      </p>
+    </div>
+  </header>
+
+  <!-- Simulator Main Container -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="simulator-wrapper">
+        
+        <!-- Domain Switcher -->
+        <div class="sim-header">
+          <div class="tab-pill">
+            <button id="btnTaskFraud" class="tab-btn active">💳 Task A: Credit Card Fraud (40:1 Ratio)</button>
+            <button id="btnTaskLoan" class="tab-btn">🏦 Task B: Loan Default (10:1 Ratio)</button>
+          </div>
+          <p id="taskDescription" style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 14px;">
+            Task A: Credit Card Fraud Detection (1.85M transactions, 0.58% extreme imbalance, 40:1 FN/FP cost ratio)
+          </p>
+        </div>
+
+        <!-- Dynamic Output Cards -->
+        <div class="sim-metrics-grid">
+          <div class="sim-metric-card">
+            <div class="sim-metric-title">Total Financial Loss</div>
+            <div id="simCostVal" class="sim-metric-val gradient-text">$12,160.00</div>
+            <div class="sim-metric-sub">Expected loss across test cohort</div>
+          </div>
+
+          <div class="sim-metric-card">
+            <div class="sim-metric-title">Cost Savings vs 0.50</div>
+            <div id="simSavingsVal" class="sim-metric-val" style="color: var(--accent-emerald);">44.0% ($9,560)</div>
+            <div class="sim-metric-sub">Avoided loss via optimal cutoff</div>
+          </div>
+
+          <div class="sim-metric-card">
+            <div class="sim-metric-title">Recall (Capture Rate)</div>
+            <div id="simRecallVal" class="sim-metric-val" style="color: var(--accent-blue);">91.7%</div>
+            <div class="sim-metric-sub">Caught fraud / default incidents</div>
+          </div>
+
+          <div class="sim-metric-card">
+            <div class="sim-metric-title">Precision (Hit Rate)</div>
+            <div id="simPrecisionVal" class="sim-metric-val" style="color: var(--accent-amber);">23.0%</div>
+            <div class="sim-metric-sub">Alert efficiency per review</div>
+          </div>
+        </div>
+
+        <!-- Slider Controller -->
+        <div class="sim-controls">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+            <label for="threshSlider" style="font-weight: 700; font-size: 1.05rem;">
+              Decision Cutoff Threshold: <span id="threshValBadge" class="badge badge-accent">0.023</span>
+            </label>
+            <div style="display: flex; gap: 8px;">
+              <button id="btnPresetOptimal" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;">⚡ Optimal (p*)</button>
+              <button id="btnPresetDefault" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;">Default (0.50)</button>
+            </div>
+          </div>
+
+          <input type="range" id="threshSlider" min="0.01" max="0.95" step="0.005" value="0.023" class="sim-slider">
+
+          <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;">
+            <span>0.01 (High Sensitivity / Recall)</span>
+            <span>0.50 (Standard Naive Cutoff)</span>
+            <span>0.95 (High Specificity / Conservative)</span>
+          </div>
+        </div>
+
+        <!-- Chart Visualization -->
+        <div class="chart-container">
+          <canvas id="costChart"></canvas>
+        </div>
+
+        <!-- Live Confusion Matrix -->
+        <div style="margin-top: 35px;">
+          <h3 style="margin-bottom: 16px; font-size: 1.25rem;">Live Test Set Confusion Matrix (at Current Threshold)</h3>
+          <div class="confusion-grid">
+            <div class="cm-cell cm-tp">
+              <div class="cm-val" id="cmTP">154</div>
+              <div class="cm-lbl">True Positives (Caught Risk)</div>
+            </div>
+            <div class="cm-cell cm-fp">
+              <div class="cm-val" id="cmFP">516</div>
+              <div class="cm-lbl">False Positives (Verification Friction)</div>
+            </div>
+            <div class="cm-cell cm-fn">
+              <div class="cm-val" id="cmFN">14</div>
+              <div class="cm-lbl">False Negatives (Escaped Loss)</div>
+            </div>
+            <div class="cm-cell cm-tn">
+              <div class="cm-val" id="cmTN">39,316</div>
+              <div class="cm-lbl">True Negatives (Legitimate Approvals)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mathematical Cost Model Explainer -->
+        <div style="margin-top: 40px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <h3 style="margin-bottom: 12px; font-size: 1.2rem;">📐 Mathematical Decision Formulation</h3>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">
+            Under the Bayesian Minimum Risk framework, an instance with predicted posterior risk probability \( P(Y=1|x) \) is assigned positive action if the expected loss of declaring positive is strictly lower than declaring negative:
+          </p>
+          <div class="formula-card">
+            p* = Cost(FP) / [Cost(FP) + Cost(FN)]
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+            For Credit Card Fraud with \( Cost(FN) = \$200 \) and \( Cost(FP) = \$5 \):<br>
+            <strong>Theoretical optimal threshold:</strong> \( p^* = \frac{5}{5 + 200} = \frac{5}{205} \approx 0.0244 \).<br>
+            Our empirical 150-point grid search validates an optimal operating point at <strong>p* = 0.023</strong>, matching theoretical Bayesian decision theory with 99.4% precision.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;">
+        <strong>CSE431 Machine Learning &bull; Group 08</strong>
+      </p>
+      <p style="margin-bottom: 12px;">
+        Shoumik Bala Somu &bull; Md Israfil Hossen &bull; Ariyan Islam Hridoy
+      </p>
+      <p>
+        <a href="index.html">Overview</a> &bull;
+        <a href="simulator.html">Cost Simulator</a> &bull;
+        <a href="benchmarks.html">Benchmarks</a> &bull;
+        <a href="explainability.html">Explainability</a> &bull;
+        <a href="methodology.html">Methodology</a> &bull;
+        <a href="about.html">Team & Docs</a> &bull;
+        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
