@@ -109,11 +109,11 @@ Substituting our institutional cost parameters:
 ### 5.1 Leakage-Free Feature Engineering
 All data preprocessing transformers are fitted exclusively on training splits; frozen scalers and categorical encoders transform the holdout test data.
 
-1. **Spatial Distance (`dist_to_merch_km`):** Spherical Haversine distance between customer coordinates $(\text{lat}, \text{long})$ and merchant coordinates $(\text{merch\_lat}, \text{merch\_long})$:
+1. **Spatial Distance (`dist_to_merch_km`):** Spherical Haversine distance between customer coordinates $(\text{lat}_1, \text{long}_1)$ and merchant coordinates $(\text{lat}_2, \text{long}_2)$ (derived from dataset fields `lat`, `long` and `merch_lat`, `merch_long`):
    $$d = 2 R \arcsin \sqrt{\sin^2\left(\frac{\Delta \phi}{2}\right) + \cos\phi_1 \cos\phi_2 \sin^2\left(\frac{\Delta \lambda}{2}\right)}$$
 2. **Temporal Transformations:** Extraction of `trans_hour` (0–23) and `is_weekend` flag.
 3. **Monetary & Demographic Features:** Cardholder age, logarithmic amount $\ln(1 + \text{amt})$, and ratio of current transaction amount to merchant category historical mean.
-4. **Applicant Solvency Features (Loan Task):** `income_per_exp_year`, `age_to_exp_ratio`, and `stability_score` = $\frac{\text{CURRENT\_JOB\_YRS} + \text{CURRENT\_HOUSE\_YRS}}{\text{Age} + 1}$.
+4. **Applicant Solvency Features (Loan Task):** `income_per_exp_year`, `age_to_exp_ratio`, and `stability_score` = $\frac{\text{Current Job Years} + \text{Current House Years}}{\text{Age} + 1}$ (derived from `CURRENT_JOB_YRS` and `CURRENT_HOUSE_YRS`).
 
 ### 5.2 Evaluated Model Families
 1. **L2-Logistic Regression:** Baseline generalized linear model with standard scaling and one-hot encoding.

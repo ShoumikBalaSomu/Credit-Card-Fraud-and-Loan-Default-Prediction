@@ -37,7 +37,7 @@ Financial risk assessment encompasses heterogeneous decision problems characteri
 ### 3.2 Task B (Loan Default)
 1. **Human Capital Return:** `income_per_exp_year` = $\frac{\text{Income}}{\text{Experience} + 1}$.
 2. **Age-Career Maturity:** `age_to_exp_ratio` = $\frac{\text{Age}}{\text{Experience} + 1}$.
-3. **Residential & Career Stability:** `stability_score` = $\frac{\text{CURRENT\_JOB\_YRS} + \text{CURRENT\_HOUSE\_YRS}}{\text{Age} + 1}$.
+3. **Residential & Career Stability:** `stability_score` = $\frac{\text{Current Job Years} + \text{Current House Years}}{\text{Age} + 1}$ (derived from `CURRENT_JOB_YRS` and `CURRENT_HOUSE_YRS`).
 
 ---
 
