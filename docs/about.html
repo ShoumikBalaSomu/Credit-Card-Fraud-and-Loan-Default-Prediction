@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Team & Reproducibility | FinRisk ML Group 08</title>
-  <meta name="description" content="Research team governance, Bengali executive summary, and complete reproducibility guide for CSE431 Financial Risk ML project.">
+  <meta name="description" content="Research team governance, executive summary, and complete reproducibility guide for CSE431 Financial Risk ML project.">
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- KaTeX Math Rendering -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
@@ -51,11 +51,11 @@
       <div class="badge-wrapper">
         <span class="badge badge-accent">Academic Governance</span>
         <span class="badge">Master Seed 42</span>
-        <span class="badge">বাংলা সারসংক্ষেপ</span>
+        <span class="badge">Executive Summary</span>
       </div>
       <h1>👥 Research Team &amp; Reproducibility Guide</h1>
       <p>
-        Full documentation of collaborative governance, equal contribution commitments, complete Bengali executive summary, and step-by-step reproduction instructions.
+        Full documentation of collaborative governance, equal contribution commitments, comprehensive executive summary, and step-by-step reproduction instructions.
       </p>
     </div>
   </header>
@@ -102,29 +102,29 @@
         </div>
       </div>
 
-      <!-- Section 2: Bengali Executive Summary -->
+      <!-- Section 2: Executive Summary -->
       <div style="margin-bottom: 50px;">
         <div class="section-header" style="text-align: left; margin-bottom: 20px;">
-          <h2 style="font-size: 1.6rem;">2. বাংলা সারসংক্ষেপ (Executive Summary in Bengali)</h2>
-          <p>আর্থিক ঝুঁকি বিশ্লেষণে খরচ-সংবেদনশীল এবং ব্যাখ্যাযোগ্য মেশিন লার্নিং গবেষণা</p>
+          <h2 style="font-size: 1.6rem;">2. Executive Summary</h2>
+          <p>Cost-sensitive and explainable machine learning research for asymmetric financial risk.</p>
         </div>
 
-        <div class="bengali-content" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; color: var(--text-secondary);">
-          <h3 style="font-size: 1.2rem; color: var(--text-primary); margin-top: 0;">১. প্রকল্পের পটভূমি ও মূল উদ্দেশ্য</h3>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; color: var(--text-secondary); line-height: 1.7;">
+          <h3 style="font-size: 1.2rem; color: var(--text-primary); margin-top: 0;">1. Project Motivation &amp; Asymmetric Risk</h3>
           <p style="margin-bottom: 16px;">
-            আর্থিক খাতে মেশিন লার্নিং মডেল ব্যবহারের ক্ষেত্রে সাধারণ অ্যাকুরেসি (Accuracy) বা সুষম মেট্রিক সম্পূর্ণ অকার্যকর। কারণ ক্রেডিট কার্ড প্রতারণায় হার মাত্র ০.৫৮% এবং ঋণ খেলাপি হার ১২.৩০%। তদুপরি, একটি প্রতারণামূলক লেনদেন বা ঋণ খেলাপি ধরতে না পারার আর্থিক ক্ষতি (False Negative) একটি বৈধ লেনদেন যাচাই করার খরচের (False Positive) চেয়ে বহুগুণ বেশি। এই গবেষণায় আমরা কঠোর সময়ভিত্তিক বিভাজন (Chronological Split), কস্ট-অপ্টিমাল থ্রেশহোল্ড টিউনিং এবং গেম-তাত্ত্বিক SHAP প্রয়োগের মাধ্যমে সর্বোচ্চ আর্থিক সঞ্চয় নিশ্চিত করেছি।
+            In financial systems, conventional accuracy and symmetric metrics fail due to extreme class imbalance (0.58% fraud prevalence, 12.30% loan default prevalence) and heavily asymmetric misclassification costs. Missing a fraudulent transaction or defaulting borrower (False Negative) incurs severe capital loss compared to the nominal operational friction of reviewing a legitimate customer (False Positive). We establish strict chronological holdout splits, cost-optimal Bayesian threshold tuning, and game-theoretic SHAP explainability to maximize realized financial savings.
           </p>
 
-          <h3 style="font-size: 1.2rem; color: var(--text-primary);">২. মূল গবেষণার ফলাফল ও আর্থিক সঞ্চয়</h3>
+          <h3 style="font-size: 1.2rem; color: var(--text-primary);">2. Key Empirical Findings &amp; Cost Reductions</h3>
           <ul style="padding-left: 20px; margin-bottom: 16px; line-height: 1.8;">
-            <li><strong>ক্রেডিট কার্ড প্রতারণা প্রতিরোধ (Task A):</strong> CatBoost এবং Ensemble Blend সর্বোচ্চ PR-AUC (০.৮৩৯৮) অর্জন করেছে। সনাতন ০.৫০ থ্রেশহোল্ডের পরিবর্তে অপ্টিমাল কাটঅফ \( p^* = 0.023 \) নির্ধারণ করে মোট আর্থিক ক্ষতি $২১,৭২০ থেকে কমিয়ে $১২,১৬০-এ নামিয়ে আনা সম্ভব হয়েছে, যা <strong>৪৪.০১% আর্থিক সাশ্রয়</strong> নিশ্চিত করে।</li>
-            <li><strong>ঋণ খেলাপি পূর্বাভাস (Task B):</strong> Random Forest এবং Ensemble Blend সর্বোচ্চ PR-AUC (০.৬২৫৯) এবং ROC-AUC (০.৯১৩৫) অর্জন করেছে। সিদ্ধান্ত থ্রেশহোল্ড \( p^* = 0.142 \)-তে নামিয়ে এনে ঋণ খেলাপি ক্ষতি $৭.০৯ মিলিয়ন থেকে $১.৮৯ মিলিয়নে নামিয়ে আনা হয়েছে, যা <strong>৭৩.৪১% আর্থিক সাশ্রয়</strong> নিশ্চিত করে।</li>
-            <li><strong>রিয়েল-টাইম সক্ষমতা:</strong> প্রতি লেনদেনে ইনফারেন্স লেটেন্সি মাত্র ০.০১৪৯ মিলি-সেকেন্ড (প্রতি সেকেন্ডে ৬৭,০০০+ লেনদেন যাচাই সম্ভব), যা পেমেন্ট গেটওয়ের সাব-১০ms এসএলএ শর্তের সাথে সম্পূর্ণ সঙ্গতিপূর্ণ।</li>
+            <li><strong>Credit Card Fraud Detection (Task A):</strong> CatBoost and Ensemble Blend achieve state-of-the-art PR-AUC (0.8398). Calibrating the decision threshold to the cost-optimal cutoff \( p^* = 0.023 \) reduces total misclassification losses from $21,720 to $12,160, delivering a <strong>44.01% financial cost reduction</strong> over standard 0.50 thresholding.</li>
+            <li><strong>Loan Default Prediction (Task B):</strong> Random Forest and Ensemble Blend achieve leading PR-AUC (0.6259) and ROC-AUC (0.9135). Shifting threshold cutoff to \( p^* = 0.142 \) cuts default write-downs from $7.09M to $1.89M, securing <strong>73.41% financial savings</strong>.</li>
+            <li><strong>Real-Time Production SLA:</strong> Single-sample inference latency is benchmarked at 0.0149 ms per transaction (exceeding 67,000 inferences/sec), comfortably satisfying mission-critical payment gateway sub-10ms SLA requirements.</li>
           </ul>
 
-          <h3 style="font-size: 1.2rem; color: var(--text-primary);">৩. ব্যাখ্যাযোগ্যতা এবং নিয়ন্ত্রক বিধিমালা</h3>
+          <h3 style="font-size: 1.2rem; color: var(--text-primary);">3. Explainability &amp; Regulatory Compliance</h3>
           <p>
-            ইউএস ইকুয়াল ক্রেডিট অপরচুনিটি অ্যাক্ট (ECOA) এবং ফেয়ার ক্রেডিট রিপোর্টিং অ্যাক্ট (FCRA) বিধিমালা অনুযায়ী প্রতিটি প্রত্যাখ্যানের সুনির্দিষ্ট কারণ প্রকাশ করা বাধ্যতামূলক। আমরা TreeSHAP এবং ওয়াটারফল ডায়াগ্রামের মাধ্যমে প্রতিটি সিদ্ধান্তের পেছনে শীর্ষ বৈশিষ্ট্যসমূহ (লেনদেনের পরিমাণ, ভৌগোলিক দূরত্ব, ঋণ-আয়ের অনুপাত) স্বয়ংক্রিয়ভাবে উপস্থাপনের পাইপলাইন তৈরি করেছি।
+            Under the Equal Credit Opportunity Act (ECOA 12 CFR &sect; 1002.9) and Fair Credit Reporting Act (FCRA), adverse financial decisions mandate adverse action notices with principal reason codes. We integrate TreeSHAP waterfall decompositions to generate deterministic, local attribution rankings (transaction amount, spatial Haversine distance, income-to-experience ratios) for every automated decline decision.
           </p>
         </div>
       </div>

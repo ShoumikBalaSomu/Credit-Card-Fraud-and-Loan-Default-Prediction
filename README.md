@@ -182,7 +182,6 @@ ML-Project-Group-08/
 │   ├── dataset_licensing.md       # CC0 licensing and data ethics statement
 │   ├── methodology.md             # Detailed engineering and ML methodology
 │   ├── reproducibility.md         # Hardware and environmental replication guide
-│   ├── SUMMARY_BN.md              # প্রকল্পের বাংলা সারসংক্ষেপ (Bengali Project Summary)
 │   └── TROUBLESHOOTING.md         # Real-world engineering post-mortem
 ├── notebooks/
 │   ├── 01_eda.ipynb               # Exploratory data analysis & class skew profiling
