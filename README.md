@@ -5,6 +5,7 @@
 **Team:** Group 08  
 
 [![CI Pipeline](https://github.com/ShoumikBalaSomu/ML-Project-Group-08/actions/workflows/ci.yml/badge.svg)](https://github.com/ShoumikBalaSomu/ML-Project-Group-08/actions)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/FinRisk_ML_Group08.ipynb)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Interactive%20Showcase-emerald.svg)](https://shoumikbalasomu.github.io/ML-Project-Group-08/)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
@@ -124,6 +125,13 @@ flowchart TD
 ---
 
 ## ⚡ Quickstart & Reproducibility Guide
+
+### 🚀 1-Click Interactive Google Colab Demo
+Execute the complete end-to-end pipeline with zero local installation directly in your browser on Google Colab:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/FinRisk_ML_Group08.ipynb)
+
+The unified master notebook [`FinRisk_ML_Group08.ipynb`](FinRisk_ML_Group08.ipynb) synthesizes all project code into a single, interactive document containing data ingestion, feature engineering, 6-model training, Bayesian threshold sweeps, latency benchmarking, TreeSHAP global feature ranking, 5 regulatory waterfall case studies, and fairness audits.
 
 ### 1. Clone & Setup Environment
 ```bash
