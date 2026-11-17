@@ -155,17 +155,22 @@ pytest -v tests/
 ```
 *Expected: 10 tests passed in ~1.8 seconds.*
 
-### 3. Run the Complete Pipeline
-Execute data ingestion, chronological partitioning, feature engineering, model training, cross-validated cost thresholding, calibration, and SHAP explainability:
+### 3. Run the Complete Pipeline (Master Notebook)
+All data cleaning, Scikit-Learn pipelines, 6-model benchmarking, cost optimization, and TreeSHAP explainability are unified in the master notebook:
 ```bash
-python scripts/run_all.py
+jupyter notebook FinRisk_ML_Group08.ipynb
+```
+Or execute headless directly from the command line:
+```bash
+make notebook
 ```
 
-### 4. Launch the Interactive Streamlit Dashboard
+### 4. Interactive Financial Cost Simulator
+Open the client-side interactive simulator directly in your browser or launch the local documentation server:
 ```bash
-streamlit run app/app.py
+make pages
 ```
-Open your browser at `http://localhost:8501` to test the threshold simulator and live inference sandbox.
+Navigate to `http://localhost:8000/simulator.html` to explore the interactive threshold simulator and adverse action explainability sandbox.
 
 ---
 
@@ -173,10 +178,8 @@ Open your browser at `http://localhost:8501` to test the threshold simulator and
 
 ```text
 ML-Project-Group-08/
-├── .github/workflows/ci.yml       # Automated GitHub Actions CI workflow
-├── app/
-│   ├── app.py                     # Multi-tab interactive Streamlit dashboard
-│   └── README.md                  # Streamlit execution guide
+├── .github/workflows/ci.yml       # Automated GitHub Actions CI workflow (Black, Ruff, Pytest)
+├── FinRisk_ML_Group08.ipynb       # 🌟 Master Notebook: Complete end-to-end ML pipeline with Colab button
 ├── configs/
 │   ├── cost_matrices.yaml         # Financial cost matrices ($40:1 and $10:1 penalties)
 │   ├── data.yaml                  # Dataset sources and chronological split rules
@@ -184,7 +187,13 @@ ML-Project-Group-08/
 │   └── random_seed.yaml           # Master seed (42) control
 ├── data/
 │   └── README.md                  # Dataset provenance, schemas, and download guide
-├── docs/
+├── docs/                          # Interactive GitHub Pages showcase & documentation
+│   ├── index.html                 # Academic project showcase homepage
+│   ├── about.html                 # Authors, mission, and repository guide
+│   ├── methodology.html           # Full methodology, mathematical derivations & KaTeX
+│   ├── benchmarks.html            # Empirical results, metric tables & ROC/PR curves
+│   ├── explainability.html        # Global TreeSHAP and local waterfall case studies
+│   ├── simulator.html             # Client-side interactive financial cost simulator
 │   ├── contribution_split.md      # Detailed member responsibilities
 │   ├── cost_model.md              # Mathematical derivation of optimal threshold p*
 │   ├── dataset_licensing.md       # CC0 licensing and data ethics statement
@@ -192,11 +201,8 @@ ML-Project-Group-08/
 │   ├── reproducibility.md         # Hardware and environmental replication guide
 │   └── TROUBLESHOOTING.md         # Real-world engineering post-mortem
 ├── notebooks/
-│   ├── 01_eda.ipynb               # Exploratory data analysis & class skew profiling
-│   ├── 02_baseline.ipynb          # Baseline models & leakage verification
-│   ├── 03_cost_sensitive.ipynb    # Cost-sensitive strategies & threshold optimization
-│   ├── 04_explainability.ipynb    # TreeSHAP beeswarm & local waterfall case studies
-│   └── README.md                  # Notebook headless execution guide
+│   ├── FinRisk_ML_Group08.ipynb   # Mirrored copy of unified master notebook
+│   └── README.md                  # Notebook execution guide and Google Colab launch instructions
 ├── reports/
 │   ├── CSE431_Report.md           # Full academic research paper
 │   ├── slides_outline.md          # 15-slide defense presentation outline
@@ -207,20 +213,12 @@ ML-Project-Group-08/
 │   ├── figures/                   # 15 pre-rendered vector/PNG plots
 │   ├── results/                   # Serialized models (.joblib) and metrics (.json)
 │   └── tables/                    # Summary CSV tables
-├── scripts/
-│   ├── benchmark.py               # Latency, memory, and throughput profiler
-│   ├── evaluate_thresholds.py     # 300-point cost curve optimizer
-│   └── run_all.py                 # Master end-to-end execution script
-├── src/
-│   ├── data/                      # Ingestion, chronological split, preprocessing
-│   ├── evaluate/                  # Calibration, metrics, cost curves, plotting
-│   ├── explain/                   # Global TreeSHAP, local waterfalls, model cards
-│   ├── features/                  # Haversine distance, temporal cyclical features
-│   ├── models/                    # Model wrappers, cost-sensitive strategies
-│   └── utils/                     # Logging, seeding, I/O, artifact management
-├── tests/                         # Pytest test suite with synthetic fixtures
-├── Makefile                       # Developer shortcuts (make test, make lint)
-├── pyproject.toml                 # Ruff and build configuration
+├── tests/                         # Fast Pytest test suite (all pass in ~1.3s)
+│   ├── test_notebook_integrity.py # Validates schema, Colab badge, authors, no Bengali
+│   ├── test_data_cleaning_and_sklearn.py # Validates imputation, winsorization, sklearn pipelines
+│   └── test_cost_optimization.py  # Validates cost matrix math and threshold optimizer
+├── Makefile                       # Developer shortcuts (make test, make lint, make notebook)
+├── pyproject.toml                 # Ruff, Black, and Pytest configuration
 └── requirements.txt               # Locked production dependencies
 ```
 
