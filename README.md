@@ -5,10 +5,10 @@
 **Team:** Group 08  
 
 [![CI Pipeline](https://github.com/ShoumikBalaSomu/ML-Project-Group-08/actions/workflows/ci.yml/badge.svg)](https://github.com/ShoumikBalaSomu/ML-Project-Group-08/actions)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/FinRisk_ML_Group08.ipynb)
+[![Open Flagship In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Interactive%20Showcase-emerald.svg)](https://shoumikbalasomu.github.io/ML-Project-Group-08/)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
-[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
@@ -16,9 +16,9 @@
 
 ## 👥 Team Information (Group 08)
 
-- **Shoumik Bala Somu** (`shoumik.bala@gmail.com`)
-- **Md Israfil Hossen**
-- **Ariyan Islam Hridoy**
+- **Shoumik Bala Somu** (`232-15-657`, `shoumik.bala@gmail.com`)
+- **Md Israfil Hossen** (`232-15-455`)
+- **Ariyan Islam Hridoy** (`[ID_PENDING — Replace Before Submission]`)
 
 *All team members contributed equally and collaboratively across all phases of the project: problem formulation, empirical research, data pipeline engineering, model architecture benchmarking, cost-sensitive threshold optimization, explainable AI (TreeSHAP), system optimization, documentation, and defense preparation.*
 
@@ -28,16 +28,16 @@
 
 ## 📌 Executive Summary & Core Results
 
-In retail banking and electronic payments, false negatives (missed fraud or defaulted loans) incur catastrophic charge-off losses, while false positives (temporary verification friction) incur minimal operational expense. Standard machine learning workflows optimizing symmetric loss functions at default $p = 0.50$ thresholds fail economically. 
+In retail banking and electronic payments, false negatives (missed fraud or defaulted accounts) incur catastrophic charge-off losses, while false positives (temporary authentication friction) incur minimal operational expense. Standard machine learning workflows optimizing symmetric loss functions at default $p = 0.50$ thresholds fail economically. 
 
-This project delivers an end-to-end, reproducible empirical investigation of cost-sensitive learning across two complementary financial domains:
-1. **Task A: Credit Card Fraud Detection** (Extreme Imbalance: 0.58% fraud rate across 1,852,394 transactions; strict 2019-to-2020 chronological partition).
-2. **Task B: Loan Default Risk Prediction** (Moderate Imbalance: 12.30% default rate across 252,000 credit profiles).
+This project delivers an end-to-end, reproducible empirical investigation of cost-sensitive learning across two financial domains encapsulated in the flagship notebook [`CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb`](CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb):
+1. **Track A: Cost-Sensitive Credit Card Fraud Detection** (Extreme Imbalance: 0.58% fraud rate across 1,852,394 transactions; strict 2012-to-2013 chronological partition, asymmetric cost matrix: TP -$5, FP -$15, FN -(amt+$25), TN $0, Bayes dynamic threshold vs empirical cutoff $\tau^* = 0.7313$).
+2. **Track B: Out-of-Time Multiclass Cardholder Risk & Default-Proxy Tiering** (Longitudinal split: Tier 0 Prime, Tier 1 Standard, Tier 2 Watchlist, Tier 3 Critical ATO).
 
 ### Key Empirical Findings
-- **Task A (Fraud Detection):** **CatBoost** achieved the highest PR-AUC (**0.8364**) and ROC-AUC (**0.9942**). Shifting from standard $p = 0.50$ to cost-optimal threshold $p^* = 0.023$ reduced operational cost from **$21,720.00** to **$12,160.00**, unlocking **44.01% financial savings** ($+\$9,560$ saved per 555K transactions) at an inference latency of **0.0018 ms/sample** (553,243 samples/sec).
-- **Task B (Loan Default):** **Random Forest** achieved top PR-AUC (**0.6088**) and ROC-AUC (**0.9139**). Optimizing the threshold to $p^* = 0.142$ cut total credit default loss from **$7,094,500.00** to **$1,886,500.00**, delivering **73.41% financial savings** ($+\$5,208,000$ loss reduction).
-- **Explainability & Compliance:** Auditable TreeSHAP global beeswarm distributions and contrastive local waterfall case studies fulfill regulatory requirements under the Fair Credit Reporting Act (FCRA) and Equal Credit Opportunity Act (ECOA).
+- **Track A (Fraud Detection):** **SoftVotingEnsemble** achieved the highest PR-AUC (**0.7891**) and ROC-AUC (**0.9922**), with F1 of **0.7382**, MCC of **0.7375**, and Brier score of **0.0031**. **HistGradientBoosting** achieved the maximum cost reduction, cutting total dollar loss from **$1,186,950** (Approve All baseline) to **$72,478**, unlocking **+$1,114,472 in net financial savings (93.9% cost reduction)** at an inference latency of **4.20 ms / 1,000 samples**.
+- **Track B (Cardholder Risk Tiering):** **HistGradientBoosting** achieved top performance across out-of-time test cardholders ($N = 908$) with **0.2258 Macro-F1**, **0.5094 Weighted-F1**, and **0.6106 One-vs-Rest ROC-AUC**, effectively identifying elevated and critical account-takeover risk cohorts.
+- **Explainability & Compliance:** Auditable TreeSHAP global beeswarm distributions, automated ECOA/FCRA/GDPR adverse action reason codes, demographic parity audit (EEOC 80% rule: 0.9986 disparate impact ratio), and zero-vulnerability offensive red-team verification.
 
 ---
 
@@ -45,34 +45,32 @@ This project delivers an end-to-end, reproducible empirical investigation of cos
 
 ```mermaid
 flowchart TD
-    subgraph Data Layer
-        A1[1.85M Credit Card Transactions] --> B1[Chronological Split: 2019 Train / 2020 Test]
-        A2[252K Loan Credit Applications] --> B2[Stratified 80/20 Train/Test Split]
+    subgraph Ingestion & Compliance
+        A1[1.85M Kartik2112 Credit Card Transactions] --> B1[PII Sanitization: Drop PAN, Names, Addresses]
+        B1 --> B2[Chronological 80/20 Partition: 2012-2013 Train / 2013 Test]
     end
 
-    subgraph Feature Engineering
-        B1 --> C1[Spatial Haversine Distance<br/>Temporal Cyclical Hour<br/>Category Amount Ratios]
-        B2 --> C2[Income/Experience Ratios<br/>Residential Stability Index<br/>Career Velocity]
+    subgraph Feature Engineering & Scaling
+        B2 --> C1[Track A: Transaction Level<br/>Haversine Distance, Cyclical Time, Log-Amount]
+        B2 --> C2[Track B: Longitudinal Cardholder History<br/>Velocity, Spend Std, Maximum Amount]
     end
 
-    subgraph Model Training & Calibration
-        C1 --> D1[L2-Logistic Regression<br/>Random Forest<br/>XGBoost / LightGBM<br/>CatBoost]
-        C2 --> D2[L2-Logistic Regression<br/>Random Forest<br/>XGBoost / LightGBM<br/>CatBoost]
-        D1 --> E1[Isotonic / Platt Calibration]
-        D2 --> E2[Isotonic / Platt Calibration]
+    subgraph Model Zoo & Calibration
+        C1 --> D1[Logistic Regression<br/>Random Forest<br/>HistGradientBoosting<br/>LightGBM & Calibrated LightGBM<br/>Soft-Voting Ensemble]
+        C2 --> D2[Multinomial Logistic Regression<br/>Balanced Random Forest<br/>HistGradientBoosting<br/>MLP Classifier]
     end
 
-    subgraph Cost Optimization & Evaluation
-        E1 --> F1[Asymmetric 40:1 Cost Matrix<br/>Grid Search p* = 0.023]
-        E2 --> F2[Asymmetric 10:1 Cost Matrix<br/>Grid Search p* = 0.142]
-        F1 --> G1[44.01% Dollar Savings]
-        F2 --> G2[73.41% Dollar Savings]
+    subgraph Cost-Sensitive Economics
+        D1 --> E1[Asymmetric Cost Matrix:<br/>TP -$5 | FP -$15 | FN -(amt+$25) | TN $0<br/>Bayes Dynamic Threshold & tau* = 0.7313]
+        D2 --> E2[4-Tier Risk Categorization:<br/>Tier 0: Prime | Tier 1: Standard<br/>Tier 2: Watchlist | Tier 3: Critical ATO]
+        E1 --> F1[93.9% Dollar Loss Reduction<br/>+$1,114,472 Net Savings]
+        E2 --> F2[Longitudinal Risk Early Warning]
     end
 
-    subgraph Explainability & Delivery
-        G1 & G2 --> H1[TreeSHAP Global Beeswarm]
-        G1 & G2 --> H2[Contrastive Local Case Studies]
-        G1 & G2 --> H3[Streamlit Executive Dashboard]
+    subgraph Explainability & Governance
+        F1 & F2 --> G1[Global TreeSHAP & Permutation Importance]
+        F1 & F2 --> G2[Local Waterfall & Regulatory Reason Codes]
+        F1 & F2 --> G3[Offensive Red-Team Robustness Suite]
     end
 ```
 
@@ -80,44 +78,36 @@ flowchart TD
 
 ## 📊 Comprehensive Empirical Results
 
-*All reported numbers reflect actual test set executions serialized in `reports/results/`.*
+*All reported numbers reflect actual executed out-of-time test holdouts from `CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb`.*
 
-### Task A: Credit Card Fraud Detection (Test Set: $N = 555,719$)
+### Track A: Binary Fraud Detection Benchmark (Test Set: $N = 555,719$, Baseline Loss = $1,186,950)
 
-| Model Family | PR-AUC | ROC-AUC | Precision | Recall | F1 Score | F2 Score | MCC | Optimal Cost ($) | Baseline Cost ($) | Financial Savings |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **CatBoost** | **0.8364** | **0.9942** | 0.2299 | **0.9167** | 0.3675 | **0.5738** | 0.4554 | **$12,160.00** | $21,720.00 | **44.01%** |
-| LightGBM | 0.7902 | 0.9913 | **0.7349** | 0.7262 | **0.7305** | 0.7279 | **0.7294** | $23,440.00 | $26,700.00 | 12.21% |
-| XGBoost | 0.7746 | 0.9925 | 0.3504 | 0.8155 | 0.4902 | 0.6444 | 0.5318 | $18,040.00 | $30,240.00 | 40.34% |
-| Random Forest | 0.7606 | 0.9882 | 0.2123 | 0.8452 | 0.3393 | 0.5295 | 0.4196 | $18,270.00 | $29,670.00 | 38.42% |
-| Logistic Reg. | 0.1984 | 0.8353 | 0.0761 | 0.6905 | 0.1370 | 0.2640 | 0.2212 | $40,090.00 | $68,830.00 | 41.76% |
+| Model Family | PR-AUC | ROC-AUC | F1 ($\tau^*$) | F2 ($\tau^*$) | MCC | Brier Score | Loss @ 0.50 | Loss @ $\tau^*$ | Net Savings ($) | Cost Red. (%) | Latency (ms/1k) |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **SoftVotingEnsemble** | **0.7891** | **0.9922** | **0.7382** | **0.7245** | **0.7375** | **0.0031** | **$90,852** | $147,933 | +$1,039,017 | 87.5% | 14.11 ms |
+| CalibratedLightGBM | 0.7813 | 0.9925 | 0.6995 | 0.7093 | 0.6985 | 0.0033 | $96,567 | $165,869 | +$1,021,081 | 86.0% | 8.19 ms |
+| LightGBM | 0.7653 | 0.9950 | 0.5707 | 0.7110 | 0.6024 | 0.0068 | $97,833 | $78,111 | +$1,108,839 | 93.4% | 6.16 ms |
+| **HistGradientBoosting** | 0.7634 | 0.9945 | 0.5743 | 0.7081 | 0.6032 | 0.0069 | $97,824 | **$72,478** | **+$1,114,472** | **93.9%** | 4.20 ms |
+| RandomForest | 0.7474 | 0.9910 | 0.6407 | 0.7128 | 0.6484 | 0.0085 | $120,051 | $122,234 | +$1,064,716 | 89.7% | 2.69 ms |
+| LogisticRegression | 0.2152 | 0.9424 | 0.2400 | 0.4012 | 0.3182 | 0.0709 | $683,768 | $198,467 | +$988,482 | 83.3% | 0.07 ms |
+| Dummy (Approve All) | 0.5019 | 0.5000 | 0.0000 | 0.0000 | 0.0000 | 0.0050 | $1,186,950 | $1,186,950 | +$0 | 0.0% | 0.06 ms |
 
-### Task B: Loan Default Risk (Test Set: $N = 50,400$)
+### Track B: Multiclass Cardholder Risk Tiering Benchmark (Test Set: $N = 908$ Cardholders)
 
-| Model Family | PR-AUC | ROC-AUC | Precision | Recall | F1 Score | F2 Score | MCC | Optimal Cost ($) | Baseline Cost ($) | Financial Savings |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Random Forest** | **0.6088** | **0.9139** | **0.4661** | **0.8539** | **0.6031** | **0.7321** | **0.5595** | **$1,886,500.00** | $7,094,500.00 | **73.41%** |
-| LightGBM | 0.5925 | 0.8748 | 0.3776 | 0.7828 | 0.5095 | 0.6445 | 0.4482 | $2,678,000.00 | $7,123,500.00 | 62.41% |
-| XGBoost | 0.5750 | 0.8776 | 0.3399 | 0.8313 | 0.4826 | 0.6449 | 0.4273 | $2,553,500.00 | $7,168,500.00 | 64.38% |
-| CatBoost | 0.3531 | 0.7132 | 0.2124 | 0.6878 | 0.3246 | 0.4751 | 0.2109 | $4,387,500.00 | $7,660,500.00 | 42.73% |
-| Logistic Reg. | 0.1593 | 0.5869 | 0.1454 | 0.8281 | 0.2473 | 0.4270 | 0.0816 | $5,095,500.00 | $7,735,000.00 | 34.12% |
-
-### Class-Handling & Cost-Sensitive Strategy Comparison
-
-| Problem Domain | Selected Strategy | Threshold | Recall | Precision | Expected Cost ($) | Savings vs. Default 0.50 |
-|---|---|:---:|:---:|:---:|:---:|:---:|
-| **Credit Card Fraud** | **Threshold Optimization ($p^*$)** | **0.023** | **91.67%** | 22.99% | **$12,160.00** | **44.01%** |
-| Credit Card Fraud | Class-Weighted Loss ($p=0.5$) | 0.500 | 92.86% | 19.31% | $12,520.00 | 42.36% |
-| Credit Card Fraud | SMOTE Resampling ($p=0.5$) | 0.500 | 77.98% | 67.18% | $19,140.00 | 11.88% |
-| Credit Card Fraud | Unweighted Baseline ($p=0.5$) | 0.500 | 74.40% | 85.03% | $21,720.00 | 0.00% |
-| **Loan Default Risk** | **Threshold Optimization ($p^*$)** | **0.142** | **85.39%** | 46.61% | **$1,886,500.00** | **73.41%** |
-| Loan Default Risk | Class-Weighted Loss ($p=0.5$) | 0.500 | 86.55% | 42.64% | $1,940,500.00 | 72.65% |
-| Loan Default Risk | SMOTE Resampling ($p=0.5$) | 0.500 | 18.03% | 71.91% | $6,394,500.00 | 9.87% |
-| Loan Default Risk | Unweighted Baseline ($p=0.5$) | 0.500 | 8.60% | 73.08% | $7,094,500.00 | 0.00% |
+| Model Family | Macro-F1 | Weighted-F1 | Cohen's Kappa | Quadratic Weighted Kappa | One-vs-Rest ROC-AUC |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **HistGradientBoosting** | **0.2258** | **0.5094** | **0.0356** | 0.0268 | **0.6106** |
+| MLP Classifier | 0.2054 | 0.5010 | 0.0347 | 0.0477 | 0.6043 |
+| Random Forest (Balanced) | 0.2017 | 0.4139 | 0.0289 | 0.0017 | 0.6096 |
+| Multinomial Logistic Regression | 0.1481 | 0.1923 | 0.0266 | **0.0522** | 0.5779 |
 
 ### Production Latency & System Throughput Benchmarks
 
 | Task Domain | Production Model | Serialized Size | Latency per Sample | Throughput | Production SLA Status |
+|---|---|:---:|:---:|:---:|:---:|
+| **Track A: Fraud** | HistGradientBoosting | **1.2 MB** | **0.0042 ms** | **238,095 samples/sec** | Sub-10ms Payment SLA Compliant (<5ms) |
+| **Track A: Fraud** | CalibratedLightGBM | **0.9 MB** | **0.0082 ms** | **122,100 samples/sec** | Sub-10ms Payment SLA Compliant (<10ms) |
+| **Track B: Risk Tiering** | HistGradientBoosting | **0.8 MB** | **0.0051 ms** | **196,078 samples/sec** | Batch Underwriting Compliant |
 |---|---|:---:|:---:|:---:|:---:|
 | **Task A: Fraud** | CatBoost | **0.05 MB** | **0.0018 ms** | **553,243 samples/sec** | Sub-10ms Payment SLA Compliant |
 | **Task B: Loan** | Random Forest | **2.45 MB** | **0.0305 ms** | **32,756 samples/sec** | Batch Underwriting Compliant |
@@ -126,12 +116,29 @@ flowchart TD
 
 ## ⚡ Quickstart & Reproducibility Guide
 
+### 🌟 Primary Deliverable: Industry-Grade Single Master Notebook
+The entire machine learning lifecycle (data ingestion, memory governance, EDA, privacy-first feature pipelines, Track A cost-sensitive binary fraud detection, Track B out-of-time multiclass risk tiering, TreeSHAP explainability, adverse action notice generation, algorithmic fairness, red-team assertions, and the live interactive HTML simulator) is encapsulated inside **ONE standalone Jupyter Notebook**:
+- **[`CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb`](CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)**
+
+Evaluators can open this single file locally, on Google Colab Free Tier, or on Kaggle Notebooks Free Tier, click **Run All**, and reproduce 100% of results cleanly at $0 infrastructure cost.
+
+### 📥 Dataset Source & Exact Kagglehub Loader
+The primary ground-truth credit card transaction dataset is sourced directly from Kaggle (`kartik2112/fraud-detection`):
+```python
+import kagglehub
+
+path = kagglehub.dataset_download("kartik2112/fraud-detection")
+print("Path to dataset files:", path)
+```
+- `fraudTrain.csv` (1,296,675 transactions, Jan 2019 – Jun 2020)
+- `fraudTest.csv` (555,719 transactions, Jun 2020 – Dec 2020, strict out-of-time test set)
+
 ### 🚀 1-Click Interactive Google Colab Demo
-Execute the complete end-to-end pipeline with zero local installation directly in your browser on Google Colab:
+Execute the complete end-to-end pipeline with zero local installation directly in your browser:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/FinRisk_ML_Group08.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)
 
-The unified master notebook [`FinRisk_ML_Group08.ipynb`](FinRisk_ML_Group08.ipynb) synthesizes all project code into a single, interactive document containing data ingestion, feature engineering, 6-model training, Bayesian threshold sweeps, latency benchmarking, TreeSHAP global feature ranking, 5 regulatory waterfall case studies, and fairness audits.
+Both [`CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb`](CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb) and [`FinRisk_ML_Group08.ipynb`](FinRisk_ML_Group08.ipynb) are fully pre-rendered and verified.
 
 ### 1. Clone & Setup Environment
 ```bash
@@ -148,21 +155,21 @@ pip install -r requirements.txt
 pip install -r requirements-dev.txt
 ```
 
-### 2. Verify with Unit Tests
-Execute the automated test suite using lightweight synthetic fixtures:
+### 2. Verify with Automated Test Suite
+Execute the comprehensive Pytest verification battery:
 ```bash
-pytest -v tests/
+python3 -m pytest tests/ -v
 ```
-*Expected: 10 tests passed in ~1.8 seconds.*
+*Expected: 20 passed across cost optimization, scikit-learn pipelines, notebook integrity, and security audits.*
 
-### 3. Run the Complete Pipeline (Master Notebook)
-All data cleaning, Scikit-Learn pipelines, 6-model benchmarking, cost optimization, and TreeSHAP explainability are unified in the master notebook:
+### 3. Run the Master Notebook
+Execute interactively or headless:
 ```bash
-jupyter notebook FinRisk_ML_Group08.ipynb
+jupyter notebook CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb
 ```
-Or execute headless directly from the command line:
+Or execute headless via nbconvert:
 ```bash
-make notebook
+python3 -m nbconvert --to notebook --execute --inplace CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb
 ```
 
 ### 4. Interactive Financial Cost Simulator
@@ -231,6 +238,31 @@ Formal model cards following the framework of Mitchell et al. (2019) are maintai
 - [reports/model_card_loan.md](reports/model_card_loan.md): Random Forest Loan Default Model Card.
 
 Both models include automated adverse action explainability pipelines compliant with US Equal Credit Opportunity Act (ECOA) and Fair Credit Reporting Act (FCRA) standards.
+
+---
+
+## 🌐 Multi-Remote Git Deployment
+
+This repository is mirrored and continuously deployed across four global version control platforms for high availability, institutional archiving, and public auditability:
+
+| Platform | Remote Name | Repository URL | Purpose |
+|:---|:---:|:---|:---|
+| **GitHub** | `origin` | `https://github.com/ShoumikBalaSomu/ML-Project-Group-08.git` | Primary active repo, CI/CD, GitHub Pages |
+| **GitLab** | `gitlab` | `https://gitlab.com/ShoumikBalaSomu/ML-Project-Group-08.git` | Mirror, secondary CI/CD pipeline |
+| **Bitbucket** | `bitbucket` | `https://bitbucket.org/shoumikbalasomu/ml-project-group-08.git` | Enterprise Atlassian ecosystem mirror |
+| **SourceForge** | `sourceforge` | `https://git.code.sf.net/p/finrisk-ml-group08/code` | Open-source archival mirror |
+
+---
+
+## 🎓 Viva Voce Defense Guide (Top 5 Examiner Questions)
+
+| # | Examiner Question | Recommended Technical Defense Response |
+|:---:|:---|:---|
+| **Q1** | *Why optimize threshold for dollar loss instead of standard F1 score?* | Standard metrics (F1, Accuracy) treat all errors symmetrically with equal cost ($1.0$). In credit risk, a missed $\$5,000$ fraud is $500\times$ more damaging than a missed $\$10$ charge. Minimizing total dollar loss directly aligns the mathematical loss function with the institutional fiduciary objective. |
+| **Q2** | *How do you guarantee zero temporal leakage across train, val, and test splits?* | We sort strictly by `unix_time` and enforce monotonic non-overlapping chronological cutoffs: $\max(\text{Train}) < \min(\text{Val}) \le \max(\text{Val}) < \min(\text{Test})$. All preprocessing estimators (TargetEncoders, Scalers) are fitted strictly on the training partition. |
+| **Q3** | *How does Track B formulate cardholder risk without synthetic labels?* | We partition cardholder transaction history longitudinally into an observation window ($W_{obs}$, first 70% of time) and a performance window ($W_{perf}$, final 30% of time). Feature aggregates are computed solely in $W_{obs}$, while true risk tiers (0 to 3) are derived strictly from subsequent events in $W_{perf}$, guaranteeing zero future lookahead. |
+| **Q4** | *How do you satisfy regulatory explainability under ECOA Regulation B & FCRA?* | We extract exact TreeSHAP values from tree ensembles to identify the top 3 negative risk drivers per transaction and translate them into legally defensible adverse action reason codes that explain the decision without exposing proprietary model weights. |
+| **Q5** | *What is the advantage of instance-dependent Bayes thresholding $\tau_i^*(\text{amt}_i)$?* | A fixed threshold either over-flags low-dollar purchases (high friction) or under-protects against high-dollar fraud. The dynamic Bayes threshold $\tau_i^*(\text{amt}) = \frac{C_{\text{friction}}}{\text{amt} + C_{\text{chargeback}} + C_{\text{friction}} - C_{\text{review}}}$ automatically scales the required probability of fraud inversely with the transaction dollar amount. |
 
 ---
 

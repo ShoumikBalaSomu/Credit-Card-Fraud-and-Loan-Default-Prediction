@@ -86,3 +86,36 @@ def test_pre_rendered_outputs_exist(root_notebook):
     code_cells = [c for c in root_notebook.cells if c.cell_type == "code"]
     executed_cells = [c for c in code_cells if c.execution_count is not None]
     assert len(executed_cells) >= 10, "Notebook cells must be pre-rendered with executed outputs"
+
+
+def test_cse431_master_notebook_integrity():
+    """Verifies that CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb is fully valid, pre-rendered, and adheres to strict standards."""
+    nb_path = Path("CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb")
+    assert nb_path.exists(), "Master notebook CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb must exist at repo root"
+    nb = nbformat.read(nb_path, as_version=4)
+    assert nb.nbformat == 4
+    assert nb.metadata.kernelspec.language == "python"
+    assert len(nb.cells) >= 25
+
+    # Check author attribution
+    cell_0 = nb.cells[0].source
+    pos_shoumik = cell_0.find("Shoumik Bala Somu")
+    pos_israfil = cell_0.find("Md Israfil Hossen")
+    pos_ariyan = cell_0.find("Ariyan Islam Hridoy")
+    assert pos_shoumik != -1 and pos_israfil != -1 and pos_ariyan != -1
+    assert pos_shoumik < pos_israfil < pos_ariyan, "Author attribution order violated"
+
+    # Check zero Bengali characters
+    bengali_regex = re.compile(r"[\u0980-\u09FF]")
+    for idx, cell in enumerate(nb.cells):
+        matches = bengali_regex.findall(cell.source)
+        assert len(matches) == 0, f"Found Bengali characters in cell {idx}: {matches}"
+
+    # Check pre-rendered outputs and zero errors
+    code_cells = [c for c in nb.cells if c.cell_type == "code"]
+    executed = [c for c in code_cells if c.execution_count is not None]
+    assert len(executed) == len(code_cells), "All code cells must be pre-rendered"
+    for idx, c in enumerate(code_cells):
+        for o in c.outputs:
+            assert o.get("output_type") != "error", f"Execution error found in code cell {idx}: {o.get('ename')}: {o.get('evalue')}"
+

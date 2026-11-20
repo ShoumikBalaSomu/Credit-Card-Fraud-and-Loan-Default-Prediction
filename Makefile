@@ -1,4 +1,4 @@
-.PHONY: all setup test lint format notebook pages clean optimize
+.PHONY: all setup test lint format notebook pages clean optimize push-all verify
 
 VENV := ./venv/bin
 PYTHON := $(VENV)/python
@@ -29,6 +29,16 @@ pages:
 
 optimize: format lint test
 	@echo "All quality and regression tests passed!"
+
+verify:
+	$(VENV)/pytest -v tests/
+
+push-all:
+	@echo "Pushing to all 4 configured remotes (origin, gitlab, bitbucket, sourceforge)..."
+	git push origin main
+	git push gitlab main
+	git push bitbucket main
+	git push sourceforge main
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
