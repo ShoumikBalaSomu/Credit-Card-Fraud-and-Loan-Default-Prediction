@@ -5,9 +5,10 @@ Constructs the complete industry-grade single Jupyter Notebook with all cells,
 markdown narratives, executive takeaways, and zero external module imports.
 """
 
-import json
-import nbformat as nbf
 from pathlib import Path
+
+import nbformat as nbf
+
 
 def create_notebook():
     nb = nbf.v4.new_notebook()
@@ -15,7 +16,7 @@ def create_notebook():
         "kernelspec": {
             "display_name": "Python 3 (ipykernel)",
             "language": "python",
-            "name": "python3"
+            "name": "python3",
         },
         "language_info": {
             "codemirror_mode": {"name": "ipython", "version": 3},
@@ -24,18 +25,18 @@ def create_notebook():
             "name": "python",
             "nbconvert_exporter": "python",
             "pygments_lexer": "ipython3",
-            "version": "3.11.0"
-        }
+            "version": "3.11.0",
+        },
     }
-    
+
     cells = []
-    
+
     # -------------------------------------------------------------------------
     # CELL 0: EXECUTIVE COVER BANNER (Markdown + HTML)
     # -------------------------------------------------------------------------
     cell_0_md = """# 💳 Cost-Sensitive & Explainable Machine Learning for Financial Risk
 ## Dual-Stream Credit Card Fraud Detection & Out-of-Time Cardholder Default-Proxy Risk Tiering
-**Course:** CSE431-ML-Machine Learning &bull; **Capstone Track:** Financial Intelligence & Risk Quantification  
+**Course:** CSE431-ML-Machine Learning &bull; **Capstone Track:** Financial Intelligence & Risk Quantification
 **Institution:** Department of Computer Science and Engineering &bull; **Group:** Group 08
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)
@@ -49,7 +50,7 @@ def create_notebook():
 All team members contributed equally (33.3% each) across system architecture, mathematical cost formulation, pipeline engineering, XAI compliance, and security audit:
 1. **Shoumik Bala Somu** (`232-15-657`) &bull; *Lead ML Architect, Pipeline & Systems Engineer*
 2. **Md Israfil Hossen** (`232-15-455`) &bull; *Financial Quant, Cost Matrix & Multiclass Risk Modeler*
-3. **Ariyan Islam Hridoy** (`[ID_PENDING — Replace Before Submission]`) &bull; *Explainable AI (XAI) & Cyber-Defense Red Team*
+3. **Ariyan Islam Hridoy** (`232-15-378`) &bull; *Explainable AI (XAI) & Cyber-Defense Red Team*
 
 ---
 
@@ -195,7 +196,7 @@ banner_html = '''
             </div>
             <div style="background: #1E293B; border-left: 3px solid #009E73; padding: 8px 12px; border-radius: 0 6px 6px 0;">
                 <div style="font-size: 13px; font-weight: 700; color: #F8FAFC;">Ariyan Islam Hridoy</div>
-                <div style="font-size: 11px; color: #009E73; font-family: monospace;">[ID_PENDING]</div>
+                <div style="font-size: 11px; color: #009E73; font-family: monospace;">ID: 232-15-378</div>
                 <div style="font-size: 11px; color: #94A3B8;">Explainable AI & Cyber Red Team</div>
             </div>
         </div>
@@ -556,12 +557,12 @@ We sort `df_train_raw` chronologically by `unix_time`. The earliest 80% forms th
 def engineer_features(df: pd.DataFrame, train_medians: Optional[Dict[str, float]] = None) -> Tuple[pd.DataFrame, Dict[str, float]]:
     \"\"\"Generates leakage-free features for binary fraud classification.\"\"\"
     df_feat = df.copy()
-    
+
     # 1. Cyclical Temporal Features
     dt = pd.to_datetime(df_feat['unix_time'], unit='s')
     hour = dt.dt.hour
     dow = dt.dt.day_of_week
-    
+
     df_feat['hour_sin'] = np.sin(2 * np.pi * hour / 24.0).astype(np.float32)
     df_feat['hour_cos'] = np.cos(2 * np.pi * hour / 24.0).astype(np.float32)
     df_feat['dow_sin'] = np.sin(2 * np.pi * dow / 7.0).astype(np.float32)
@@ -572,25 +573,25 @@ def engineer_features(df: pd.DataFrame, train_medians: Optional[Dict[str, float]
     # 2. Demographic Age
     dob = pd.to_datetime(df_feat['dob'])
     df_feat['tx_age_years'] = ((dt - dob).dt.total_seconds() / (365.25 * 86400.0)).astype(np.float32)
-    
+
     # 3. Log Transforms
     df_feat['amt_log1p'] = np.log1p(df_feat['amt']).astype(np.float32)
     df_feat['city_pop_log1p'] = np.log1p(df_feat['city_pop']).astype(np.float32)
-    
+
     # 4. Geodesic Distance Deltas
     df_feat['lat_diff'] = np.abs(df_feat['lat'] - df_feat['merch_lat']).astype(np.float32)
     df_feat['long_diff'] = np.abs(df_feat['long'] - df_feat['merch_long']).astype(np.float32)
-    
+
     # 5. Relative Amount vs Category Median
     if train_medians is None:
         train_medians = df_feat.groupby('category', observed=False)['amt'].median().to_dict()
-    
+
     cat_meds = df_feat['category'].map(train_medians).fillna(df_feat['amt'].median()).astype(np.float32)
     df_feat['amt_to_cat_median'] = (df_feat['amt'] / np.maximum(cat_meds, 1.0)).astype(np.float32)
-    
+
     # 6. Past-Only Behavioral Velocity (Time Since Previous Txn)
     df_feat['time_since_prev_tx'] = (df_feat.groupby('cc_num')['unix_time'].diff() / 3600.0).fillna(999.0).astype(np.float32)
-    
+
     return df_feat, train_medians
 
 # Sort chronologically
@@ -1223,7 +1224,7 @@ for title, idx in cases:
     exp_inst = explainer(inst.reshape(1, -1))[0]
     exp_inst.feature_names = feature_cols
     generate_adverse_action_notice(inst, feature_cols, exp_inst.values, probs_te[idx], optimal_tau)
-    
+
     fig = plt.figure(figsize=(9, 4), facecolor=SURFACE_COLORS["background"])
     shap.plots.waterfall(exp_inst, max_display=6, show=False)
     plt.title(f"SHAP Waterfall Attribution: {title}", fontsize=11, weight="bold")
@@ -1256,9 +1257,9 @@ def audit_demographic_fairness(df: pd.DataFrame, y_true: np.ndarray, y_pred: np.
 
     # Age Groups
     df_eval['age_bucket'] = pd.cut(df_eval['tx_age_years'], bins=[0, 30, 50, 100], labels=['<30', '30-50', '50+'])
-    
+
     fairness_records = []
-    
+
     # 1. Gender Audit
     for g in df_eval['gender'].dropna().unique():
         sub = df_eval[df_eval['gender'] == g]
@@ -1568,11 +1569,12 @@ This entire notebook is designed to execute from start to finish at **\\$0.00 in
     cells.append(nbf.v4.new_markdown_cell(cell_28_md))
 
     nb.cells = cells
-    
+
     out_path = Path("CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb")
     with open(out_path, "w", encoding="utf-8") as f:
         nbf.write(nb, f)
     print(f"Successfully generated master notebook: {out_path} ({len(cells)} cells)")
+
 
 if __name__ == "__main__":
     create_notebook()

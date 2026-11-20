@@ -91,7 +91,9 @@ def test_pre_rendered_outputs_exist(root_notebook):
 def test_cse431_master_notebook_integrity():
     """Verifies that CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb is fully valid, pre-rendered, and adheres to strict standards."""
     nb_path = Path("CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb")
-    assert nb_path.exists(), "Master notebook CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb must exist at repo root"
+    assert (
+        nb_path.exists()
+    ), "Master notebook CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb must exist at repo root"
     nb = nbformat.read(nb_path, as_version=4)
     assert nb.nbformat == 4
     assert nb.metadata.kernelspec.language == "python"
@@ -117,5 +119,6 @@ def test_cse431_master_notebook_integrity():
     assert len(executed) == len(code_cells), "All code cells must be pre-rendered"
     for idx, c in enumerate(code_cells):
         for o in c.outputs:
-            assert o.get("output_type") != "error", f"Execution error found in code cell {idx}: {o.get('ename')}: {o.get('evalue')}"
-
+            assert (
+                o.get("output_type") != "error"
+            ), f"Execution error found in code cell {idx}: {o.get('ename')}: {o.get('evalue')}"

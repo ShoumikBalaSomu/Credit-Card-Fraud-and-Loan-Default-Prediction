@@ -3,16 +3,15 @@ Unit tests for Security, Leakage & Robustness Audit Suite using standard unittes
 """
 
 import unittest
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+
 from src.security_audit import (
+    AdversarialRobustnessSuite,
     PIIComplianceAuditor,
     TemporalLeakageAuditor,
     TrackBContaminationAuditor,
-    AdversarialRobustnessSuite,
-    assert_pci_gdpr_compliance,
-    assert_temporal_split_integrity,
-    assert_track_b_zero_overlap,
 )
 
 
@@ -65,23 +64,29 @@ class TestSecurityAuditSuite(unittest.TestCase):
         self.assertFalse(res_bad.passed)
 
     def test_adversarial_micro_splitting(self):
-        sample = pd.Series({
-            "amt": 800.0,
-            "trans_date_trans_time": "2020-01-01 10:00:00",
-            "unix_time": 1577872800,
-            "category": "grocery_pos",
-        })
-        splits = AdversarialRobustnessSuite.simulate_micro_splitting(sample, n_splits=4, delta_seconds=60)
+        sample = pd.Series(
+            {
+                "amt": 800.0,
+                "trans_date_trans_time": "2020-01-01 10:00:00",
+                "unix_time": 1577872800,
+                "category": "grocery_pos",
+            }
+        )
+        splits = AdversarialRobustnessSuite.simulate_micro_splitting(
+            sample, n_splits=4, delta_seconds=60
+        )
         self.assertEqual(len(splits), 4)
         self.assertAlmostEqual(splits["amt"].sum(), 800.0)
         self.assertAlmostEqual(splits["amt"].iloc[0], 200.0)
         self.assertEqual(splits["unix_time"].iloc[1], 1577872800 + 60)
 
     def test_coordinate_perturbation(self):
-        df = pd.DataFrame({
-            "merch_lat": [40.7128, 34.0522],
-            "merch_long": [-74.0060, -118.2437],
-        })
+        df = pd.DataFrame(
+            {
+                "merch_lat": [40.7128, 34.0522],
+                "merch_long": [-74.0060, -118.2437],
+            }
+        )
         perturbed = AdversarialRobustnessSuite.perturb_coordinates(df, sigma_deg=0.02, seed=42)
         self.assertFalse(np.allclose(df["merch_lat"], perturbed["merch_lat"]))
         self.assertTrue(np.all(np.abs(df["merch_lat"] - perturbed["merch_lat"]) < 0.1))

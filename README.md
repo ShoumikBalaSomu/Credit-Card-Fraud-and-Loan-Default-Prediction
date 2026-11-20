@@ -18,7 +18,7 @@
 
 - **Shoumik Bala Somu** (`232-15-657`, `shoumik.bala@gmail.com`)
 - **Md Israfil Hossen** (`232-15-455`)
-- **Ariyan Islam Hridoy** (`[ID_PENDING — Replace Before Submission]`)
+- **Ariyan Islam Hridoy** (`232-15-378`)
 
 *All team members contributed equally and collaboratively across all phases of the project: problem formulation, empirical research, data pipeline engineering, model architecture benchmarking, cost-sensitive threshold optimization, explainable AI (TreeSHAP), system optimization, documentation, and defense preparation.*
 
@@ -45,32 +45,32 @@ This project delivers an end-to-end, reproducible empirical investigation of cos
 
 ```mermaid
 flowchart TD
-    subgraph Ingestion & Compliance
-        A1[1.85M Kartik2112 Credit Card Transactions] --> B1[PII Sanitization: Drop PAN, Names, Addresses]
-        B1 --> B2[Chronological 80/20 Partition: 2012-2013 Train / 2013 Test]
+    subgraph Ingestion["Ingestion & Compliance"]
+        A1["1.85M Kartik2112 Credit Card Transactions"] --> B1["PII Sanitization: Drop PAN, Names, Addresses"]
+        B1 --> B2["Chronological 80/20 Partition: 2019-2020 Train / 2020 Test"]
     end
 
-    subgraph Feature Engineering & Scaling
-        B2 --> C1[Track A: Transaction Level<br/>Haversine Distance, Cyclical Time, Log-Amount]
-        B2 --> C2[Track B: Longitudinal Cardholder History<br/>Velocity, Spend Std, Maximum Amount]
+    subgraph Features["Feature Engineering & Scaling"]
+        B2 --> C1["Track A: Transaction Level<br/>Haversine Distance, Cyclical Time, Log-Amount"]
+        B2 --> C2["Track B: Longitudinal Cardholder History<br/>Velocity, Spend Std, Maximum Amount"]
     end
 
-    subgraph Model Zoo & Calibration
-        C1 --> D1[Logistic Regression<br/>Random Forest<br/>HistGradientBoosting<br/>LightGBM & Calibrated LightGBM<br/>Soft-Voting Ensemble]
-        C2 --> D2[Multinomial Logistic Regression<br/>Balanced Random Forest<br/>HistGradientBoosting<br/>MLP Classifier]
+    subgraph Models["Model Zoo & Calibration"]
+        C1 --> D1["Logistic Regression<br/>Random Forest<br/>HistGradientBoosting<br/>LightGBM & Calibrated LightGBM<br/>Soft-Voting Ensemble"]
+        C2 --> D2["Multinomial Logistic Regression<br/>Balanced Random Forest<br/>HistGradientBoosting<br/>MLP Classifier"]
     end
 
-    subgraph Cost-Sensitive Economics
-        D1 --> E1[Asymmetric Cost Matrix:<br/>TP -$5 | FP -$15 | FN -(amt+$25) | TN $0<br/>Bayes Dynamic Threshold & tau* = 0.7313]
-        D2 --> E2[4-Tier Risk Categorization:<br/>Tier 0: Prime | Tier 1: Standard<br/>Tier 2: Watchlist | Tier 3: Critical ATO]
-        E1 --> F1[93.9% Dollar Loss Reduction<br/>+$1,114,472 Net Savings]
-        E2 --> F2[Longitudinal Risk Early Warning]
+    subgraph Economics["Cost-Sensitive Economics"]
+        D1 --> E1["Asymmetric Cost Matrix:<br/>TP -$5, FP -$15, FN -(amt+$25), TN $0<br/>Bayes Dynamic Threshold & tau* = 0.023"]
+        D2 --> E2["4-Tier Risk Categorization:<br/>Tier 0: Prime • Tier 1: Standard<br/>Tier 2: Watchlist • Tier 3: Critical ATO"]
+        E1 --> F1["44.01% Dollar Loss Reduction<br/>+$9,560 Net Savings per 555K Transactions"]
+        E2 --> F2["Longitudinal Risk Early Warning"]
     end
 
-    subgraph Explainability & Governance
-        F1 & F2 --> G1[Global TreeSHAP & Permutation Importance]
-        F1 & F2 --> G2[Local Waterfall & Regulatory Reason Codes]
-        F1 & F2 --> G3[Offensive Red-Team Robustness Suite]
+    subgraph Governance["Explainability & Governance"]
+        F1 & F2 --> G1["Global TreeSHAP & Permutation Importance"]
+        F1 & F2 --> G2["Local Waterfall & Regulatory Reason Codes"]
+        F1 & F2 --> G3["Offensive Red-Team Robustness Suite"]
     end
 ```
 

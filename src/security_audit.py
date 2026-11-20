@@ -6,17 +6,18 @@ temporal leakage verifications, Track B target contamination guards, and an
 adversarial robustness evaluation suite.
 """
 
-from dataclasses import dataclass, field
 import hashlib
 import re
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from dataclasses import dataclass, field
+from typing import Any, Callable, Dict, List, Optional, Tuple
+
 import numpy as np
 import pandas as pd
-
 
 # ==============================================================================
 # 1. PII RETENTION & COMPLIANCE AUDITOR (PCI-DSS & GDPR)
 # ==============================================================================
+
 
 @dataclass
 class PIIAuditResult:
@@ -84,7 +85,9 @@ class PIIComplianceAuditor:
             passed=passed,
             violations=violations,
             warnings=warnings,
-            sanitized_features=[c for c in feature_columns if c.lower() not in cls.STRICT_PROHIBITED_COLUMNS],
+            sanitized_features=[
+                c for c in feature_columns if c.lower() not in cls.STRICT_PROHIBITED_COLUMNS
+            ],
         )
 
     @classmethod
@@ -143,6 +146,7 @@ class PIIComplianceAuditor:
 # ==============================================================================
 # 2. TEMPORAL LEAKAGE AUDITOR
 # ==============================================================================
+
 
 @dataclass
 class TemporalAuditResult:
@@ -216,6 +220,7 @@ class TemporalLeakageAuditor:
 # 3. TRACK B CONTAMINATION AUDITOR
 # ==============================================================================
 
+
 @dataclass
 class TrackBAuditResult:
     passed: bool
@@ -226,8 +231,12 @@ class TrackBAuditResult:
     def summary(self) -> str:
         status = "PASSED (ZERO CONTAMINATION)" if self.passed else "FAILED (CONTAMINATED)"
         msg = [f"[Track B Out-of-Time Contamination Audit] Status: {status}"]
-        msg.append(f"  Feature Observation Window: {self.feature_window[0]} -> {self.feature_window[1]}")
-        msg.append(f"  Target Prediction Window:   {self.target_window[0]} -> {self.target_window[1]}")
+        msg.append(
+            f"  Feature Observation Window: {self.feature_window[0]} -> {self.feature_window[1]}"
+        )
+        msg.append(
+            f"  Target Prediction Window:   {self.target_window[0]} -> {self.target_window[1]}"
+        )
         if self.violations:
             msg.append("  Violations:")
             for v in self.violations:
@@ -273,6 +282,7 @@ class TrackBContaminationAuditor:
 # 4. ADVERSARIAL ROBUSTNESS SUITE
 # ==============================================================================
 
+
 class AdversarialRobustnessSuite:
     @staticmethod
     def simulate_micro_splitting(
@@ -289,7 +299,9 @@ class AdversarialRobustnessSuite:
         for i in range(n_splits):
             row_copy = tx_row.copy()
             row_copy["amt"] = split_amt
-            row_copy["trans_date_trans_time"] = str(base_time + pd.Timedelta(seconds=i * delta_seconds))
+            row_copy["trans_date_trans_time"] = str(
+                base_time + pd.Timedelta(seconds=i * delta_seconds)
+            )
             if "unix_time" in row_copy:
                 row_copy["unix_time"] = base_unix + (i * delta_seconds)
             splits.append(row_copy)
@@ -390,7 +402,9 @@ class AdversarialRobustnessSuite:
             "total_financial_loss": float(total_loss),
             "baseline_approve_all_loss": float(baseline_loss),
             "net_dollar_savings": float(dollar_savings),
-            "savings_percentage": float((dollar_savings / baseline_loss) * 100.0) if baseline_loss > 0 else 0.0,
+            "savings_percentage": (
+                float((dollar_savings / baseline_loss) * 100.0) if baseline_loss > 0 else 0.0
+            ),
         }
 
     @staticmethod
@@ -440,7 +454,9 @@ class AdversarialRobustnessSuite:
                 "financial_loss": loss_coord,
                 "max_prob_drift": max_prob_drift,
                 "mean_prob_drift": mean_prob_drift,
-                "robustness_pass": bool(loss_coord["net_dollar_savings"] > 0 and mean_prob_drift < 0.05),
+                "robustness_pass": bool(
+                    loss_coord["net_dollar_savings"] > 0 and mean_prob_drift < 0.05
+                ),
             },
             "edge_case_nans": {
                 "pipeline_survived": nan_handled,
@@ -453,6 +469,7 @@ class AdversarialRobustnessSuite:
 # ==============================================================================
 # 5. RUNTIME ASSERTIONS
 # ==============================================================================
+
 
 def assert_pci_gdpr_compliance(feature_columns: List[str]) -> None:
     result = PIIComplianceAuditor.audit_feature_columns(feature_columns)
