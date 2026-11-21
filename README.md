@@ -255,7 +255,7 @@ This repository is mirrored and continuously deployed across four global version
 | **GitHub** | `origin` | `https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction.git` | Primary active repo, CI/CD, GitHub Pages |
 | **GitLab** | `gitlab` | `https://gitlab.com/ShoumikBalaSomu/credit-card-fraud-and-loan-default-prediction.git` | Mirror, secondary CI/CD pipeline |
 | **Bitbucket** | `bitbucket` | `https://bitbucket.org/shoumikbalasomu/credit-card-fraud-and-loan-default-prediction.git` | Enterprise Atlassian ecosystem mirror |
-| **SourceForge** | `sourceforge` | `https://git.code.sf.net/p/finrisk-ml-group08/code` | Open-source archival mirror |
+| **SourceForge** | `sourceforge` | `https://git.code.sf.net/p/credit-card-fraud-prediction/code` | Open-source archival mirror |
 
 ---
 
