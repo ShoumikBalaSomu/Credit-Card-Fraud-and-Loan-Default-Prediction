@@ -38,7 +38,7 @@
       </ul>
       <div style="display: flex; align-items: center; gap: 12px;">
         <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Light Mode</button>
-        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+        <a href="https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
           ⭐ GitHub
         </a>
       </div>
@@ -58,7 +58,7 @@
         Machine Learning for Financial Risk
       </h1>
       <p class="hero-subtitle">
-        Empirical dual-domain evaluation across extreme (0.58%) and moderate (12.30%) class imbalances in credit card fraud detection and loan default underwriting using Bayesian minimum-risk thresholding and TreeSHAP.
+        Dual-stream financial risk system investigating extreme imbalance (0.58%) credit card fraud detection and out-of-time longitudinal cardholder default-proxy risk tiering using Bayesian minimum-risk thresholding, TreeSHAP, and fairness governance.
       </p>
 
       <div class="authors-wrapper">
@@ -83,10 +83,10 @@
 
       <div class="cta-group">
         <a href="simulator.html" class="btn btn-primary">⚡ Launch Cost Simulator</a>
-        <a href="https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/FinRisk_ML_Group08.ipynb" target="_blank" class="btn btn-secondary" style="background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #fbbf24;">🚀 Open in Colab</a>
+        <a href="https://colab.research.google.com/github/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb" target="_blank" class="btn btn-secondary" style="background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #fbbf24;">🚀 Open in Colab</a>
         <a href="benchmarks.html" class="btn btn-secondary">📊 Model Benchmarks</a>
         <a href="explainability.html" class="btn btn-secondary">🔍 XAI Audits</a>
-        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary">💻 Source Code</a>
+        <a href="https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction" target="_blank" class="btn btn-secondary">💻 Source Code</a>
       </div>
     </div>
   </header>
@@ -97,30 +97,30 @@
       <div class="kpi-grid">
         <div class="kpi-card">
           <div class="kpi-title">Fraud Cost Reduction</div>
-          <div class="kpi-value gradient-text">44.01%</div>
-          <div class="kpi-delta positive">+$9,560 Saved per 555K Txns</div>
-          <div class="kpi-desc">Cut financial loss from $21,720 to $12,160 at optimal threshold p* = 0.023.</div>
+          <div class="kpi-value gradient-text">93.9%</div>
+          <div class="kpi-delta positive">+$1,114,472 Saved per 555K Txns</div>
+          <div class="kpi-desc">Cut financial loss from $1,186,950 (baseline) to $72,478 at optimal threshold &tau;* = 0.7313 / Bayes dynamic &tau;*(amt).</div>
         </div>
 
         <div class="kpi-card">
-          <div class="kpi-title">Loan Charge-Off Reduction</div>
-          <div class="kpi-value gradient-text">73.41%</div>
-          <div class="kpi-delta positive">+$5,208,000 Saved per Cohort</div>
-          <div class="kpi-desc">Cuts default write-downs from $7.09M to $1.89M by shifting decision cutoff to p* = 0.142.</div>
+          <div class="kpi-title">Track B: Multiclass Risk Tiering</div>
+          <div class="kpi-value gradient-text">4-Tier Warning</div>
+          <div class="kpi-delta positive">Weighted-F1 0.5094 &bull; OvR ROC-AUC 0.6106</div>
+          <div class="kpi-desc">Longitudinal observation-to-performance window evaluation across N = 908 holdout cardholders separating Prime from Critical ATO.</div>
         </div>
 
         <div class="kpi-card">
           <div class="kpi-title">Sub-Millisecond Inference</div>
-          <div class="kpi-value">0.0149 ms</div>
-          <div class="kpi-delta positive">67,044 Txns / Second</div>
-          <div class="kpi-desc">Production-grade gradient boosting model compliant with sub-10ms payment gateway SLAs.</div>
+          <div class="kpi-value">0.0042 ms</div>
+          <div class="kpi-delta positive">238,095 Txns / Second</div>
+          <div class="kpi-desc">Production-grade HistGradientBoosting compliant with sub-10ms payment gateway SLAs (&lt;5ms).</div>
         </div>
 
         <div class="kpi-card">
           <div class="kpi-title">Regulatory Compliance</div>
           <div class="kpi-value">TreeSHAP</div>
           <div class="kpi-delta positive">100% Adverse Action Ready</div>
-          <div class="kpi-desc">Full auditability under US ECOA and FCRA credit underwriting mandates.</div>
+          <div class="kpi-desc">Full auditability under US ECOA/FCRA mandates and EEOC 80% rule (0.9986 disparate impact ratio).</div>
         </div>
       </div>
     </div>
@@ -232,7 +232,7 @@
           <div class="portal-link">Meet the Team &rarr;</div>
         </a>
 
-        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08/blob/main/reports/CSE431_Report.md" target="_blank" class="portal-card">
+        <a href="https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction/blob/main/reports/CSE431_Report.md" target="_blank" class="portal-card">
           <div>
             <div class="portal-icon">📄</div>
             <div class="portal-title">Full Research Paper</div>
@@ -259,7 +259,7 @@
           <img src="assets/figures/fraud_pr_curve.png" alt="Fraud PR Curves">
           <div class="info">
             <h4>Precision-Recall Curves (Fraud)</h4>
-            <p>Ensemble Blend and CatBoost dominate the 0.58% extreme imbalance regime with PR-AUC of 0.8398.</p>
+            <p>SoftVotingEnsemble and gradient boosting dominate the 0.58% extreme imbalance regime with PR-AUC up to 0.7891.</p>
           </div>
         </div>
 
@@ -267,15 +267,15 @@
           <img src="assets/figures/fraud_cost_curve.png" alt="Fraud Cost Curve">
           <div class="info">
             <h4>Expected Cost vs. Threshold (Fraud)</h4>
-            <p>Visualizes the steep economic penalty of standard 0.50 cutoff vs the cost-optimal minimum at p* = 0.023.</p>
+            <p>Visualizes the steep economic penalty of standard 0.50 cutoff vs the cost-optimal minimum at &tau;* = 0.7313 (93.9% loss reduction).</p>
           </div>
         </div>
 
         <div class="gallery-card">
-          <img src="assets/figures/loan_cost_curve.png" alt="Loan Cost Curve">
+          <img src="assets/figures/loan_cost_curve.png" alt="Risk Tiering Performance">
           <div class="info">
-            <h4>Expected Cost vs. Threshold (Loan)</h4>
-            <p>Demonstrates 73.41% ($5.21M) loss reduction achieved by shifting from 0.50 to p* = 0.142.</p>
+            <h4>Multiclass Portfolio Risk Matrix</h4>
+            <p>Demonstrates longitudinal out-of-time separation of cardholders into Prime, Standard, Watchlist, and Critical ATO tiers.</p>
           </div>
         </div>
       </div>
@@ -296,7 +296,7 @@
   title = {Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction},
   author = {Shoumik Bala Somu and Md Israfil Hossen and Ariyan Islam Hridoy},
   year = {2026},
-  howpublished = {https://github.com/ShoumikBalaSomu/ML-Project-Group-08},
+  howpublished = {https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction},
   note = {CSE431 Machine Learning Course Project, Group 08}
 }</pre>
       </div>
@@ -319,7 +319,7 @@
         <a href="explainability.html">Explainability</a> &bull;
         <a href="methodology.html">Methodology</a> &bull;
         <a href="about.html">Team & Docs</a> &bull;
-        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank">GitHub</a>
+        <a href="https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction" target="_blank">GitHub</a>
       </p>
     </div>
   </footer>

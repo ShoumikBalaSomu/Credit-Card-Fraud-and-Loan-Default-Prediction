@@ -8,8 +8,8 @@ authors:
   - name: "Ariyan Islam Hridoy"
 version: "1.0.0"
 date-released: "2026-11-15"
-url: "https://github.com/ShoumikBalaSomu/ML-Project-Group-08"
-repository-code: "https://github.com/ShoumikBalaSomu/ML-Project-Group-08"
+url: "https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction"
+repository-code: "https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction"
 license: "CC0-1.0"
 preferred-citation:
   type: generic
@@ -19,6 +19,6 @@ preferred-citation:
     - name: "Md Israfil Hossen"
     - name: "Ariyan Islam Hridoy"
   year: 2026
-  url: "https://github.com/ShoumikBalaSomu/ML-Project-Group-08"
+  url: "https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction"
   institution:
     name: "Department of Computer Science and Engineering"

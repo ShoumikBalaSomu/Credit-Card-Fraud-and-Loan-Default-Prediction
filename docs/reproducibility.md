@@ -37,8 +37,8 @@ Enforced via `src/utils/seeding.py`:
 
 ### Step 1: Clone Repository
 ```bash
-git clone https://github.com/ShoumikBalaSomu/ML-Project-Group-08.git
-cd ML-Project-Group-08
+git clone https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction.git
+cd Credit-Card-Fraud-and-Loan-Default-Prediction
 ```
 
 ### Step 2: Create Isolated Virtual Environment

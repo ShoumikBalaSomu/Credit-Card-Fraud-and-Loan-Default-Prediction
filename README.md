@@ -4,9 +4,9 @@
 **Institution:** Department of Computer Science and Engineering  
 **Team:** Group 08  
 
-[![CI Pipeline](https://github.com/ShoumikBalaSomu/ML-Project-Group-08/actions/workflows/ci.yml/badge.svg)](https://github.com/ShoumikBalaSomu/ML-Project-Group-08/actions)
-[![Open Flagship In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Interactive%20Showcase-emerald.svg)](https://shoumikbalasomu.github.io/ML-Project-Group-08/)
+[![CI Pipeline](https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction/actions)
+[![Open Flagship In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Interactive%20Showcase-emerald.svg)](https://shoumikbalasomu.github.io/Credit-Card-Fraud-and-Loan-Default-Prediction/)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -45,32 +45,39 @@ This project delivers an end-to-end, reproducible empirical investigation of cos
 
 ```mermaid
 flowchart TD
-    subgraph Ingestion["Ingestion & Compliance"]
-        A1["1.85M Kartik2112 Credit Card Transactions"] --> B1["PII Sanitization: Drop PAN, Names, Addresses"]
-        B1 --> B2["Chronological 80/20 Partition: 2019-2020 Train / 2020 Test"]
+    subgraph Layer0["Phase 0: Ingestion & Telemetry"]
+        A["KaggleHub: kartik2112/fraud-detection<br/>fraudTrain.csv (1.30M) + fraudTest.csv (555K)"] --> B["SHA-256 Checksum & Memory Downcasting<br/>float32, int32, category (Peak RAM < 1.8 GB)"]
     end
 
-    subgraph Features["Feature Engineering & Scaling"]
-        B2 --> C1["Track A: Transaction Level<br/>Haversine Distance, Cyclical Time, Log-Amount"]
-        B2 --> C2["Track B: Longitudinal Cardholder History<br/>Velocity, Spend Std, Maximum Amount"]
+    subgraph Layer1["Phase 1 & 2: Privacy Preprocessing & Feature Pipelines"]
+        B --> C["PCI-DSS & GDPR Compliance Sanitization<br/>Drop PAN cc_num, names, street, dob, trans_num"]
+        C --> D["Zero-Leakage Chronological Partition (unix_time)<br/>Train (80%), Validation (20%), Untouched Test (555K)"]
+        D --> E["Domain Feature Engineering Pipeline<br/>Haversine Distance, Cyclical Time (sin/cos),<br/>Amount Ratio vs Median, Causal 24h Velocity"]
     end
 
-    subgraph Models["Model Zoo & Calibration"]
-        C1 --> D1["Logistic Regression<br/>Random Forest<br/>HistGradientBoosting<br/>LightGBM & Calibrated LightGBM<br/>Soft-Voting Ensemble"]
-        C2 --> D2["Multinomial Logistic Regression<br/>Balanced Random Forest<br/>HistGradientBoosting<br/>MLP Classifier"]
+    subgraph Layer2["Phase 3: Track A — Cost-Sensitive Binary Fraud Detection"]
+        E --> F["Asymmetric Business Cost Loss Matrix<br/>C_TP = -$5, C_FP = -$15, C_FN = -(amt + $25), C_TN = $0"]
+        F --> G["Model Zoo Benchmark<br/>LogisticRegression, RandomForest, HistGradientBoosting, LightGBM, Soft-Voting"]
+        G --> H["Validation Threshold Sweep & Bayes Dynamic Cutoff<br/>p*(amt) = 15 / (amt + 35) • Dollar Loss Minimization"]
+        H --> I["Out-of-Time Test Set Evaluation (N = 555,719)<br/>PR-AUC: 0.7891, ROC-AUC: 0.9922<br/>93.9% Loss Reduction (+$1,114,472 Net Savings)"]
     end
 
-    subgraph Economics["Cost-Sensitive Economics"]
-        D1 --> E1["Asymmetric Cost Matrix:<br/>TP -$5, FP -$15, FN -(amt+$25), TN $0<br/>Bayes Dynamic Threshold & tau* = 0.023"]
-        D2 --> E2["4-Tier Risk Categorization:<br/>Tier 0: Prime • Tier 1: Standard<br/>Tier 2: Watchlist • Tier 3: Critical ATO"]
-        E1 --> F1["44.01% Dollar Loss Reduction<br/>+$9,560 Net Savings per 555K Transactions"]
-        E2 --> F2["Longitudinal Risk Early Warning"]
+    subgraph Layer3["Phase 4: Track B — Out-of-Time Multiclass Cardholder Risk Tiering"]
+        E --> J["Longitudinal Cohort Construction<br/>Obs Window W_obs (70%) -> Perf Window W_perf (30%)"]
+        J --> K["4-Class Ground-Truth Tiers (N = 908 Holdout Cardholders)<br/>Tier 0: Prime • Tier 1: Standard<br/>Tier 2: Watchlist • Tier 3: Critical ATO"]
+        K --> L["Multiclass Benchmark & Portfolio Risk Matrix<br/>HistGradientBoosting: Weighted-F1 0.5094, OvR ROC-AUC 0.6106"]
     end
 
-    subgraph Governance["Explainability & Governance"]
-        F1 & F2 --> G1["Global TreeSHAP & Permutation Importance"]
-        F1 & F2 --> G2["Local Waterfall & Regulatory Reason Codes"]
-        F1 & F2 --> G3["Offensive Red-Team Robustness Suite"]
+    subgraph Layer4["Phase 5 & 6: Explainability, Fairness & Red-Teaming"]
+        I --> M["Global TreeSHAP & Permutation Importance<br/>Partial Dependence Plots (PDP) on Top Risk Drivers"]
+        L --> M
+        M --> N["ECOA / FCRA Adverse Action Notice Generator<br/>4 Contrastive Waterfall Case Studies (TP, FP, FN, TN)"]
+        N --> O["Fairness Audit (EEOC 80% Rule Passed)<br/>Disparate Impact Ratio = 0.9986"]
+        O --> P["Offensive Red-Team Adversarial Robustness Battery<br/>Zero PII Leakage, Micro-Splits, Coordinate Jitter Invariant"]
+    end
+
+    subgraph Layer5["Phase 7: Production Inference & Interactive Delivery"]
+        P --> Q["Interactive Live Risk & Explainability Simulator<br/>Embedded HTML/JS HUD with Real-Time Reactive Cutoffs<br/>Production Throughput: 238,000 tx/sec (<0.005 ms/sample)"]
     end
 ```
 
@@ -108,9 +115,6 @@ flowchart TD
 | **Track A: Fraud** | HistGradientBoosting | **1.2 MB** | **0.0042 ms** | **238,095 samples/sec** | Sub-10ms Payment SLA Compliant (<5ms) |
 | **Track A: Fraud** | CalibratedLightGBM | **0.9 MB** | **0.0082 ms** | **122,100 samples/sec** | Sub-10ms Payment SLA Compliant (<10ms) |
 | **Track B: Risk Tiering** | HistGradientBoosting | **0.8 MB** | **0.0051 ms** | **196,078 samples/sec** | Batch Underwriting Compliant |
-|---|---|:---:|:---:|:---:|:---:|
-| **Task A: Fraud** | CatBoost | **0.05 MB** | **0.0018 ms** | **553,243 samples/sec** | Sub-10ms Payment SLA Compliant |
-| **Task B: Loan** | Random Forest | **2.45 MB** | **0.0305 ms** | **32,756 samples/sec** | Batch Underwriting Compliant |
 
 ---
 
@@ -136,14 +140,14 @@ print("Path to dataset files:", path)
 ### 🚀 1-Click Interactive Google Colab Demo
 Execute the complete end-to-end pipeline with zero local installation directly in your browser:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)
 
 Both [`CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb`](CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb) and [`FinRisk_ML_Group08.ipynb`](FinRisk_ML_Group08.ipynb) are fully pre-rendered and verified.
 
 ### 1. Clone & Setup Environment
 ```bash
-git clone https://github.com/ShoumikBalaSomu/ML-Project-Group-08.git
-cd ML-Project-Group-08
+git clone https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction.git
+cd Credit-Card-Fraud-and-Loan-Default-Prediction
 
 # Create and activate virtual environment
 python3 -m venv venv
@@ -184,9 +188,10 @@ Navigate to `http://localhost:8000/simulator.html` to explore the interactive th
 ## 📁 Repository Structure
 
 ```text
-ML-Project-Group-08/
+Credit-Card-Fraud-and-Loan-Default-Prediction/
 ├── .github/workflows/ci.yml       # Automated GitHub Actions CI workflow (Black, Ruff, Pytest)
-├── FinRisk_ML_Group08.ipynb       # 🌟 Master Notebook: Complete end-to-end ML pipeline with Colab button
+├── CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb # 🌟 Primary Master Notebook: Standalone dual-track ML system
+├── FinRisk_ML_Group08.ipynb       # Mirrored Master Notebook: Complete end-to-end ML pipeline with Colab button
 ├── configs/
 │   ├── cost_matrices.yaml         # Financial cost matrices ($40:1 and $10:1 penalties)
 │   ├── data.yaml                  # Dataset sources and chronological split rules
@@ -247,9 +252,9 @@ This repository is mirrored and continuously deployed across four global version
 
 | Platform | Remote Name | Repository URL | Purpose |
 |:---|:---:|:---|:---|
-| **GitHub** | `origin` | `https://github.com/ShoumikBalaSomu/ML-Project-Group-08.git` | Primary active repo, CI/CD, GitHub Pages |
-| **GitLab** | `gitlab` | `https://gitlab.com/ShoumikBalaSomu/ML-Project-Group-08.git` | Mirror, secondary CI/CD pipeline |
-| **Bitbucket** | `bitbucket` | `https://bitbucket.org/shoumikbalasomu/ml-project-group-08.git` | Enterprise Atlassian ecosystem mirror |
+| **GitHub** | `origin` | `https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction.git` | Primary active repo, CI/CD, GitHub Pages |
+| **GitLab** | `gitlab` | `https://gitlab.com/ShoumikBalaSomu/credit-card-fraud-and-loan-default-prediction.git` | Mirror, secondary CI/CD pipeline |
+| **Bitbucket** | `bitbucket` | `https://bitbucket.org/shoumikbalasomu/credit-card-fraud-and-loan-default-prediction.git` | Enterprise Atlassian ecosystem mirror |
 | **SourceForge** | `sourceforge` | `https://git.code.sf.net/p/finrisk-ml-group08/code` | Open-source archival mirror |
 
 ---
@@ -275,7 +280,7 @@ If you reference this work or codebase in academic or industrial research, pleas
   title = {Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction},
   author = {Shoumik Bala Somu and Md Israfil Hossen and Ariyan Islam Hridoy},
   year = {2026},
-  howpublished = {https://github.com/ShoumikBalaSomu/ML-Project-Group-08},
+  howpublished = {https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction},
   note = {CSE431 Machine Learning Course Project, Group 08}
 }
 ```

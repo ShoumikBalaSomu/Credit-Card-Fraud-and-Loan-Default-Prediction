@@ -38,7 +38,7 @@
       </ul>
       <div style="display: flex; align-items: center; gap: 12px;">
         <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Light Mode</button>
-        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+        <a href="https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
           ⭐ GitHub
         </a>
       </div>
@@ -75,22 +75,23 @@
           <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; text-align: center;">
             <div style="font-size: 2.2rem; margin-bottom: 10px;">🎓</div>
             <h3 style="font-size: 1.2rem; margin-bottom: 6px;">Shoumik Bala Somu</h3>
-            <p style="font-size: 0.88rem; color: var(--accent-blue); margin-bottom: 10px;"><code>shoumik.bala@gmail.com</code></p>
-            <span class="badge badge-accent">Equal Co-Author (33.3%)</span>
+            <p style="font-size: 0.88rem; color: var(--accent-blue); margin-bottom: 4px;">ID: <code>232-15-657</code></p>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 10px;"><code>shoumik.bala@gmail.com</code></p>
+            <span class="badge badge-accent">Lead ML Architect (33.3%)</span>
           </div>
 
           <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; text-align: center;">
             <div style="font-size: 2.2rem; margin-bottom: 10px;">🎓</div>
             <h3 style="font-size: 1.2rem; margin-bottom: 6px;">Md Israfil Hossen</h3>
-            <p style="font-size: 0.88rem; color: var(--accent-blue); margin-bottom: 10px;">Co-Researcher</p>
-            <span class="badge badge-accent">Equal Co-Author (33.3%)</span>
+            <p style="font-size: 0.88rem; color: var(--accent-blue); margin-bottom: 10px;">ID: <code>232-15-455</code></p>
+            <span class="badge badge-accent">Financial Quant & Modeler (33.3%)</span>
           </div>
 
           <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; text-align: center;">
             <div style="font-size: 2.2rem; margin-bottom: 10px;">🎓</div>
             <h3 style="font-size: 1.2rem; margin-bottom: 6px;">Ariyan Islam Hridoy</h3>
-            <p style="font-size: 0.88rem; color: var(--accent-blue); margin-bottom: 10px;">Co-Researcher</p>
-            <span class="badge badge-accent">Equal Co-Author (33.3%)</span>
+            <p style="font-size: 0.88rem; color: var(--accent-blue); margin-bottom: 10px;">ID: <code>232-15-378</code></p>
+            <span class="badge badge-accent">XAI & Red-Team Auditor (33.3%)</span>
           </div>
         </div>
 
@@ -143,10 +144,10 @@
               <div>
                 <strong style="color: #fbbf24; font-size: 1.05rem;">🚀 1-Click Interactive Google Colab Execution</strong>
                 <p style="margin: 4px 0 0; font-size: 0.9rem; color: var(--text-secondary);">
-                  Run the unified master notebook <code>FinRisk_ML_Group08.ipynb</code> directly in your cloud browser without local Python setup.
+                  Run the standalone master notebook <code>CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb</code> directly in your cloud browser without local Python setup.
                 </p>
               </div>
-              <a href="https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/FinRisk_ML_Group08.ipynb" target="_blank" class="btn btn-secondary" style="background: #f59e0b; color: #000; font-weight: 700; border: none; padding: 8px 18px;">
+              <a href="https://colab.research.google.com/github/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb" target="_blank" class="btn btn-secondary" style="background: #f59e0b; color: #000; font-weight: 700; border: none; padding: 8px 18px;">
                 Open in Colab &rarr;
               </a>
             </div>
@@ -154,8 +155,8 @@
 
           <h4 style="font-size: 1.05rem; margin-bottom: 10px; color: var(--accent-blue);">Step 1: Clone Repository and Setup Environment</h4>
           <div class="formula-card" style="color: var(--text-primary);">
-            git clone https://github.com/ShoumikBalaSomu/ML-Project-Group-08.git<br>
-            cd ML-Project-Group-08<br>
+            git clone https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction.git<br>
+            cd Credit-Card-Fraud-and-Loan-Default-Prediction<br>
             python3 -m venv venv<br>
             source venv/bin/activate<br>
             pip install -r requirements.txt
@@ -166,15 +167,15 @@
             python scripts/run_all.py --phase all
           </div>
           <p style="font-size: 0.9rem; color: var(--text-secondary);">
-            Executes training across all 6 model architectures, computes optimal Bayesian thresholds, generates diagnostic curves and SHAP beeswarms, and writes 5 local case studies into <code>reports/case_studies.md</code>.
+            Executes training across all model architectures, computes optimal Bayesian thresholds, generates diagnostic curves and SHAP beeswarms, and writes 5 local case studies into <code>reports/case_studies.md</code>.
           </p>
 
-          <h4 style="font-size: 1.05rem; margin-top: 20px; margin-bottom: 10px; color: var(--accent-amber);">Step 3: Run Verification Test Suite (35 Invariants)</h4>
+          <h4 style="font-size: 1.05rem; margin-top: 20px; margin-bottom: 10px; color: var(--accent-amber);">Step 3: Run Verification Test Suite (20 Invariants)</h4>
           <div class="formula-card" style="color: var(--text-primary);">
             pytest -v tests/
           </div>
           <p style="font-size: 0.9rem; color: var(--text-secondary);">
-            Verifies 35 automated invariants: lack of lookahead leakage, cost matrix arithmetic, Population Stability Index (PSI) drift detection, 80% four-fifths fairness rule, Shapley efficiency properties, and sub-10ms inference SLAs.
+            Verifies 20 automated invariants: lack of lookahead leakage, cost matrix arithmetic, notebook integrity, 80% four-fifths fairness rule, Shapley efficiency properties, and sub-10ms inference SLAs.
           </p>
         </div>
       </div>
@@ -194,7 +195,7 @@
   title = {Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction},
   author = {Shoumik Bala Somu and Md Israfil Hossen and Ariyan Islam Hridoy},
   year = {2026},
-  howpublished = {https://github.com/ShoumikBalaSomu/ML-Project-Group-08},
+  howpublished = {https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction},
   note = {CSE431 Machine Learning Course Project, Group 08}
 }</pre>
           </div>
@@ -202,7 +203,7 @@
           <!-- APA -->
           <div class="bibtex-box">
             <button id="copyApaBtn" class="copy-btn">Copy APA</button>
-            <pre id="apaCode" style="white-space: pre-wrap; font-family: var(--font-sans); font-size: 0.9rem; line-height: 1.6; color: var(--text-primary);">Somu, S. B., Hossen, M. I., &amp; Hridoy, A. I. (2026). Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction. GitHub. https://github.com/ShoumikBalaSomu/ML-Project-Group-08</pre>
+            <pre id="apaCode" style="white-space: pre-wrap; font-family: var(--font-sans); font-size: 0.9rem; line-height: 1.6; color: var(--text-primary);">Somu, S. B., Hossen, M. I., &amp; Hridoy, A. I. (2026). Cost-Sensitive and Explainable Machine Learning for Financial Risk: Credit Card Fraud and Loan Default Prediction. GitHub. https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction</pre>
           </div>
         </div>
       </div>
@@ -226,7 +227,7 @@
         <a href="explainability.html">Explainability</a> &bull;
         <a href="methodology.html">Methodology</a> &bull;
         <a href="about.html">Team & Docs</a> &bull;
-        <a href="https://github.com/ShoumikBalaSomu/ML-Project-Group-08" target="_blank">GitHub</a>
+        <a href="https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction" target="_blank">GitHub</a>
       </p>
     </div>
   </footer>

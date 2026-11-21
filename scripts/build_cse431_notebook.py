@@ -39,9 +39,9 @@ def create_notebook():
 **Course:** CSE431-ML-Machine Learning &bull; **Capstone Track:** Financial Intelligence & Risk Quantification
 **Institution:** Department of Computer Science and Engineering &bull; **Group:** Group 08
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/ML-Project-Group-08/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/ShoumikBalaSomu/ML-Project-Group-08)
-[![Course](https://img.shields.io/badge/Course-CSE431%20Machine%20Learning-blue.svg)](https://github.com/ShoumikBalaSomu/ML-Project-Group-08)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction/blob/main/CSE431_CostSensitive_Explainable_Financial_Risk_ML.ipynb)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction)
+[![Course](https://img.shields.io/badge/Course-CSE431%20Machine%20Learning-blue.svg)](https://github.com/ShoumikBalaSomu/Credit-Card-Fraud-and-Loan-Default-Prediction)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
@@ -70,6 +70,48 @@ All team members contributed equally (33.3% each) across system architecture, ma
 13. [Interactive What-If Cost & Volume Simulator](#section-13)
 14. [Algorithmic Fairness & Demographic Disparity Audit](#section-14)
 15. [Academic Citations, Reproducibility Statement & Viva Defense Guide](#section-15)
+
+---
+
+### 🏛️ End-to-End System Architecture
+
+```mermaid
+flowchart TD
+    subgraph Layer0["Phase 0: Ingestion & Telemetry"]
+        A["KaggleHub: kartik2112/fraud-detection<br/>fraudTrain.csv (1.30M) + fraudTest.csv (555K)"] --> B["SHA-256 Checksum & Memory Downcasting<br/>float32, int32, category (Peak RAM < 1.8 GB)"]
+    end
+
+    subgraph Layer1["Phase 1 & 2: Privacy Preprocessing & Feature Pipelines"]
+        B --> C["PCI-DSS & GDPR Compliance Sanitization<br/>Drop PAN cc_num, names, street, dob, trans_num"]
+        C --> D["Zero-Leakage Chronological Partition (unix_time)<br/>Train (80%), Validation (20%), Untouched Test (555K)"]
+        D --> E["Domain Feature Engineering Pipeline<br/>Haversine Distance, Cyclical Time (sin/cos),<br/>Amount Ratio vs Median, Causal 24h Velocity"]
+    end
+
+    subgraph Layer2["Phase 3: Track A — Cost-Sensitive Binary Fraud Detection"]
+        E --> F["Asymmetric Business Cost Loss Matrix<br/>C_TP = -$5, C_FP = -$15, C_FN = -(amt + $25), C_TN = $0"]
+        F --> G["Model Zoo Benchmark<br/>LogisticRegression, RandomForest, HistGradientBoosting, LightGBM, Soft-Voting"]
+        G --> H["Validation Threshold Sweep & Bayes Dynamic Cutoff<br/>p*(amt) = 15 / (amt + 35) • Dollar Loss Minimization"]
+        H --> I["Out-of-Time Test Set Evaluation (N = 555,719)<br/>PR-AUC: 0.7891, ROC-AUC: 0.9922<br/>93.9% Loss Reduction (+$1,114,472 Net Savings)"]
+    end
+
+    subgraph Layer3["Phase 4: Track B — Out-of-Time Multiclass Cardholder Risk Tiering"]
+        E --> J["Longitudinal Cohort Construction<br/>Obs Window W_obs (70%) -> Perf Window W_perf (30%)"]
+        J --> K["4-Class Ground-Truth Tiers (N = 908 Holdout Cardholders)<br/>Tier 0: Prime • Tier 1: Standard<br/>Tier 2: Watchlist • Tier 3: Critical ATO"]
+        K --> L["Multiclass Benchmark & Portfolio Risk Matrix<br/>HistGradientBoosting: Weighted-F1 0.5094, OvR ROC-AUC 0.6106"]
+    end
+
+    subgraph Layer4["Phase 5 & 6: Explainability, Fairness & Red-Teaming"]
+        I --> M["Global TreeSHAP & Permutation Importance<br/>Partial Dependence Plots (PDP) on Top Risk Drivers"]
+        L --> M
+        M --> N["ECOA / FCRA Adverse Action Notice Generator<br/>4 Contrastive Waterfall Case Studies (TP, FP, FN, TN)"]
+        N --> O["Fairness Audit (EEOC 80% Rule Passed)<br/>Disparate Impact Ratio = 0.9986"]
+        O --> P["Offensive Red-Team Adversarial Robustness Battery<br/>Zero PII Leakage, Micro-Splits, Coordinate Jitter Invariant"]
+    end
+
+    subgraph Layer5["Phase 7: Production Inference & Interactive Delivery"]
+        P --> Q["Interactive Live Risk & Explainability Simulator<br/>Embedded HTML/JS HUD with Real-Time Reactive Cutoffs<br/>Production Throughput: 238,000 tx/sec (<0.005 ms/sample)"]
+    end
+```
 
 ---
 """
